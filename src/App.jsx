@@ -1,12 +1,16 @@
-import { useState } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+//Imports Pages
+import { Home } from '../src/pages/Home';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h3 className="bg-white text-black">Hola soy el primer h3</h3>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </>
   );
 }
