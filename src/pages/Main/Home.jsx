@@ -7,8 +7,8 @@ import { Footer } from '../../components/Footer';
 export const Home = () => {
   return (
     <>
-      <Navbar></Navbar>
       <Footer></Footer>
+      <Navbar></Navbar>
     </>
   );
 };
