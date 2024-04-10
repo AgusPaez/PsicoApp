@@ -9,6 +9,10 @@ import { Login } from '../src/pages/Main/Login';
 import { Studies } from '../src/pages/Main/Studies';
 // PATIENT PAGES
 // PSICO PAGES
+import { HomePsico } from '../src/pages/Psico/HomePsico';
+import { MyProfile } from './pages/Psico/MyProfile';
+import { ControlPanel } from './pages/Psico/ControlPanel';
+import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
 
 function App() {
   return (
@@ -20,6 +24,12 @@ function App() {
           <Route path="/Appointment" element={<Appointment />} />
           <Route path="/Studies" element={<Studies />} />
           <Route path="/Login" element={<Login />} />
+          {/* routes protected with auth "Patient Routes" */}
+          {/* routes protected with auth "Psico Routes" */}
+          <Route path="/HomePsico" element={<HomePsico />} />
+          <Route path="/MyProfile" element={<MyProfile />} />
+          <Route path="/AppointmentPsico" element={<AppointmentPsico />} />
+          <Route path="/ControlPanel" element={<ControlPanel />} />
         </Routes>
       </Router>
     </>
