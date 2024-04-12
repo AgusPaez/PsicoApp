@@ -7,8 +7,10 @@ import { Footer } from '../../components/Footer';
 export const Home = () => {
   return (
     <>
-      <Footer></Footer>
-      <Navbar></Navbar>
+      <div className="bg-rose-200 min-h-screen">
+        <Footer></Footer>
+        <Navbar></Navbar>
+      </div>
     </>
   );
 };
