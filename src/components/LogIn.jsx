@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import bgImage from '../assets/images/fondoLogin.jpg';
+import bgImage from '../assets/images/loginfondo.jpg';
+import loginIcon from '../assets/icons/PhUserDuotone.png';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -13,17 +14,18 @@ export const LogIn = () => {
   };
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center "
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="max-w-md w-full bg-slate-300 bg-opacity-90 rounded-lg border border-gray-300 px-8 py-6">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Iniciar sesión
-          </h2>
+      {/* <div className="w-1/3 m-4 p-2 bg-black ">soy el div form</div> */}
+      <div className=" w-1/3  bg-opacity-90 rounded-lg border border-gray-300 px-8 py-6 backdrop-blur-lg">
+        <div className="flex items-center justify-center m-4">
+          <div className="flex items-center justify-center m-2 p-2 bg-black h-24 w-24 rounded-full">
+            <img src={loginIcon} width={45} height={45} />
+          </div>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-2xl space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Correo electrónico
@@ -36,7 +38,7 @@ export const LogIn = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="bg-transparent relative block w-full px-3 py-3 border-b border-gray- placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Correo electrónico"
               />
             </div>
@@ -52,7 +54,7 @@ export const LogIn = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="bg-inherit rounded-none relative block w-full px-3 py-3 border-b border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña"
               />
             </div>
