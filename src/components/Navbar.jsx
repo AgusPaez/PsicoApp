@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+//images
 import SymbolPsico from '../assets/icons/pngwing.com.png';
 
 export const Navbar = () => {
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
+  const buttonClass = (path) => `${isActive(path) ? 'bg-gray-700' : ''} 
+`;
 
   const showMenu = () => {
     setOpenMenu(!openMenu);
-    console.log('ESTADO:', openMenu);
   };
   const openOptionsProfile = () => {
     setOptionsProfile(!optionsProfile);
-    console.log('PROFILE', optionsProfile);
   };
 
   return (
@@ -85,28 +88,40 @@ export const Navbar = () => {
                   {/* Cuando esta seleccionado Current: "bg-gray-900 text-white" */}
                   <a
                     href="/AboutMe"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className={
+                      buttonClass('/AboutMe') +
+                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    }
                     aria-current="page"
                   >
                     Sobre Mi
                   </a>
                   <a
                     href="/Appointment"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className={
+                      buttonClass('/Appointment') +
+                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    }
                   >
                     Citas
                   </a>
                   <a
                     href="/Studies"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className={
+                      buttonClass('/Studies') +
+                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    }
                   >
                     Estudios
                   </a>
                   <a
                     href="/Login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className={
+                      buttonClass('/Login') +
+                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    }
                   >
-                    Calendar
+                    Login
                   </a>
                 </div>
               </div>
@@ -217,31 +232,42 @@ export const Navbar = () => {
         {openMenu && (
           <div className="sm:hidden" id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2 ">
-              {/* cuando esta presionado: bg-gray-900 text-white  para agregar el path active */}
               <a
                 href="/AboutMe"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className={
+                  buttonClass('/AboutMe') +
+                  'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                }
                 aria-current="page"
               >
                 Sobre Mi
               </a>
               <a
                 href="/Appointment"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className={
+                  buttonClass('/Appointment') +
+                  'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                }
               >
                 Citas
               </a>
               <a
                 href="/Studies"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className={
+                  buttonClass('/Studies') +
+                  'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                }
               >
                 Estudios
               </a>
               <a
-                href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                href="/Login"
+                className={
+                  buttonClass('/Login') +
+                  'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                }
               >
-                Calendar
+                Login
               </a>
             </div>
           </div>
