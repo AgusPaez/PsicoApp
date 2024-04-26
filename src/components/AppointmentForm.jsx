@@ -1,33 +1,22 @@
 import React from 'react';
-
 //Import Hook
 import { useForm } from 'react-hook-form';
 //images
 import imgAppointment from '../assets/images/imgAppointment.jpg';
+//service
+import { create } from '../services/appointmentService';
 
 export const AppointmentForm = () => {
+  // validations
   const {
     register,
     handleSubmit,
-    //watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:3000/appointment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log('Recurso creado exitosamente.');
-      } else {
-        console.error('Error al crear el recurso.');
-      }
+      const response = await create(data);
     } catch (error) {
       console.error('Error al conectarse con la API:', error);
     }
