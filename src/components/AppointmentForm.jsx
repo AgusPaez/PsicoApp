@@ -13,7 +13,25 @@ export const AppointmentForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch('http://localhost:3000/appointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('Recurso creado exitosamente.');
+      } else {
+        console.error('Error al crear el recurso.');
+      }
+    } catch (error) {
+      console.error('Error al conectarse con la API:', error);
+    }
+  };
 
   return (
     <>
@@ -68,6 +86,7 @@ export const AppointmentForm = () => {
                 placeholder="Email"
                 className="m-2 my-4 h-9 p-4 w-full rounded-2xl"
                 id="email"
+                {...register('email', { required: false })}
               />
             </div>
             <div className="flex w-full my-4 gap-6">
@@ -90,6 +109,7 @@ export const AppointmentForm = () => {
                   placeholder="Derivacion"
                   className="m-2 h-9 p-4 w-full rounded-2xl"
                   id="derivacion"
+                  {...register('derivacion')}
                 />
               </div>
             </div>
@@ -116,7 +136,7 @@ export const AppointmentForm = () => {
             </button>
           </form>
         </div>
-        <div className="">
+        <div className=" flex justify-center items-center">
           <img src={imgAppointment} alt="imagen" width={200} height={200} />
         </div>
       </section>
