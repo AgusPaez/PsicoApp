@@ -2,7 +2,7 @@ import React from 'react';
 //Import Hook
 import { useForm } from 'react-hook-form';
 //images
-import imgAppointment from '../assets/images/imgAppointment.jpg';
+import imgAppointment from '../assets/images/imgAppointment.png';
 //service
 import { create } from '../services/appointmentService';
 
@@ -27,12 +27,12 @@ export const AppointmentForm = () => {
       <section className="h-[82vh] grid grid-cols-2 gap-10">
         <div className="p-10">
           <form onSubmit={handleSubmit(onSubmit)} className=" p-6 m-6">
-            <h2 className="text-lg ml-4">Pedir una cita</h2>
+            <h2 className="text-lg ml-4">Agendá tu cita</h2>
             <div className="flex w-full my-4 gap-6">
               <div className="w-2/5">
                 <input
                   placeholder="Nombre"
-                  className="m-2 h-9 p-4 w-full rounded-2xl"
+                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80 "
                   id="nombre"
                   {...register('nombre', { required: true })}
                 />
@@ -46,7 +46,7 @@ export const AppointmentForm = () => {
               <div className="w-2/5">
                 <input
                   placeholder="Apellido"
-                  className="m-2 rounded-2xl h-9 p-4 w-full"
+                  className="m-2 rounded-2xl h-9 p-4 w-full opacity-60 focus:opacity-80"
                   id="apellido"
                   {...register('apellido', { required: true })}
                 />
@@ -59,7 +59,7 @@ export const AppointmentForm = () => {
               <div className="w-1/5">
                 <input
                   placeholder="Edad"
-                  className="m-2 h-9 p-4 w-full rounded-2xl"
+                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80 "
                   id="edad"
                   {...register('edad', { required: true })}
                 />
@@ -73,7 +73,7 @@ export const AppointmentForm = () => {
             <div className="">
               <input
                 placeholder="Email"
-                className="m-2 my-4 h-9 p-4 w-full rounded-2xl"
+                className="m-2 my-4 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80"
                 id="email"
                 {...register('email', { required: false })}
               />
@@ -81,8 +81,8 @@ export const AppointmentForm = () => {
             <div className="flex w-full my-4 gap-6">
               <div className="w-1/2">
                 <input
-                  placeholder="Numero de telefono"
-                  className="m-2 h-9 p-4 w-full rounded-2xl"
+                  placeholder="Número de telefono"
+                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 "
                   id="numero"
                   {...register('numero', { required: true })}
                 />
@@ -95,8 +95,8 @@ export const AppointmentForm = () => {
 
               <div className="w-1/2">
                 <input
-                  placeholder="Derivacion"
-                  className="m-2 h-9 p-4 w-full rounded-2xl"
+                  placeholder="Derivación"
+                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80"
                   id="derivacion"
                   {...register('derivacion')}
                 />
@@ -105,7 +105,7 @@ export const AppointmentForm = () => {
             <div className="my-6">
               <textarea
                 placeholder="Motivo de consulta"
-                className="m-2 max-h-44 min-h-20 p-4 w-full rounded-2xl text-left"
+                className="m-2 max-h-44 min-h-20 p-4 w-full rounded-2xl text-left opacity-60 focus:opacity-80"
                 id="motivo_consulta"
                 {...register('motivo_consulta', { required: true })}
               />
@@ -126,7 +126,7 @@ export const AppointmentForm = () => {
           </form>
         </div>
         <div className=" flex justify-center items-center">
-          <img src={imgAppointment} alt="imagen" width={200} height={200} />
+          <img src={imgAppointment} alt="imagen" width={400} height={400} />
         </div>
       </section>
     </>
