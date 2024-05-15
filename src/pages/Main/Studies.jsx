@@ -10,6 +10,7 @@ export const Studies = () => {
     <>
       <Navbar></Navbar>
       <StudiesComponent></StudiesComponent>
+
       <Footer></Footer>
     </>
   );

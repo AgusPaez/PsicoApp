@@ -4,6 +4,7 @@ import graduadoItem from '../assets/icons/graduado.png';
 //imports
 import { fetchAllStudies } from '../services/StudiesService';
 import axios from 'axios';
+import { SliderTitles } from '../components/SliderTitles';
 
 export const StudiesComponent = () => {
   //state use for studies
@@ -23,6 +24,7 @@ export const StudiesComponent = () => {
     fetchStudies();
   }, []);
   console.log(studies); //para corroborar resultados luego BORRAR
+
   return (
     <>
       {/* <div>
@@ -69,11 +71,11 @@ export const StudiesComponent = () => {
             </h2>
           </div>
         </div>
-        <div className="h-auto">
+        <div className="h-auto ">
           <h2 className="flex items-center justify-center mt-8 mb-6 p-2 text-base">
             Formación
           </h2>
-          <div>
+          <div className="">
             <ul>
               {studies.map((study) => (
                 <li
@@ -90,6 +92,7 @@ export const StudiesComponent = () => {
             </ul>
           </div>
         </div>
+        <SliderTitles></SliderTitles>
         <div className="h-auto my-8 ">CAROUSEL CON IMAGENES</div>
       </section>
     </>
