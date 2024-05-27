@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import bgImage from '../assets/images/loginfondo.jpg';
 import loginIcon from '../assets/icons/PhUserDuotone.png';
+import { useAuth } from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useAuth();
+  const navigate = useNavigate();
 
+  if (auth.isAuthenticated) {
+    navigate('/HomePsico');
+    return null;
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aquí puedes agregar la lógica para manejar el inicio de sesión
