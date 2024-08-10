@@ -3,11 +3,12 @@ const EditSection = ({ select, onClose }) => {
   return (
     <div className="h-48 w-44 text-green-600">
       <form>
-        <input type="text" />
+        <input type="text" placeholder={select.titulo} />
+        <input type="text" placeholder={select.institucion} />
+        <input type="number" placeholder={select.anio} />
         <button> guardar</button>
+        <button> eliminar</button>
       </form>
-      EditSection
-      {select._id}
       <button onClick={onClose}>cerrar</button>
     </div>
   );

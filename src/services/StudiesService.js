@@ -15,5 +15,26 @@ const fetchAllStudies = async () => {
     throw error;
   }
 };
+//create appointment function
+const create = async (data) => {
+  const url = 'contentStudies';
+  try {
+    const response = await axios.post(`${baseUrl}${url}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-export { fetchAllStudies };
+    if (response.ok) {
+      console.log('Recurso creado exitosamente.');
+    } else {
+      console.error('Error al crear el recurso.');
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
+export { fetchAllStudies, create };
