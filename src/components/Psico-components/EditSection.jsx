@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 //import services
-import { updateStudy } from '../../services/StudiesService';
+import { updateStudy, deleteStudy } from '../../services/StudiesService';
 
 const EditSection = ({ select, onClose }) => {
+  //delete?
+  const [removeItem, setRemoveItem] = useState(false);
+
   // required states for the form
   const [titulo, setTitulo] = useState('');
   const [institucion, setInstitucion] = useState('');
@@ -26,11 +29,35 @@ const EditSection = ({ select, onClose }) => {
       ...(institucion && { institucion }),
       ...(anio && { anio }),
     };
+
+    if (removeItem === false) {
+      //try update
+      try {
+        const updatedStudy = await updateStudy(id, data);
+        console.log('Study updated successfully:', updatedStudy);
+      } catch (error) {
+        console.error('Failed to update study:', error);
+      }
+    }
+    // == false -> call removeStudy function
+    removeStudy();
+  };
+
+  //modify RemoveItem State
+  const changueRemove = () => {
+    setRemoveItem(true);
+  };
+  // delete studies function
+  const removeStudy = async () => {
     try {
-      const updatedStudy = await updateStudy(id, data);
-      console.log('Study updated successfully:', updatedStudy);
+      const remove = await deleteStudy(id);
+      console.log('Study deleted successfully');
+      //reset RemoveItem State
+      setRemoveItem(false);
     } catch (error) {
-      console.error('Failed to update study:', error);
+      console.error('Failed to delete study:', error);
+      //reset RemoveItem State
+      setRemoveItem(false);
     }
   };
 
@@ -59,7 +86,7 @@ const EditSection = ({ select, onClose }) => {
         />
 
         <button type="submit"> guardar</button>
-        <button> eliminar</button>
+        <button onClick={changueRemove}> eliminar</button>
       </form>
       <button onClick={onClose}>cerrar</button>
     </div>
