@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+// import services
+import { getMyProfile } from '../../services/users';
 
 const data = {
   nombre: 'agustin',
@@ -8,18 +11,33 @@ const data = {
   imagenUrl: '',
 };
 export const Profile = () => {
+  const [profile, setProfile] = useState('');
+  const [id, setId] = useState('662997258561b18d86577109');
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const profile = await getMyProfile(id);
+        setProfile(profile.data);
+      } catch (error) {
+        console.log('Error get my profile', error);
+      }
+    };
+    getProfile();
+  }, [id]);
+  //console.log('DATOS:', profile.data.nombre);
   return (
     <>
       <div>
         <h1>Nombre de la cuenta:</h1>
         <>
-          {data.apellido}, {data.nombre}{' '}
+          {profile.apellido}, {profile.nombre}{' '}
         </>
         <h1>Email asociado:</h1>
-        <> {data.email}</>
+        <> {profile.email}</>
         <h1>ROL:</h1>
-        <> {data.rol} </>
-        <image alt="foto de perfil" url={data.imagenUrl} />
+        <> {profile.rol} </>
+        <img alt="foto de perfil" src={profile.imagenUrl} />
       </div>
       <div>
         <button>Editar Datos personales</button>
