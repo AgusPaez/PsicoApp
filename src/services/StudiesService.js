@@ -47,4 +47,14 @@ const updateStudy = async (id, data) => {
     throw error;
   }
 };
-export { fetchAllStudies, create, updateStudy };
+// delete study function
+const deleteStudy = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}${url}/${id}`);
+    return response;
+  } catch (error) {
+    console.log('Error:', error);
+    throw error;
+  }
+};
+export { fetchAllStudies, create, updateStudy, deleteStudy };
