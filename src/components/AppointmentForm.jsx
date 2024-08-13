@@ -21,12 +21,24 @@ export const AppointmentForm = () => {
       console.error('Error al conectarse con la API:', error);
     }
   };
-
+  const back = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700" opacity="0.59"><defs><linearGradient gradientTransform="rotate(147, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient"><stop stop-color="hsl(315, 100%, 72%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 80%)" stop-opacity="1" offset="100%"></stop></linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency="0.001 0.004" numOctaves="2" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
+  <feGaussianBlur stdDeviation="43 51" x="0%" y="0%" width="100%" height="100%" in="turbulence" edgeMode="duplicate" result="blur"></feGaussianBlur>
+  <feBlend mode="screen" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" in2="blur" result="blend"></feBlend>
+  
+</filter></defs><rect width="700" height="700" fill="url(#ffflux-gradient)" filter="url(#ffflux-filter)"></rect></svg>`;
   return (
     <>
-      <section className="h-[82vh] grid grid-cols-2 gap-10">
+      <section
+        className="h-[81.2vh] 2xl:h-[86vh] grid grid-cols-2 gap-10 bg-cover bg-center "
+        style={{
+          backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+            back
+          )}")`,
+        }}
+      >
         <div className="p-10">
-          <form onSubmit={handleSubmit(onSubmit)} className=" p-6 m-6">
+          <form onSubmit={handleSubmit(onSubmit)} className=" p-6 m-6 ">
             <h2 className="text-lg ml-4">Agendá tu cita</h2>
             <div className="flex w-full my-4 gap-6">
               <div className="w-2/5">

@@ -7,11 +7,9 @@ import { AppointmentForm } from '../../components/AppointmentForm';
 export const Appointment = () => {
   return (
     <>
-      <div className="bg-rose-200 min-h-screen">
-        <Navbar></Navbar>
-        <AppointmentForm></AppointmentForm>
-        <Footer></Footer>
-      </div>
+      <Navbar></Navbar>
+      <AppointmentForm></AppointmentForm>
+      <Footer></Footer>
     </>
   );
 };
