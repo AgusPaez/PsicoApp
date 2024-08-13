@@ -15,4 +15,14 @@ const getMyProfile = async (id) => {
     throw error;
   }
 };
-export { getMyProfile };
+// update my profile function
+const updateMyProfile = async (id, data) => {
+  try {
+    const response = await axios.patch(`${baseUrl}${url}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al actualizar el perfil:', error);
+    throw error;
+  }
+};
+export { getMyProfile, updateMyProfile };
