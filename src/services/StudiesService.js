@@ -3,21 +3,22 @@ import axios from 'axios';
 
 //import enviroment variable
 const baseUrl = import.meta.env.VITE_API_URL;
+//urls
+const url = 'contentStudies';
+const urlExtends = 'contentStudies/findAll';
 //fetch all studies
 const fetchAllStudies = async () => {
-  const url = 'contentStudies/findAll';
   try {
     // GET request
-    const response = await axios.get(`${baseUrl}${url}`);
+    const response = await axios.get(`${baseUrl}${urlExtends}`);
     return response.data;
   } catch (error) {
     console.error('Error:', error);
     throw error;
   }
 };
-//create appointment function
+//create studies function
 const create = async (data) => {
-  const url = 'contentStudies';
   try {
     const response = await axios.post(`${baseUrl}${url}`, data, {
       headers: {
@@ -36,5 +37,14 @@ const create = async (data) => {
     throw error;
   }
 };
-
-export { fetchAllStudies, create };
+// update study function
+const updateStudy = async (id, data) => {
+  try {
+    const response = await axios.patch(`${baseUrl}${url}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+export { fetchAllStudies, create, updateStudy };
