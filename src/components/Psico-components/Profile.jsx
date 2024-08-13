@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // import services
 import { getMyProfile } from '../../services/users';
+import { EditMyProfile } from './EditMyProfile';
 
 const data = {
   nombre: 'agustin',
@@ -11,6 +12,7 @@ const data = {
   imagenUrl: '',
 };
 export const Profile = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState('');
   const [id, setId] = useState('662997258561b18d86577109');
 
@@ -25,6 +27,14 @@ export const Profile = () => {
     };
     getProfile();
   }, [id]);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCloseEdit = () => {
+    setIsEditing(false);
+  };
   //console.log('DATOS:', profile.data.nombre);
   return (
     <>
@@ -37,10 +47,15 @@ export const Profile = () => {
         <> {profile.email}</>
         <h1>ROL:</h1>
         <> {profile.rol} </>
-        <img alt="foto de perfil" src={profile.imagenUrl} />
+        <img width={100} alt="foto de perfil" src={profile.imagenUrl} />
       </div>
       <div>
-        <button>Editar Datos personales</button>
+        <button onClick={handleEditClick}>Editar Datos personales</button>
+      </div>
+      <div>
+        {isEditing && (
+          <EditMyProfile profile={profile} onClose={handleCloseEdit} />
+        )}
       </div>
     </>
   );
