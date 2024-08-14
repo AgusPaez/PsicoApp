@@ -13,25 +13,52 @@ import { HomePsico } from '../src/pages/Psico/HomePsico';
 import { MyProfile } from './pages/Psico/MyProfile';
 import { ControlPanel } from './pages/Psico/ControlPanel';
 import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/AboutMe" element={<AboutMe />} />
-          <Route path="/Appointment" element={<Appointment />} />
-          <Route path="/Studies" element={<Studies />} />
-          <Route path="/Login" element={<Login />} />
-          {/* routes protected with auth "Patient Routes" */}
-          {/* routes protected with auth "Psico Routes" */}
-          <Route path="/HomePsico" element={<HomePsico />} />
-          <Route path="/MyProfile" element={<MyProfile />} />
-          <Route path="/AppointmentPsico" element={<AppointmentPsico />} />
-          <Route path="/ControlPanel" element={<ControlPanel />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/AboutMe" element={<AboutMe />} />
+        <Route path="/Appointment" element={<Appointment />} />
+        <Route path="/Studies" element={<Studies />} />
+        <Route path="/Login" element={<Login />} />
+        {/* routes protected with auth "Patient Routes" */}
+        {/* routes protected with auth "Psico Routes" */}
+        <Route
+          path="/HomePsico"
+          element={
+            <ProtectedRoute role="psicologo">
+              <HomePsico />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyProfile"
+          element={
+            <ProtectedRoute role="psicologo">
+              <MyProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AppointmentPsico"
+          element={
+            <ProtectedRoute role="psicologo">
+              <AppointmentPsico />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ControlPanel"
+          element={
+            <ProtectedRoute role="psicologo">
+              <ControlPanel />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </>
   );
 }
