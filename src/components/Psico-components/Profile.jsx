@@ -9,6 +9,7 @@ import { useAuth } from '../../context/AuthProvider';
 
 export const Profile = () => {
   console.log('Profile component rendered');
+  //states
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState('');
   const [id, setId] = useState('');

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 //images
 import graduadoItem from '../assets/icons/graduado.png';
-//imports
+//imports services
 import { fetchAllStudies } from '../services/StudiesService';
-import axios from 'axios';
+// import components
 import { SliderTitles } from '../components/SliderTitles';
 
 export const StudiesComponent = () => {
@@ -23,16 +23,12 @@ export const StudiesComponent = () => {
     };
     fetchStudies();
   }, []);
-  console.log(studies); //para corroborar resultados luego BORRAR
 
   return (
     <>
-      {/* <div>
-        <h1>Lista de Estudios</h1> */}
-
       <section className="h-[100vh] bg-slate-300">
-        <div className="h-1/3 grid">
-          <div className="flex items-center justify-center m-2 mt-20 p-2">
+        <div className="grid h-1/3">
+          <div className="flex items-center justify-center p-2 m-2 mt-20">
             <svg
               preserveAspectRatio="xMidYMid meet"
               data-bbox="53.245 47.211 93.512 105.578"
@@ -61,7 +57,7 @@ export const StudiesComponent = () => {
             </svg>
           </div>
           <div>
-            <h2 className="flex items-center justify-center mt-4 p-0 text-3xl">
+            <h2 className="flex items-center justify-center p-0 mt-4 text-3xl">
               Lic. Antonella Rabiti
             </h2>
           </div>
@@ -72,7 +68,7 @@ export const StudiesComponent = () => {
           </div>
         </div>
         <div className="h-auto ">
-          <h2 className="flex items-center justify-center mt-8 mb-6 p-2 text-base">
+          <h2 className="flex items-center justify-center p-2 mt-8 mb-6 text-base">
             Formación
           </h2>
           <div className="">
@@ -80,10 +76,10 @@ export const StudiesComponent = () => {
               {studies.map((study) => (
                 <li
                   key={study._id}
-                  className="m-0 p-0 flex items-center justify-center"
+                  className="flex items-center justify-center p-0 m-0"
                 >
                   <img src={graduadoItem} height={20} width={20}></img>
-                  <a className="ml-4 text-lg flex items-center justify-center m-0 my-1">
+                  <a className="flex items-center justify-center m-0 my-1 ml-4 text-lg">
                     {study.titulo}, {study.institucion} ({study.anio})
                   </a>
                   <br />

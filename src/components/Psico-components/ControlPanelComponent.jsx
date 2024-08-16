@@ -1,17 +1,18 @@
+// imports
 import React, { useState } from 'react';
-// Importar componentes
+// imports components
 import { LayoutAboutMe } from '../Psico-components/LayoutAboutMe';
 import { LayoutStudies } from './LayoutStudies';
 
 export const ControlPanelComponent = () => {
-  // Estados
+  // states
   const [section, setSection] = useState(0);
-  // console.log("USE STATE PRIMERO = ", section)
-  //cambia la variable de la section
+
+  //changue variables sections
   const changeSection = (nro) => {
     setSection(nro);
   };
-  //se selecciona que layout se renderiza
+  //select layout
   const renderSection = () => {
     switch (section) {
       case 1:
@@ -24,13 +25,12 @@ export const ControlPanelComponent = () => {
         break;
     }
   };
-  // console.log("USE STATE  = ", section)
   return (
     <>
-      <section className="bg-black text-gray-400 p-5 m-12 mt-20 flex justify-center rounded-full ">
+      <section className="flex justify-center p-5 m-12 mt-20 text-gray-400 bg-black rounded-full ">
         <h2>Panel de control</h2>
       </section>
-      <section className="bg-black text-gray-400 p-5 m-12 mb-2 mt-20 flex justify-center rounded-full ">
+      <section className="flex justify-center p-5 m-12 mt-20 mb-2 text-gray-400 bg-black rounded-full ">
         <div>
           <button
             className="p-2 m-2 border hover:opacity-50"
@@ -60,16 +60,6 @@ export const ControlPanelComponent = () => {
       </section>
       {renderSection()}
       {/* Sección adicional si es necesario */}
-      {/* <section className="bg-black text-gray-400 p-5 my-12 m-8  flex justify-center rounded-full ">
-        <form>
-          <input type="text" />
-          <label htmlFor=""></label>
-          <input type="text" />
-          <label htmlFor=""></label>
-          <input type="text" />
-          <label htmlFor=""></label>
-        </form>
-      </section> */}
     </>
   );
 };

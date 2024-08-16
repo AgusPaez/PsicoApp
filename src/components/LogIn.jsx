@@ -1,11 +1,12 @@
+//imports
 import React, { useEffect, useState } from 'react';
-import bgImage from '../assets/images/loginfondo.jpg';
+import { useNavigate } from 'react-router-dom';
+//imports Images
 import loginIcon from '../assets/icons/PhUserDuotone.png';
 import { useAuth } from '../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
-  console.log('LOGIN component rendered');
+  //console.log('LOGIN component rendered');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, isLogin, dataLogin } = useAuth();
@@ -16,7 +17,7 @@ export const LogIn = () => {
     event.preventDefault();
     login(email, password);
   };
-  console.log('DATALOGIN: ', dataLogin);
+  //console.log('DATALOGIN: ', dataLogin);
   useEffect(() => {
     if (isLogin) {
       if (
