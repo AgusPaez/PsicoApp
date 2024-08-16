@@ -8,6 +8,7 @@ import { Appointment } from '../src/pages/Main/Appointment';
 import { Login } from '../src/pages/Main/Login';
 import { Studies } from '../src/pages/Main/Studies';
 // PATIENT PAGES
+import { HomePatient } from './pages/Patient/HomePatient';
 // PSICO PAGES
 import { HomePsico } from '../src/pages/Psico/HomePsico';
 import { MyProfile } from './pages/Psico/MyProfile';
@@ -25,6 +26,14 @@ function App() {
         <Route path="/Studies" element={<Studies />} />
         <Route path="/Login" element={<Login />} />
         {/* routes protected with auth "Patient Routes" */}
+        <Route
+          path="/HomePatient"
+          element={
+            <ProtectedRoute role="paciente">
+              <HomePatient />
+            </ProtectedRoute>
+          }
+        />
         {/* routes protected with auth "Psico Routes" */}
         <Route
           path="/HomePsico"
