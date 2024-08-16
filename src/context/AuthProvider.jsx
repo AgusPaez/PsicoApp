@@ -10,6 +10,7 @@ const urlRegister = 'auth/signUp';
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
+  console.log('CONTEXT component rendered');
   const [dataLogin, setDataLogin] = useState(
     JSON.parse(localStorage.getItem('dataLogin')) || {}
   );

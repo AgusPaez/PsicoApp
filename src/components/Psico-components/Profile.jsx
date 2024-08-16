@@ -4,29 +4,42 @@ import React, { useEffect, useState } from 'react';
 import { getMyProfile } from '../../services/users';
 import { EditMyProfile } from './EditMyProfile';
 
-const data = {
-  nombre: 'agustin',
-  apellido: 'paez',
-  email: 'example',
-  rol: 'admin',
-  imagenUrl: '',
-};
+//import context
+import { useAuth } from '../../context/AuthProvider';
+
 export const Profile = () => {
+  console.log('Profile component rendered');
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState('');
-  const [id, setId] = useState('662997258561b18d86577109');
+  const [id, setId] = useState('');
+  const { dataLogin } = useAuth();
 
   useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const profile = await getMyProfile(id);
-        setProfile(profile.data);
-      } catch (error) {
-        console.log('Error get my profile', error);
-      }
-    };
-    getProfile();
-  }, [id]);
+    if (dataLogin._id !== id) {
+      setId(dataLogin._id);
+    }
+  }, [dataLogin._id, id]);
+  console.log(dataLogin);
+
+  //1option
+
+  // useEffect(() => {
+  //   if (id) {
+  //     const getProfile = async () => {
+  //       try {
+  //         const profile = await getMyProfile(id);
+  //         setProfile(profile.data);
+  //       } catch (error) {
+  //         console.log('Error get my profile', error);
+  //       }
+  //     };
+  //     getProfile();
+  //   }
+  // }, [id]);
+
+  useEffect(() => {
+    setProfile(dataLogin);
+  }, [dataLogin._id, id]);
 
   const handleEditClick = () => {
     setIsEditing(true);

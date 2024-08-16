@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
+  console.log('LOGIN component rendered');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, isLogin, dataLogin } = useAuth();
