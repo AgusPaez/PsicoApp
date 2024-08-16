@@ -3,30 +3,39 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 
+const baseUrl = import.meta.env.VITE_API_URL;
+const urlLogin = 'auth/login';
+const urlRegister = 'auth/signUp';
+
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-  // Inicialización de estados similares al primer código
   const [dataLogin, setDataLogin] = useState(
     JSON.parse(localStorage.getItem('dataLogin')) || {}
   );
   const [isLogin, setIsLogin] = useState(dataLogin?.userLogin || false);
-  const [showModal, setShowModal] = useState(false);
+  //const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  // Sincronización con localStorage
+  // Sinc with localStorage
+  // useEffect(() => {
+  //   if (!dataLogin || !dataLogin.userLogin) {
+  //     console.error('No hay datos de login');
+  //   } else {
+  //     localStorage.setItem('dataLogin', JSON.stringify(dataLogin));
+  //   }
+  // }, [dataLogin]);
   useEffect(() => {
-    if (!dataLogin || !dataLogin.userLogin) {
-      console.error('No hay datos de login');
-    } else {
+    const storedData = JSON.parse(localStorage.getItem('dataLogin'));
+    if (storedData && storedData !== dataLogin) {
       localStorage.setItem('dataLogin', JSON.stringify(dataLogin));
     }
   }, [dataLogin]);
 
-  // Función login
+  // login function
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await axios.post(`${baseUrl}${urlLogin}`, {
         email,
         password,
       });
@@ -35,14 +44,23 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('dataLogin', JSON.stringify(userData));
         setDataLogin(userData);
         setIsLogin(true);
-        navigate('/HomePsico'); // Ajusta la redirección según el rol del usuario si es necesario
+
+        // redirect
+        switch (userData.rol) {
+          case 'psicologo':
+            navigate('/HomePsico');
+            break;
+          case 'paciente':
+            navigate('/HomePatient');
+            break;
+        }
       }
     } catch (error) {
       console.error('Login failed', error);
     }
   };
 
-  // Función logout
+  // logOut function
   const logout = () => {
     localStorage.removeItem('dataLogin');
     setDataLogin({ userLogin: false });
@@ -54,12 +72,12 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         login,
+        logout,
         isLogin,
         setIsLogin,
         dataLogin,
-        showModal,
-        setShowModal,
-        logout,
+        //showModal,
+        //setShowModal,
       }}
     >
       {children}

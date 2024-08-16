@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import bgImage from '../assets/images/loginfondo.jpg';
 import loginIcon from '../assets/icons/PhUserDuotone.png';
-import { useAuth } from '../context/AuthProvider'; // Asegúrate de que la ruta sea correcta
+import { useAuth } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isLogin } = useAuth(); // Ajusta para usar `isLogin` en lugar de `isAuthenticated`
+  const { login, isLogin, dataLogin } = useAuth();
+
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     login(email, password);
   };
-
+  console.log('DATALOGIN: ', dataLogin);
   useEffect(() => {
     if (isLogin) {
-      navigate('/HomePsico'); // Redirige si el usuario ya está autenticado
+      if (
+        dataLogin.rol === 'paciente' &&
+        window.location.pathname !== '/HomePatient'
+      ) {
+        navigate('/HomePatient');
+      } else if (
+        dataLogin.rol === 'psicologo' &&
+        window.location.pathname !== '/HomePsico'
+      ) {
+        navigate('/HomePsico');
+      }
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, navigate, dataLogin.rol]);
   const svgBackground = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700" opacity="0.42"><defs><linearGradient gradientTransform="rotate(129, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient"><stop stop-color="hsl(290, 83%, 38%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(227, 100%, 50%)" stop-opacity="1" offset="100%"></stop></linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feTurbulence type="fractalNoise" baseFrequency="0.003 0.003" numOctaves="2" seed="226" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
   <feGaussianBlur stdDeviation="77 41" x="0%" y="0%" width="100%" height="100%" in="turbulence" edgeMode="duplicate" result="blur"></feGaussianBlur>
