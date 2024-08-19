@@ -25,4 +25,14 @@ const updateMyProfile = async (id, data) => {
     throw error;
   }
 };
-export { getMyProfile, updateMyProfile };
+
+const findPatients = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}${url}`);
+    return response.data;
+  } catch (error) {
+    console.log('Error get all patients', error);
+    throw error;
+  }
+};
+export { getMyProfile, updateMyProfile, findPatients };
