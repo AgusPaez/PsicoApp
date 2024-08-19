@@ -15,17 +15,20 @@ import { MyProfile } from './pages/Psico/MyProfile';
 import { ControlPanel } from './pages/Psico/ControlPanel';
 import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Patients } from './pages/Psico/Patients';
 
 function App() {
   return (
     <>
       <Routes>
+        {/* main routes*/}
         <Route path="/" element={<Home />} />
         <Route path="/AboutMe" element={<AboutMe />} />
         <Route path="/Appointment" element={<Appointment />} />
         <Route path="/Studies" element={<Studies />} />
         <Route path="/Login" element={<Login />} />
         {/* routes protected with auth "Patient Routes" */}
+
         <Route
           path="/HomePatient"
           element={
@@ -35,6 +38,7 @@ function App() {
           }
         />
         {/* routes protected with auth "Psico Routes" */}
+
         <Route
           path="/HomePsico"
           element={
@@ -64,6 +68,14 @@ function App() {
           element={
             <ProtectedRoute role="psicologo">
               <ControlPanel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Patients"
+          element={
+            <ProtectedRoute role="psicologo">
+              <Patients />
             </ProtectedRoute>
           }
         />

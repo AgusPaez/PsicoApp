@@ -18,13 +18,13 @@ export const NavbarPsico = () => {
   return (
     <>
       <nav className="bg-gradient-to-r from-red-800 to-red-900">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
+        <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
               <button
                 type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
                 onClick={showMenu}
@@ -37,7 +37,7 @@ export const NavbarPsico = () => {
             Menu open: "hidden", Menu closed: "block"
           --> */}
                 <svg
-                  className="block h-6 w-6"
+                  className="block w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -56,7 +56,7 @@ export const NavbarPsico = () => {
             Menu open: "block", Menu closed: "hidden"
           --> */}
                 <svg
-                  className="hidden h-6 w-6"
+                  className="hidden w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -72,8 +72,8 @@ export const NavbarPsico = () => {
               </button>
               {/* ***************** End menu botton  ******************** */}
             </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center ">
+            <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+              <div className="flex items-center flex-shrink-0 ">
                 <img
                   className="h-10 xl:h-16 w-auto xl:absolute  xl:-left-[8vh] 2xl:-left-[18vh]"
                   src={SymbolPsico}
@@ -85,26 +85,26 @@ export const NavbarPsico = () => {
                   {/* Cuando esta seleccionado Current: "bg-gray-900 text-white" */}
                   <a
                     href="/MyProfile"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                     aria-current="page"
                   >
                     Mi perfil
                   </a>
                   <a
                     href="/AppointmentPsico"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                   >
                     Citas
                   </a>
                   <a
-                    href="/MyProfile"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    href="/Patients"
+                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                   >
                     Pacientes
                   </a>
                   <a
                     href="/ControlPanel"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                   >
                     Panel de control
                   </a>
@@ -115,12 +115,12 @@ export const NavbarPsico = () => {
               {/* Notifications */}
               <button
                 type="button"
-                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                className="relative p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               >
                 <span className="absolute -inset-1.5"></span>
                 <span className="sr-only">View notifications</span>
                 <svg
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -140,7 +140,7 @@ export const NavbarPsico = () => {
                 <div>
                   <button
                     type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -149,7 +149,7 @@ export const NavbarPsico = () => {
                     <span className="absolute -inset-1.5"></span>
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="h-8 w-8 rounded-full"
+                      className="w-8 h-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt="Foto de perfil"
                     />
@@ -171,7 +171,7 @@ export const NavbarPsico = () => {
                 {/*  PROFILE OPTIONS  */}
                 {optionsProfile && (
                   <div
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
@@ -216,30 +216,30 @@ export const NavbarPsico = () => {
         {/* Mobile Menu */}
         {openMenu && (
           <div className="sm:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2 ">
+            <div className="px-2 pt-2 pb-3 space-y-1 ">
               {/* cuando esta presionado: bg-gray-900 text-white  para agregar el path active */}
               <a
                 href="/MyProfile"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                 aria-current="page"
               >
                 Mi perfil
               </a>
               <a
                 href="/AppointmentPsico"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
               >
                 Citas
               </a>
               <a
                 href="/Studies"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
               >
                 Estudios
               </a>
               <a
                 href="/ControlPanel"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
               >
                 Panel de Control
               </a>
