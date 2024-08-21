@@ -1,9 +1,12 @@
 import React from 'react';
 
-export const Approach = () => {
+export const Approach = ({ content }) => {
   return (
     <section>
-      <div>Abordaje y estudio</div>
+      <div className="m-4">
+        <h1>Abordaje y estudio</h1>
+        <span> {content}</span>
+      </div>
     </section>
   );
 };
