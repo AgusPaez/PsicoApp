@@ -6,7 +6,6 @@ export const AboutmeComponent = () => {
   return (
     <div>
       <PhotoDescription></PhotoDescription>
-      <Approach />
     </div>
   );
 };
