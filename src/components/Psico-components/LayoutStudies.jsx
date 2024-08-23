@@ -1,7 +1,11 @@
+//imports
 import React, { useEffect, useState } from 'react';
-import { fetchAllStudies } from '../../services/StudiesService';
+//import components
 import EditSection from './EditSection';
 import AddSection from './AddSection';
+// import services
+import { fetchAllStudies } from '../../services/StudiesService';
+
 export const LayoutStudies = () => {
   const [edit, setEdit] = useState(false);
   const [add, setAdd] = useState(false);
@@ -43,7 +47,7 @@ export const LayoutStudies = () => {
   return (
     <>
       <div>
-        <ul className="bg-black text-gray-400 p-14 my-12 m-8 flex flex-col rounded-full gap-3 ">
+        <ul className="flex flex-col gap-3 m-8 my-12 text-gray-400 bg-black rounded-full p-14 ">
           {studies.map((studies) => (
             <li key={studies._id} className="">
               {studies.titulo}, {studies.institucion}, ({studies.anio}),
@@ -76,18 +80,3 @@ export const LayoutStudies = () => {
     </>
   );
 };
-
-// <form className="bg-black text-gray-400 p-5 my-12 m-8 flex flex-col justify-center rounded-full  ">
-//   <label className="flex flex-col" htmlFor="">
-//     Nombre del/la Psicologo/a
-//   </label>
-//   <input></input>
-//   <label className="flex flex-col" htmlFor="">
-//     Formacion
-//   </label>
-
-//   <label className="flex flex-col" htmlFor="">
-//     Imagenes
-//   </label>
-//   <input></input>
-// </form>

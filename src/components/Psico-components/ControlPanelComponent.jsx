@@ -6,7 +6,7 @@ import { LayoutStudies } from './LayoutStudies';
 
 export const ControlPanelComponent = () => {
   // states
-  const [section, setSection] = useState(0);
+  const [section, setSection] = useState(1);
 
   //changue variables sections
   const changeSection = (nro) => {
