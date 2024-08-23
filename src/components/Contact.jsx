@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Contact = ({ contentMail }, { contentNro }) => {
+export const Contact = ({ contentMail, contentNro }) => {
   return (
     <section className="m-4">
       <div>

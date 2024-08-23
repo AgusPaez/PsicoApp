@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // import services
 import { getMyProfile } from '../services/users';
 
-export const PhotoDescription = ({ content }, { photo }) => {
+export const PhotoDescription = ({ content, photo }) => {
   //states
   const [info, setInfo] = useState([]);
 
@@ -21,7 +21,6 @@ export const PhotoDescription = ({ content }, { photo }) => {
     };
     fetchInfo();
   }, []);
-  console.log(info);
 
   return (
     <>
@@ -30,8 +29,7 @@ export const PhotoDescription = ({ content }, { photo }) => {
           {info.nombre}, {info.apellido}
         </div>
         <div className="m-2">
-          {/* {info.imagenUrl} */}
-          {{ photo } ? (
+          {photo ? (
             <img
               src="https://www.shutterstock.com/image-photo/happy-professional-middle-eastern-female-260nw-2101132801.jpg"
               alt="imagen del profesional"

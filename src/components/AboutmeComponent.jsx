@@ -25,7 +25,7 @@ export const AboutmeComponent = () => {
     };
     fetchContent();
   }, []);
-  console.log('CONTENT:', content);
+
   return (
     <div className="h-[81.2vh]">
       <PhotoDescription
