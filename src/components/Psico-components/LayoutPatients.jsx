@@ -1,10 +1,14 @@
 //imports
 import React, { useEffect, useState } from 'react';
+//import components
+import { EditPatients } from './EditPatients';
 //import services
 import { findPatients, deleteProfile } from '../../services/users';
 export const LayoutPatients = () => {
   //states
   const [patients, setpatients] = useState([]);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -17,15 +21,23 @@ export const LayoutPatients = () => {
     fetchPatients();
   }, []);
   //delete patient function
-  const deleted = (id) => {
+  const deleted = async (id) => {
     try {
-      const responsed = deleteProfile(id);
+      await deleteProfile(id);
       console.log('user eliminado');
+      //refresh the patients list after deletion
+      //setPatients(patients.filter(patient => patient._id !== id));
     } catch (error) {
       console.log('erro al tratar de elimnar el user');
     }
     console.log(id);
   };
+  // function to open the edit modal
+  const OpenEdit = (id) => {
+    setOpenEdit(!openEdit);
+    setSelected(id);
+  };
+
   return (
     <>
       <section>
@@ -47,18 +59,23 @@ export const LayoutPatients = () => {
                 <td>{patients.email}</td>
                 <td>{patients.createdAt.substring(0, 10)}</td>
                 <td>
-                  <button>Editar</button>
+                  <button onClick={() => OpenEdit(patients)}>Editar</button>
                 </td>
-                <td>
-                  <button onClick={() => deleted(patients._id)}>
-                    Eliminar
-                  </button>
-                </td>
+                <td></td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
+      <div>
+        {openEdit && (
+          <EditPatients
+            close={OpenEdit}
+            deleted={deleted}
+            selected={selected}
+          />
+        )}
+      </div>
       <section>
         <form>Agregar paciente</form>
       </section>
