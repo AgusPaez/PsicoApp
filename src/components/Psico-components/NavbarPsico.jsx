@@ -1,10 +1,14 @@
+//imports
 import React, { useState } from 'react';
-
+//import context
+import { useAuth } from '../../context/AuthProvider';
+//import icons
 import SymbolPsico from '../../assets/icons/pngwing.com.png';
 
 export const NavbarPsico = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
+  const { logout } = useAuth();
 
   const showMenu = () => {
     setOpenMenu(!openMenu);
@@ -179,7 +183,7 @@ export const NavbarPsico = () => {
                   >
                     {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
                     <a
-                      href="#"
+                      href="/MyProfile"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
@@ -197,7 +201,8 @@ export const NavbarPsico = () => {
                       Settings
                     </a>
                     <a
-                      href="#"
+                      onClick={logout}
+                      //href="#"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
