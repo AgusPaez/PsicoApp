@@ -25,7 +25,7 @@ const updateMyProfile = async (id, data) => {
     throw error;
   }
 };
-
+// find patients function
 const findPatients = async () => {
   try {
     const response = await axios.get(`${baseUrl}${url}`);
@@ -35,4 +35,14 @@ const findPatients = async () => {
     throw error;
   }
 };
-export { getMyProfile, updateMyProfile, findPatients };
+// delete profile/ my profile function
+const deleteProfile = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}${url}/${id}`);
+    return console.log('user deleted', response.data);
+  } catch (error) {
+    console.log('Error delete profile', error);
+    throw error;
+  }
+};
+export { getMyProfile, updateMyProfile, findPatients, deleteProfile };

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 // imports components
 import { LayoutAboutMe } from '../Psico-components/LayoutAboutMe';
 import { LayoutStudies } from './LayoutStudies';
+import { LayoutPatients } from './LayoutPatients';
 
 export const ControlPanelComponent = () => {
   // states
@@ -18,11 +19,11 @@ export const ControlPanelComponent = () => {
       case 1:
         return <LayoutAboutMe />;
         break;
-      default:
       case 2:
         return <LayoutStudies />;
         break;
-        break;
+      case 3:
+        return <LayoutPatients />;
     }
   };
   return (
@@ -42,13 +43,13 @@ export const ControlPanelComponent = () => {
             className="p-2 m-2 border hover:opacity-50"
             onClick={() => changeSection(2)}
           >
-            Personalizar "Citas"
+            Personalizar "Estudios"
           </button>
           <button
             className="p-2 m-2 border hover:opacity-50"
             onClick={() => changeSection(3)}
           >
-            Personalizar "Estudios"
+            Personalizar "Pacientes"
           </button>
           <button
             className="p-2 m-2 border hover:opacity-50"
@@ -59,7 +60,6 @@ export const ControlPanelComponent = () => {
         </div>
       </section>
       {renderSection()}
-      {/* Sección adicional si es necesario */}
     </>
   );
 };
