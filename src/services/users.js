@@ -45,4 +45,21 @@ const deleteProfile = async (id) => {
     throw error;
   }
 };
-export { getMyProfile, updateMyProfile, findPatients, deleteProfile };
+
+//create profile/patient function
+const createProfile = async (data) => {
+  try {
+    const response = await axios.post(`${baseUrl}${url}`, data);
+    return console.log('user created', response.data);
+  } catch (error) {
+    console.log('Error create profile', error);
+    throw error;
+  }
+};
+export {
+  getMyProfile,
+  updateMyProfile,
+  findPatients,
+  deleteProfile,
+  createProfile,
+};

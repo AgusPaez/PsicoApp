@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 //import components
 import { EditPatients } from './EditPatients';
+import { AddPatient } from './AddPatient';
 //import services
 import { findPatients, deleteProfile } from '../../services/users';
+
 export const LayoutPatients = () => {
   //states
   const [patients, setpatients] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -32,10 +35,15 @@ export const LayoutPatients = () => {
     }
     console.log(id);
   };
-  // function to open the edit modal
+  // function to open edit modal
   const OpenEdit = (id) => {
     setOpenEdit(!openEdit);
     setSelected(id);
+  };
+
+  // function to open add modal
+  const OpenAdd = () => {
+    setOpenAdd(!openAdd);
   };
 
   return (
@@ -77,7 +85,8 @@ export const LayoutPatients = () => {
         )}
       </div>
       <section>
-        <form>Agregar paciente</form>
+        <button onClick={OpenAdd}>Agregar paciente</button>
+        <div>{openAdd && <AddPatient close={OpenAdd} />}</div>
       </section>
     </>
   );
