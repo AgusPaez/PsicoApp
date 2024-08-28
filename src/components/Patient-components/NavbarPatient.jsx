@@ -74,7 +74,7 @@ export const NavbarPatient = () => {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <a
-                    href="/AboutMe"
+                    href="/AboutMePatient"
                     className={
                       buttonClass('/AboutMe') +
                       'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
@@ -195,7 +195,7 @@ export const NavbarPatient = () => {
           <div className="sm:hidden" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1 ">
               <a
-                href="/AboutMe"
+                href="/AboutMePatient"
                 className={
                   buttonClass('/AboutMe') +
                   'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'

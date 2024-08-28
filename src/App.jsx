@@ -16,6 +16,7 @@ import { ControlPanel } from './pages/Psico/ControlPanel';
 import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Patients } from './pages/Psico/Patients';
+import { AboutMePatient } from './pages/Patient/AboutMePatient';
 
 function App() {
   return (
@@ -34,6 +35,15 @@ function App() {
           element={
             <ProtectedRoute role="paciente">
               <HomePatient />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/AboutMePatient"
+          element={
+            <ProtectedRoute role="paciente">
+              <AboutMePatient />
             </ProtectedRoute>
           }
         />
