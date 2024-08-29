@@ -1,13 +1,22 @@
+//imports
 import React, { useEffect, useState } from 'react';
-import { updateMyProfile } from '../../services/users';
+import { useNavigate } from 'react-router-dom';
+
+//import services
+import { updateMyProfile, deleteProfile } from '../../services/users';
+//import context
+import { useAuth } from '../../context/AuthProvider';
 
 export const EditMyProfile = ({ profile, onClose }) => {
+  //states
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
   const [rol, setRol] = useState('');
   const [imagenUrl, setImagenUrl] = useState('');
   const [id, setId] = useState('');
+  //context
+  const { logout } = useAuth();
 
   useEffect(() => {
     if (profile) {
@@ -37,7 +46,16 @@ export const EditMyProfile = ({ profile, onClose }) => {
       console.error('Failed to update profile:', error);
     }
   };
-
+  const deleteMyProfile = async () => {
+    try {
+      const response = await deleteProfile(id);
+      console.log('Profile deleted successfully', response);
+      logout();
+    } catch (error) {
+      console.log('error al intentar borrar mi perfil', error);
+      throw error;
+    }
+  };
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -78,6 +96,9 @@ export const EditMyProfile = ({ profile, onClose }) => {
 
         <button type="submit">Guardar</button>
       </form>
+      <button className="bg-red-600" onClick={deleteMyProfile}>
+        ELIMINAR PERFIL
+      </button>
       <button onClick={onClose}>Cerrar</button>
     </div>
   );
