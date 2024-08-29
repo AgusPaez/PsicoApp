@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthProvider';
 //import icons
 import SymbolPsico from '../../assets/icons/pngwing.com.png';
+import { useNavigate } from 'react-router-dom';
 
 export const NavbarPsico = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const showMenu = () => {
     setOpenMenu(!openMenu);
@@ -18,7 +20,9 @@ export const NavbarPsico = () => {
     setOptionsProfile(!optionsProfile);
     console.log('PROFILE', optionsProfile);
   };
-
+  const Redirecto = () => {
+    navigate('/HomePsico');
+  };
   return (
     <>
       <nav className="bg-gradient-to-r from-red-800 to-red-900">
@@ -79,6 +83,7 @@ export const NavbarPsico = () => {
             <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
               <div className="flex items-center flex-shrink-0 ">
                 <img
+                  onClick={Redirecto}
                   className="h-10 xl:h-16 w-auto xl:absolute  xl:-left-[8vh] 2xl:-left-[18vh]"
                   src={SymbolPsico}
                   alt="Your Company"

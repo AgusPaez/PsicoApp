@@ -12,6 +12,7 @@ import { useAuth } from '../../context/AuthProvider';
 export const NavbarPatient = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  const navigate = useNavigate();
   //States
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
@@ -25,6 +26,9 @@ export const NavbarPatient = () => {
   };
   const openOptionsProfile = () => {
     setOptionsProfile(!optionsProfile);
+  };
+  const Redirecto = () => {
+    navigate('/HomePatient');
   };
 
   return (
@@ -66,7 +70,8 @@ export const NavbarPatient = () => {
             <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
               <div className="flex items-center flex-shrink-0 ">
                 <img
-                  className="h-10 xl:h-16 w-auto xl:absolute  xl:-left-[8vh] 2xl:-left-[18vh]"
+                  onClick={Redirecto}
+                  className="h-10 xl:h-16 w-auto xl:absolute cursor-pointer  xl:-left-[8vh] 2xl:-left-[18vh] hover:drop-shadow-md"
                   src={SymbolPsico}
                   alt="Your Company"
                 />
