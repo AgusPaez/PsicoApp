@@ -2,7 +2,7 @@
 import axios from 'axios';
 //import enviroment variable
 const baseUrl = import.meta.env.VITE_API_URL;
-
+const registerUrl = 'auth/signUp';
 const url = 'users';
 
 // get my profile function  (ver si sigue por id o con el token)
@@ -49,7 +49,7 @@ const deleteProfile = async (id) => {
 //create profile/patient function
 const createProfile = async (data) => {
   try {
-    const response = await axios.post(`${baseUrl}${url}`, data);
+    const response = await axios.post(`${baseUrl}${registerUrl}`, data);
     return console.log('user created', response.data);
   } catch (error) {
     console.log('Error create profile', error);
