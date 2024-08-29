@@ -9,14 +9,16 @@ import { Login } from '../src/pages/Main/Login';
 import { Studies } from '../src/pages/Main/Studies';
 // PATIENT PAGES
 import { HomePatient } from './pages/Patient/HomePatient';
+import { Patients } from './pages/Psico/Patients';
+import { AboutMePatient } from './pages/Patient/AboutMePatient';
+import { AppointmentPatient } from './pages/Patient/AppointmentPatient';
 // PSICO PAGES
 import { HomePsico } from '../src/pages/Psico/HomePsico';
 import { MyProfile } from './pages/Psico/MyProfile';
 import { ControlPanel } from './pages/Psico/ControlPanel';
 import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
+// PROTECTED
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { Patients } from './pages/Psico/Patients';
-import { AboutMePatient } from './pages/Patient/AboutMePatient';
 
 function App() {
   return (
@@ -44,6 +46,14 @@ function App() {
           element={
             <ProtectedRoute role="paciente">
               <AboutMePatient />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AppointmentPatient"
+          element={
+            <ProtectedRoute role="paciente">
+              <AppointmentPatient />
             </ProtectedRoute>
           }
         />
