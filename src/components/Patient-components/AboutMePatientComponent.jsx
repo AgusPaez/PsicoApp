@@ -1,5 +1,7 @@
 //imports
 import React, { useEffect, useState } from 'react';
+//import components
+import { EditMyProfile } from './EditMyProfile';
 //import service
 import { findAll } from '../../services/appointmentService';
 //import context
@@ -10,10 +12,12 @@ export const AboutMePatientComponent = () => {
   const { dataLogin } = useAuth();
   //states
   const [appointment, setAppointment] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchAppointment = async () => {
       try {
+        //call service
         const response = await findAll();
         setAppointment(response);
         console.log('se pudo traer las consultas', response);
@@ -23,10 +27,15 @@ export const AboutMePatientComponent = () => {
     };
     fetchAppointment();
   }, []);
-
+  //show appointment
   const appointmentFill = appointment.filter(
     (appointment) => appointment.email === dataLogin.email
   );
+
+  //Show edit modal
+  const ShowModal = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <>
@@ -42,9 +51,15 @@ export const AboutMePatientComponent = () => {
           <p>
             <strong>Email:</strong> {dataLogin.email}
           </p>
-          {/* <p>
-            <strong>Rol:</strong> {dataLogin.rol}
-          </p> */}
+          <p>
+            <strong>Numero de telefono:</strong> {dataLogin.numero}
+          </p>
+          <p>
+            <strong>Fecha de Nacimiento:</strong> {dataLogin.fecha_nacimiento}
+          </p>
+          <p>
+            <strong>Obra social:</strong> {dataLogin.obra_social}
+          </p>
           <p>
             <strong>Imagen :</strong> {dataLogin.imagenUrl || 'No disponible'}
           </p>
@@ -56,18 +71,18 @@ export const AboutMePatientComponent = () => {
             <strong>Actualizado el:</strong>{' '}
             {new Date(dataLogin.updatedAt).toLocaleString()}
           </p>
-          {/* <p>
-            <strong>Token:</strong> {dataLogin.token}
-          </p>
-          <p>
-            <strong>Estado de Sesión:</strong>{' '}
-            {dataLogin.userLogin ? 'Sesión Activa' : 'Sesión Inactiva'}
-          </p> */}
+
+          <button className="bg-slate-600" onClick={ShowModal}>
+            Actualizar perfil
+          </button>
+          {showModal && (
+            <EditMyProfile profile={dataLogin} onClose={ShowModal} />
+          )}
           <div className="mt-6 mb-auto">
             <h1>Citas del Paciente ({dataLogin.email})</h1>
             {appointmentFill.length > 0 ? (
               <ul>
-                {appointmentFill.map((cita) => (
+                {appointmentFill.slice(0, 1).map((cita) => (
                   <li key={cita._id}>
                     <p>
                       <strong>Nombre:</strong> {cita.nombre} {cita.apellido}
