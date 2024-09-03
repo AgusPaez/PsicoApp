@@ -16,13 +16,26 @@ export const AppointmentFormPatient = () => {
     setValue,
     formState: { errors },
   } = useForm();
-
+  // calculate age function
+  const calculateAge = (fechaNacimiento) => {
+    const hoy = new Date();
+    const nacimiento = new Date(fechaNacimiento);
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+    return edad;
+  };
+  const edad = calculateAge(dataLogin.fecha_nacimiento);
   useEffect(() => {
     if (dataLogin) {
       //set data
       setValue('nombre', dataLogin.nombre || '');
       setValue('apellido', dataLogin.apellido || '');
       setValue('email', dataLogin.email || '');
+      setValue('edad', edad || '');
+      setValue('numero', dataLogin.numero || '');
     }
   }, [dataLogin, setValue]);
 
@@ -76,6 +89,7 @@ export const AppointmentFormPatient = () => {
                 className="w-full p-4 m-2 h-9 rounded-2xl opacity-60 focus:opacity-80"
                 id="edad"
                 {...register('edad', { required: true })}
+                disabled
               />
               {errors.edad && errors.edad.type === 'required' && (
                 <span className="text-red-500 text-xs m-2 mt-0.5 absolute">
@@ -100,6 +114,7 @@ export const AppointmentFormPatient = () => {
                 className="w-full p-4 m-2 h-9 rounded-2xl opacity-60"
                 id="numero"
                 {...register('numero', { required: true })}
+                disabled
               />
               {errors.numero && errors.numero.type === 'required' && (
                 <span className="text-red-500 text-xs m-2 mt-0.5 absolute ml-4">
