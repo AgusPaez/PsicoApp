@@ -56,6 +56,9 @@ export const LayoutPatients = () => {
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Email</th>
+              <th>Numero</th>
+              <th>Fecha Nacimiento</th>
+              <th>O.S</th>
               <th>Creada</th>
             </tr>
           </thead>
@@ -65,6 +68,9 @@ export const LayoutPatients = () => {
                 <td>{patients.nombre}</td>
                 <td>{patients.apellido}</td>
                 <td>{patients.email}</td>
+                <td>{patients.numero}</td>
+                <td>{patients.fecha_nacimiento.substring(0, 10)}</td>
+                <td>{patients.obra_social}</td>
                 <td>{patients.createdAt.substring(0, 10)}</td>
                 <td>
                   <button onClick={() => OpenEdit(patients)}>Editar</button>
