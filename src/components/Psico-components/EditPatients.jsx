@@ -10,6 +10,9 @@ export const EditPatients = ({ close, deleted, selected }) => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [apellido, setApellido] = useState('');
+  const [numero, setNumero] = useState('');
+  const [fecha_nacimiento, setFecha_nacimiento] = useState('');
+  const [obra_social, setObra_social] = useState('');
   //const [imagen, setImagen] = useState("");
 
   useEffect(() => {
@@ -18,6 +21,9 @@ export const EditPatients = ({ close, deleted, selected }) => {
       setNombre(selected.nombre || '');
       setEmail(selected.email || '');
       setApellido(selected.apellido || '');
+      setNumero(selected.numero || '');
+      setFecha_nacimiento(selected.fecha_nacimiento || '');
+      setObra_social(selected.obra_social || '');
       //setImagen(selected.imagenUrl || '');
     }
   }, [selected]);
@@ -29,6 +35,9 @@ export const EditPatients = ({ close, deleted, selected }) => {
       nombre,
       email,
       apellido,
+      numero,
+      fecha_nacimiento,
+      obra_social,
       //imagen
     };
     try {
@@ -62,6 +71,27 @@ export const EditPatients = ({ close, deleted, selected }) => {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label> Numero: </label>
+        <input
+          type="text"
+          value={numero}
+          onChange={(e) => setNumero(e.target.value)}
+        />
+
+        <label> Fecha nacimiento: </label>
+        <input
+          type="date"
+          value={fecha_nacimiento}
+          onChange={(e) => setFecha_nacimiento(e.target.value)}
+        />
+
+        <label> Obra social: </label>
+        <input
+          type="text"
+          value={obra_social}
+          onChange={(e) => setObra_social(e.target.value)}
         />
         <button type="submit">Guardar</button>
       </form>

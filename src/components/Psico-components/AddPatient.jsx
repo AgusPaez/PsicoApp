@@ -22,6 +22,16 @@ export const AddPatient = ({ close }) => {
       console.error('Error al conectarse con la API:', error);
     }
   };
+  // O.S.
+  const obraSocialOptions = [
+    'NO TIENE',
+    'SANCOR',
+    'SANCOR SALUD',
+    'PROVINCIA',
+    'SWISS',
+    'OSECAC',
+    'JERARQUICOS',
+  ];
 
   return (
     <div>
@@ -78,6 +88,37 @@ export const AddPatient = ({ close }) => {
             {...register('imagenUrl')}
           />
         </div> */}
+        <div>
+          <input
+            type="number"
+            placeholder="Numero"
+            {...register('numero', { required: true })}
+          />
+          {errors.rol && <span>El numero es obligatorio</span>}
+        </div>
+        <div>
+          <input
+            type="date"
+            placeholder="Fecha de nacimiento"
+            {...register('fecha_nacimiento', { required: true })}
+          />
+          {errors.rol && <span>La fecha es obligatoria</span>}
+        </div>
+        <div>
+          <label htmlFor="obra_social">Obra Social</label>
+          <select
+            id="obra_social"
+            {...register('obra_social', { required: true })}
+            defaultValue="NO TIENE"
+          >
+            {obraSocialOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          {errors.obra_social && <span>La obra social es obligatoria</span>}
+        </div>
 
         <div>
           <button type="submit">Crear</button>
