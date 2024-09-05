@@ -4,4 +4,5 @@
 
 body {
   @apply font-libre;
+  @apply font-oswald;
 }

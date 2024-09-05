@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         libre: ['Libre Baskerville', 'serif'],
+        oswald: ['Oswald', 'sans-serif'],
       },
     },
   },
