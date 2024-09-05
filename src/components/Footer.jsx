@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Footer = () => {
   return (
-    <footer className="bottom-0 w-full px-4 py-4 text-sm text-white  bg-gradient-to-r from-zinc-500 to-purple-300">
+    <footer className="bottom-0 w-full px-4 py-4 text-sm text-white bg-gradient-to-r from-zinc-500 to-purple-300">
       <p>Copyright &copy; {new Date().getFullYear()} Agustin Paez</p>
       <ul className="flex justify-center mt-4 space-x-4">
         <li>
