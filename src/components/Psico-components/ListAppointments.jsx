@@ -53,7 +53,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 border-b cursor-pointer"
                 onClick={() => sortAppointments('nombre')}
               >
-                Nombre{' '}
+                Nombre
                 {sortConfig.key === 'nombre'
                   ? sortConfig.direction === 'asc'
                     ? '↑'
@@ -64,7 +64,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 border-b cursor-pointer"
                 onClick={() => sortAppointments('apellido')}
               >
-                Apellido{' '}
+                Apellido
                 {sortConfig.key === 'apellido'
                   ? sortConfig.direction === 'asc'
                     ? '↑'
@@ -75,7 +75,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 border-b cursor-pointer"
                 onClick={() => sortAppointments('edad')}
               >
-                Edad{' '}
+                Edad
                 {sortConfig.key === 'edad'
                   ? sortConfig.direction === 'asc'
                     ? '↑'
@@ -85,7 +85,17 @@ const ListAppointment = () => {
               <th className="px-4 py-2 border-b">Motivo Consulta</th>
               <th className="px-4 py-2 border-b ">Derivación</th>
               <th className="px-4 py-2 border-b ">Número</th>
-              <th className="px-4 py-2 border-b ">Email</th>
+              <th
+                className="px-4 py-2 border-b cursor-pointer "
+                onClick={() => sortAppointments('email')}
+              >
+                Email
+                {sortConfig.key === 'email'
+                  ? sortConfig.direction === 'asc'
+                    ? '↑'
+                    : '↓'
+                  : ''}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -106,6 +116,21 @@ const ListAppointment = () => {
         </table>
         <form>
           <input type="text" placeholder="buscador" />
+        </form>
+      </div>
+      <button className="text-white bg-purple-900">agregar una cita</button>
+      <div>
+        form para agregar una cita
+        <form className="grid gap-2 cols">
+          <input type="text" placeholder="seleccionar paciente" />
+          <input type="text" placeholder="nombre" />
+          <input type="text" placeholder="apellido" />
+          <input type="text" placeholder="edad" />
+          <input type="text" placeholder="derivacion" />
+          <input type="text" placeholder="numero" />
+          <input type="text" placeholder="email" />
+          {/* <input type="text" placeholder="Detalles de la sesion" />
+          <input type="text" placeholder="historial" /> */}
         </form>
       </div>
     </section>
