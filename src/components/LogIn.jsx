@@ -46,7 +46,7 @@ export const LogIn = () => {
           </div>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="space-y-px rounded-md shadow-2xl">
+          <div className="space-y-px rounded-md">
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Correo electrónico
@@ -59,7 +59,7 @@ export const LogIn = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="relative hover:tracking-wide block w-full px-3 py-3 text-gray-900 placeholder-[#7a7a7a] focus:placeholder-[#5f5f5f] transition-all duration-500 bg-transparent border-b border-gray-300 shadow-md rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-gray-400 focus:z-10 sm:text-sm hover:shadow-lg hover:border-gray-400"
+                className="relative rounded-lg hover:tracking-wide block w-full px-3 py-3 text-gray-900 placeholder-[#7a7a7a] focus:placeholder-[#5f5f5f] transition-all duration-500 bg-transparent border-b border-gray-300 shadow-md rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-gray-400 focus:z-10 sm:text-sm hover:shadow-lg hover:border-gray-400"
                 placeholder="Correo electrónico"
               />
             </div>
@@ -75,7 +75,7 @@ export const LogIn = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="relative  hover:tracking-wide block w-full px-3 py-3 text-gray-900 placeholder-[#7a7a7a] focus:placeholder-[#5f5f5f] transition-all duration-700 bg-transparent border-b border-gray-300 shadow-md rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-gray-400 focus:z-10 sm:text-sm hover:shadow-lg hover:border-gray-400"
+                className="relative mt-2 rounded-lg hover:tracking-wide block w-full px-3 py-3 text-gray-900 placeholder-[#7a7a7a] focus:placeholder-[#5f5f5f] transition-all duration-700 bg-transparent border-b border-gray-300 shadow-md rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-gray-400 focus:z-10 sm:text-sm hover:shadow-lg hover:border-gray-400"
                 placeholder="Contraseña"
               />
             </div>
@@ -83,18 +83,23 @@ export const LogIn = () => {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="w-4 h-4 text-[#7a7a7a] border-gray-300 rounded-full focus:ring-[#7a7a7a] focus:ring-1 cursor-pointer transition-all duration-700 hover:h-[18px] hover:w-[18px]"
-              />
+              <label className="cursor-pointer">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="hidden peer "
+                />
+                <span className="top-1 inline-block relative h-5 w-5 bg-black rounded-full peer-checked:shadow-[0px_0px_30px_#09f] peer-checked:after:opacity-100 after:content-[''] after:absolute after:border-solid  after:border-r-0 after:border-b-0 after:border-[0.2em] after:w-[0.5em] after:h-[0.7em] after:left-[0.39em] after:top-[0.18em]  after:border-[#6aabff] after:rotate-[210deg] after:opacity-0 after:transition-opacity after:duration-300 after:ease transition-all duration-700 "></span>
 
-              <label
-                htmlFor="remember-me"
-                className="block ml-2 text-sm text-[#7a7a7a]"
-              >
-                Recordarme
+                <label
+                  htmlFor="remember-me"
+                  id="remember-me"
+                  name="remember-me"
+                  className=" ml-2 text-sm text-[#7a7a7a] hover:text-[#5f5f5f] hover:tracking-wide transition-all duration-700 "
+                >
+                  Recordarme
+                </label>
               </label>
             </div>
 
@@ -108,10 +113,10 @@ export const LogIn = () => {
             </div>
           </div>
 
-          <div>
+          <div className="flex justify-center ">
             <button
               type="submit"
-              className="relative flex justify-center w-full px-4 py-3 mb-4 text-sm font-medium hover:font-bold tracking-wide hover:tracking-wider transition-all duration-700 text-white bg-[#666666] border border-transparent rounded-md group hover:bg-[#424242] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="relative flex justify-center w-3/5 px-4 py-3 mb-4 text-sm font-medium hover:font-bold tracking-wide hover:tracking-wider transition-all duration-700 text-white bg-[#666666] border border-transparent rounded-md group hover:bg-[#424242] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Iniciar sesión
             </button>

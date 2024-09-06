@@ -12,7 +12,9 @@ export const Navbar = () => {
   //States
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
-  const buttonClass = (path) => `${isActive(path) ? 'bg-gray-700' : ''} 
+  const buttonClass = (path) => `${
+    isActive(path) ? 'bg-gray-600 text-white tracking-wider tracking-wider' : ''
+  } 
 `;
   //open menu function
   const showMenu = () => {
@@ -23,9 +25,9 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className=" bg-gradient-to-r from-zinc-500 to-purple-300">
+    <nav className=" bg-gradient-to-r from-[#6aabff70] to-purple-300">
       <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
+        <div className="relative flex items-center justify-between h-[4.5rem]">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* <!-- Mobile menu button--> */}
             <button
@@ -67,12 +69,11 @@ export const Navbar = () => {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {/* Cuando esta seleccionado Current: "bg-gray-900 text-white" */}
                 <a
                   href="/AboutMe"
                   className={
                     buttonClass('/AboutMe') +
-                    'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    'text-gray-600 hover:bg-gray-600  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
                   }
                   aria-current="page"
                 >
@@ -82,7 +83,7 @@ export const Navbar = () => {
                   href="/Appointment"
                   className={
                     buttonClass('/Appointment') +
-                    'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    'text-gray-600 hover:bg-gray-600  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
                   }
                 >
                   Citas
@@ -91,7 +92,7 @@ export const Navbar = () => {
                   href="/Studies"
                   className={
                     buttonClass('/Studies') +
-                    'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    'text-gray-600 hover:bg-gray-600  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
                   }
                 >
                   Estudios
@@ -100,7 +101,7 @@ export const Navbar = () => {
                   href="/Login"
                   className={
                     buttonClass('/Login') +
-                    'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                    'text-gray-600 hover:bg-gray-600  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
                   }
                 >
                   Login
