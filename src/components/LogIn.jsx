@@ -39,7 +39,7 @@ export const LogIn = () => {
 
   return (
     <div className="flex items-center justify-center flex-grow bg-center bg-cover ">
-      <div className="relative w-1/3 px-8 py-6 transition-all duration-700 border border-gray-300 rounded-lg shadow-md hover:shadow-xl hover:border-gray-400">
+      <div className="relative w-1/3 px-8 py-6 transition-all duration-700 border border-gray-300 rounded-lg shadow-md shadow-[#6aabff6e] hover:shadow-xl hover:shadow-[#6aabff60] hover:border-gray-400">
         <div className="flex items-center justify-center m-4 ">
           <div className="flex items-center justify-center w-24 h-24 p-2 m-2 bg-[#424242] rounded-full">
             <img src={loginIcon} width={45} height={45} />

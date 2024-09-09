@@ -38,13 +38,13 @@ export const AppointmentForm = () => {
         }}
       >
         <div className="p-10">
-          <form onSubmit={handleSubmit(onSubmit)} className=" p-6 m-6 ">
-            <h2 className="text-lg ml-4">Agendá tu cita</h2>
-            <div className="flex w-full my-4 gap-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 m-6 ">
+            <h2 className="ml-4 text-xl animate-slide">Agendá tu cita</h2>
+            <div className="flex w-full gap-6 my-4">
               <div className="w-2/5">
                 <input
                   placeholder="Nombre"
-                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80 "
+                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 rounded-xl opacity-60 focus:bg-slate-100 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="nombre"
                   {...register('nombre', { required: true })}
                 />
@@ -58,7 +58,7 @@ export const AppointmentForm = () => {
               <div className="w-2/5">
                 <input
                   placeholder="Apellido"
-                  className="m-2 rounded-2xl h-9 p-4 w-full opacity-60 focus:opacity-80"
+                  className="w-full p-4 m-2  h-9 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="apellido"
                   {...register('apellido', { required: true })}
                 />
@@ -71,7 +71,7 @@ export const AppointmentForm = () => {
               <div className="w-1/5">
                 <input
                   placeholder="Edad"
-                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80 "
+                  className="w-full p-4 m-2 h-9 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="edad"
                   {...register('edad', { required: true })}
                 />
@@ -85,16 +85,16 @@ export const AppointmentForm = () => {
             <div className="">
               <input
                 placeholder="Email"
-                className="m-2 my-4 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80"
+                className="w-full p-4 m-2 my-4 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                 id="email"
                 {...register('email', { required: false })}
               />
             </div>
-            <div className="flex w-full my-4 gap-6">
+            <div className="flex w-full gap-6 my-4">
               <div className="w-1/2">
                 <input
                   placeholder="Número de telefono"
-                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 "
+                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="numero"
                   {...register('numero', { required: true })}
                 />
@@ -108,7 +108,7 @@ export const AppointmentForm = () => {
               <div className="w-1/2">
                 <input
                   placeholder="Derivación"
-                  className="m-2 h-9 p-4 w-full rounded-2xl opacity-60 focus:opacity-80"
+                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="derivacion"
                   {...register('derivacion')}
                 />
@@ -117,7 +117,7 @@ export const AppointmentForm = () => {
             <div className="my-6">
               <textarea
                 placeholder="Motivo de consulta"
-                className="m-2 max-h-44 min-h-20 p-4 w-full rounded-2xl text-left opacity-60 focus:opacity-80"
+                className="w-full p-4 m-2 text-left max-h-44 min-h-20 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                 id="motivo_consulta"
                 {...register('motivo_consulta', { required: true })}
               />
@@ -130,14 +130,14 @@ export const AppointmentForm = () => {
             </div>
 
             <button
-              className="m-2 h-12 w-32 bg-slate-400 hover:bg-slate-600 rounded-full"
+              className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-white bg-[#666666c7] border border-transparent rounded-lg group hover:bg-[#424242d8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               type="submit"
             >
               Enviar
             </button>
           </form>
         </div>
-        <div className=" flex justify-center items-center">
+        <div className="flex items-center justify-center ">
           <img src={imgAppointment} alt="imagen" width={400} height={400} />
         </div>
       </section>
