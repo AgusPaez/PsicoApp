@@ -15,3 +15,16 @@ body,
   margin: 0;
   padding: 0;
 }
+@keyframes slide {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-slide {
+  animation: slide 7s ease-in-out infinite;
+}
