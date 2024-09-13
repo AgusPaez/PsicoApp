@@ -44,7 +44,7 @@ export const AppointmentForm = () => {
               <div className="w-2/5">
                 <input
                   placeholder="Nombre"
-                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 rounded-xl opacity-60 focus:bg-slate-100 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 rounded-xl opacity-60 focus:bg-slate-100 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="nombre"
                   {...register('nombre', { required: true })}
                 />
@@ -58,7 +58,7 @@ export const AppointmentForm = () => {
               <div className="w-2/5">
                 <input
                   placeholder="Apellido"
-                  className="w-full p-4 m-2  h-9 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2  h-9 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="apellido"
                   {...register('apellido', { required: true })}
                 />
@@ -71,7 +71,7 @@ export const AppointmentForm = () => {
               <div className="w-1/5">
                 <input
                   placeholder="Edad"
-                  className="w-full p-4 m-2 h-9 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="edad"
                   {...register('edad', { required: true })}
                 />
@@ -85,7 +85,7 @@ export const AppointmentForm = () => {
             <div className="">
               <input
                 placeholder="Email"
-                className="w-full p-4 m-2 my-4 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                className="w-full p-4 m-2 my-4 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                 id="email"
                 {...register('email', { required: false })}
               />
@@ -94,7 +94,7 @@ export const AppointmentForm = () => {
               <div className="w-1/2">
                 <input
                   placeholder="Número de telefono"
-                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="numero"
                   {...register('numero', { required: true })}
                 />
@@ -108,7 +108,7 @@ export const AppointmentForm = () => {
               <div className="w-1/2">
                 <input
                   placeholder="Derivación"
-                  className="w-full p-4 m-2 transition-all duration-500 border-b border-b-[#7a7a7a] shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="derivacion"
                   {...register('derivacion')}
                 />
@@ -130,7 +130,7 @@ export const AppointmentForm = () => {
             </div>
 
             <button
-              className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-white bg-[#666666c7] border border-transparent rounded-lg group hover:bg-[#424242d8] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-slate-600 bg-[#6aabffb7] border border-transparent rounded-lg group hover:bg-[#5091e6c2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               type="submit"
             >
               Enviar
