@@ -22,22 +22,6 @@ export const Profile = () => {
   }, [dataLogin._id, id]);
   console.log(dataLogin);
 
-  //1option
-
-  // useEffect(() => {
-  //   if (id) {
-  //     const getProfile = async () => {
-  //       try {
-  //         const profile = await getMyProfile(id);
-  //         setProfile(profile.data);
-  //       } catch (error) {
-  //         console.log('Error get my profile', error);
-  //       }
-  //     };
-  //     getProfile();
-  //   }
-  // }, [id]);
-
   useEffect(() => {
     setProfile(dataLogin);
   }, [dataLogin._id, id]);
@@ -49,28 +33,39 @@ export const Profile = () => {
   const handleCloseEdit = () => {
     setIsEditing(false);
   };
-  //console.log('DATOS:', profile.data.nombre);
+
   return (
-    <>
-      <div>
-        <h1>Nombre de la cuenta:</h1>
-        <>
-          {profile.apellido}, {profile.nombre}{' '}
-        </>
-        <h1>Email asociado:</h1>
-        <> {profile.email}</>
-        <h1>ROL:</h1>
-        <> {profile.rol} </>
-        <img width={100} alt="foto de perfil" src={profile.imagenUrl} />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="absolute w-full max-w-lg p-8 text-center bg-white rounded-lg shadow-xl">
+        <div className="relative w-32 h-32 mx-auto mb-4">
+          <img
+            className="object-cover w-32 h-32 mx-auto mb-4 transition-transform duration-500 ease-in-out rounded-full shadow-md hover:scale-125"
+            alt="foto de perfil"
+            src={profile.imagenUrl}
+          />
+        </div>
+        <h1 className="mb-2 text-2xl font-bold transition-all duration-500 ease-in-out hover:tracking-wide">
+          {profile.apellido}, {profile.nombre}
+        </h1>
+        <p className="mb-4 text-lg text-gray-700 transition-all duration-300 ease-in-out hover:tracking-wide">
+          {profile.email}
+        </p>
+
+        <button
+          onClick={handleEditClick}
+          className="px-6 py-2 transition-all duration-500 ease-in-out hover:tracking-wide text-white bg-[#644fff] rounded-lg hover:bg-[#503ce7]"
+        >
+          Editar Datos personales
+        </button>
       </div>
-      <div>
-        <button onClick={handleEditClick}>Editar Datos personales</button>
-      </div>
-      <div>
-        {isEditing && (
-          <EditMyProfile profile={profile} onClose={handleCloseEdit} />
-        )}
-      </div>
-    </>
+
+      {isEditing && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 pb-28">
+          <div className="flex items-center justify-center w-full max-w-md mt-32 rounded-lg shadow-lg ">
+            <EditMyProfile profile={profile} onClose={handleCloseEdit} />
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
