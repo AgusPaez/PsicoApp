@@ -35,7 +35,7 @@ export const Profile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center h-96 my-28">
       <div className="absolute w-full max-w-lg p-8 text-center bg-white rounded-lg shadow-xl">
         <div className="relative w-32 h-32 mx-auto mb-4">
           <img

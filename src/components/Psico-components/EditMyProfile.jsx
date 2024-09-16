@@ -81,14 +81,14 @@ export const EditMyProfile = ({ profile, onClose }) => {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="cursor-pointer w-full p-4 m-2 text-left min-h-12 transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="cursor-pointer w-full p-4 m-2 text-left min-h-12 transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
 
         <input
           type="text"
           placeholder="Nombre"
           {...register('nombre', { required: true })}
-          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
         {errors.nombre && (
           <span className="text-red-500">El nombre es obligatorio</span>
@@ -98,7 +98,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
           type="text"
           placeholder="Apellido"
           {...register('apellido', { required: true })}
-          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
         {errors.apellido && (
           <span className="text-red-500">El apellido es obligatorio</span>
@@ -108,7 +108,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
           type="email"
           placeholder="Email"
           {...register('email', { required: true })}
-          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
         {errors.email && (
           <span className="text-red-500">El email es obligatorio</span>
@@ -118,7 +118,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
           type="text"
           placeholder="Número de Teléfono"
           {...register('numero', { required: true })}
-          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
         {errors.numero && (
           <span className="text-red-500">El número es obligatorio</span>
@@ -128,7 +128,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
           type="date"
           placeholder="Fecha de Nacimiento"
           {...register('fecha_nacimiento', { required: true })}
-          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+          className="w-full p-4 m-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
         />
         {errors.fecha_nacimiento && (
           <span className="text-red-500">
@@ -146,7 +146,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
       </form>
       <div className="flex items-center justify-between mt-0">
         <button
-          className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-white bg-[#b93d3dc7] border border-transparent rounded-lg group hover:bg-[#db4d4de7] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-white bg-[#bd3a3ad5] border border-transparent rounded-lg group hover:bg-[#ff5151f5] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={deleteMyProfile}
         >
           ELIMINAR PERFIL
