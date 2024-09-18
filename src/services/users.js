@@ -4,6 +4,7 @@ import axios from 'axios';
 const baseUrl = import.meta.env.VITE_API_URL;
 const registerUrl = 'auth/signUp';
 const url = 'users';
+const emailUrl = '/email/';
 
 // get my profile function  (ver si sigue por id o con el token)
 const getMyProfile = async (id) => {
@@ -56,10 +57,23 @@ const createProfile = async (data) => {
     throw error;
   }
 };
+
+//get user (email) function
+const getUserByEmail = async (email) => {
+  try {
+    const response = await axios.get(`${baseUrl}${url}${emailUrl}${email}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
+};
+
 export {
   getMyProfile,
   updateMyProfile,
   findPatients,
   deleteProfile,
   createProfile,
+  getUserByEmail,
 };
