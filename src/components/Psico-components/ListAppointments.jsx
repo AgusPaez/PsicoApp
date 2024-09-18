@@ -4,7 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { RightAside } from './RightAside';
 // import service
 import { findAll } from '../../services/appointmentService';
-
+// styles from state field
+const estadoConsultaStyles = {
+  pendiente: { text: 'PENDIENTE', color: 'text-yellow-500' },
+  confirmada: { text: 'CONFIRMADA', color: 'text-blue-500' },
+  finalizada: { text: 'FINALIZADA', color: 'text-green-600' },
+  cancelada: { text: 'CANCELADA', color: 'text-red-500' },
+  noAsistida: { text: 'NO ASISTIDA', color: 'text-gray-600' },
+};
 const ListAppointment = () => {
   // states
   const [appointments, setAppointments] = useState([]);
@@ -34,31 +41,29 @@ const ListAppointment = () => {
     }
 
     const sortedData = [...appointments].sort((a, b) => {
-      if (a[key] < b[key]) {
-        return direction === 'asc' ? -1 : 1;
+      // if the key = date appointment
+      if (key === 'fecha_consulta') {
+        const dateA = new Date(a[key]);
+        const dateB = new Date(b[key]);
+        return direction === 'asc' ? dateA - dateB : dateB - dateA;
+      } else {
+        if (a[key] < b[key]) {
+          return direction === 'asc' ? -1 : 1;
+        }
+        if (a[key] > b[key]) {
+          return direction === 'asc' ? 1 : -1;
+        }
+        return 0;
       }
-      if (a[key] > b[key]) {
-        return direction === 'asc' ? 1 : -1;
-      }
-      return 0;
     });
 
     setSortConfig({ key, direction });
     setAppointments(sortedData);
   };
 
-  // styles from state field
-  const estadoConsultaStyles = {
-    pendiente: { text: 'PENDIENTE', color: 'text-yellow-500' },
-    confirmada: { text: 'CONFIRMADA', color: 'text-blue-500' },
-    finalizada: { text: 'FINALIZADA', color: 'text-green-600' },
-    cancelada: { text: 'CANCELADA', color: 'text-red-500' },
-    noAsistida: { text: 'NO ASISTIDA', color: 'text-gray-600' },
-  };
-
   // open aside function
   const handleOpenAside = (appointment) => {
-    setSelectedAppointment(appointment); // Establecer la cita seleccionada
+    setSelectedAppointment(appointment);
     setIsAsideOpen(true);
   };
 
@@ -69,7 +74,7 @@ const ListAppointment = () => {
 
   return (
     <section className="">
-      <div className="m-8 overflow-x-auto">
+      <div className="pb-8 m-8 overflow-x-auto">
         <table className="min-w-full text-left bg-white border border-gray-400">
           <thead className="bg-[#9b8197b0]">
             <tr>
@@ -122,9 +127,18 @@ const ListAppointment = () => {
                   : ''}
               </th>
 
-              <th className="px-4 py-2 border-b border-slate-400">
+              <th
+                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
+                onClick={() => sortAppointments('fecha_consulta')}
+              >
                 Fecha Consulta
+                {sortConfig.key === 'fecha_consulta'
+                  ? sortConfig.direction === 'asc'
+                    ? '⬆'
+                    : '⬇'
+                  : ''}
               </th>
+
               <th className="px-4 py-2 border-b border-slate-400">Estado</th>
             </tr>
           </thead>
@@ -190,10 +204,10 @@ const ListAppointment = () => {
       <RightAside
         isOpen={isAsideOpen}
         onClose={handleCloseAside}
-        appointment={selectedAppointment} // Pasar la cita seleccionada al aside
+        appointment={selectedAppointment}
       />
     </section>
   );
 };
-
+export { estadoConsultaStyles };
 export default ListAppointment;
