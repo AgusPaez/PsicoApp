@@ -28,3 +28,14 @@ body,
 .animate-slide {
   animation: slide 7s ease-in-out infinite;
 }
+/* Quitar flechas en Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Quitar flechas en Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
