@@ -18,6 +18,7 @@ const ListAppointment = () => {
   const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' });
   const [isAsideOpen, setIsAsideOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // function to fetch appointments
   useEffect(() => {
@@ -72,9 +73,26 @@ const ListAppointment = () => {
     setIsAsideOpen(false);
   };
 
+  // fill the appointmen by name, lastname, email
+  const filteredAppointments = appointments.filter((appointment) => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      appointment.nombre.toLowerCase().includes(searchLower) ||
+      appointment.apellido.toLowerCase().includes(searchLower) ||
+      appointment.email.toLowerCase().includes(searchLower)
+    );
+  });
+
   return (
     <section className="">
       <div className="pb-8 m-8 overflow-x-auto">
+        <input
+          type="text"
+          placeholder="Buscar por nombre, apellido, email."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-1/6 p-2 mb-4 border border-gray-400 round"
+        />
         <table className="min-w-full text-left bg-white border border-gray-400">
           <thead className="bg-[#9b8197b0]">
             <tr>
@@ -143,11 +161,11 @@ const ListAppointment = () => {
             </tr>
           </thead>
           <tbody className="bg-[#d5d2e4]">
-            {appointments.map((appointment, index) => (
+            {filteredAppointments.map((appointment, index) => (
               <tr
                 key={index}
                 className="text-left hover:bg-[#918f9c] cursor-pointer transition-all duration-150"
-                onClick={() => handleOpenAside(appointment)} // Pasar la cita seleccionada al hacer clic
+                onClick={() => handleOpenAside(appointment)}
               >
                 <td className="px-4 py-2 border-b border-slate-400">
                   {appointment.nombre}
