@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react';
 // imports components
 import { RightAside } from './RightAside';
+import { AppointmentForm } from './AppointmentForm';
 // import service
 import { findAll } from '../../services/appointmentService';
+import { create } from '../../services/appointmentService';
 // styles from state field
 const estadoConsultaStyles = {
   pendiente: { text: 'PENDIENTE', color: 'text-yellow-500' },
@@ -12,6 +14,7 @@ const estadoConsultaStyles = {
   cancelada: { text: 'CANCELADA', color: 'text-red-500' },
   noAsistida: { text: 'NO ASISTIDA', color: 'text-gray-600' },
 };
+
 const ListAppointment = () => {
   // states
   const [appointments, setAppointments] = useState([]);
@@ -19,6 +22,7 @@ const ListAppointment = () => {
   const [isAsideOpen, setIsAsideOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // function to fetch appointments
   useEffect(() => {
@@ -83,6 +87,15 @@ const ListAppointment = () => {
     );
   });
 
+  const handleSaveNewAppointment = async (data) => {
+    try {
+      const createAppointment = await create(data);
+      console.log('New appointment:', data);
+    } catch (error) {
+      console.log('Dont create Appointment', error);
+    }
+  };
+
   return (
     <section className="">
       <div className="pb-8 m-8 overflow-x-auto">
@@ -92,6 +105,18 @@ const ListAppointment = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-1/6 p-2 mb-4 border border-gray-400 round"
+        />
+        <button
+          onClick={() => setIsAddModalOpen(true)}
+          className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:tracking-wide"
+        >
+          Agregar Cita
+        </button>
+
+        <AppointmentForm
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          onSave={handleSaveNewAppointment}
         />
         <table className="min-w-full text-left bg-white border border-gray-400">
           <thead className="bg-[#9b8197b0]">
