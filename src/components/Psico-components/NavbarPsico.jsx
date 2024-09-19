@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthProvider';
 //import icons
 import SymbolPsico from '../../assets/icons/pngwing.com.png';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const NavbarPsico = () => {
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
   const { logout } = useAuth();
@@ -23,9 +25,15 @@ export const NavbarPsico = () => {
   const Redirecto = () => {
     navigate('/HomePsico');
   };
+
+  const buttonClass = (path) => `${
+    isActive(path) ? 'bg-gray-700 text-white tracking-wider' : ''
+  } 
+`;
+
   return (
     <>
-      <nav className="bg-gradient-to-r from-red-800 to-red-900">
+      <nav className="bg-gradient-to-r from-[#5b45ff] to-[#7d65bf]">
         <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -39,11 +47,6 @@ export const NavbarPsico = () => {
               >
                 <span className="absolute -inset-0.5"></span>
                 <span className="sr-only">Open main menu</span>
-                {/* <!--
-            Icon when menu is closed.
-
-            Menu open: "hidden", Menu closed: "block"
-          --> */}
                 <svg
                   className="block w-6 h-6"
                   fill="none"
@@ -58,11 +61,7 @@ export const NavbarPsico = () => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                   />
                 </svg>
-                {/* <!--
-            Icon when menu is open.
 
-            Menu open: "block", Menu closed: "hidden"
-          --> */}
                 <svg
                   className="hidden w-6 h-6"
                   fill="none"
@@ -91,29 +90,40 @@ export const NavbarPsico = () => {
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  {/* Cuando esta seleccionado Current: "bg-gray-900 text-white" */}
                   <a
                     href="/MyProfile"
-                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                    className={
+                      buttonClass('/MyProfile') +
+                      'hover:bg-gray-700  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
+                    }
                     aria-current="page"
                   >
                     Mi perfil
                   </a>
                   <a
                     href="/AppointmentPsico"
-                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                    className={
+                      buttonClass('/AppointmentPsico') +
+                      'hover:bg-gray-700  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
+                    }
                   >
                     Citas
                   </a>
                   <a
                     href="/Patients"
-                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                    className={
+                      buttonClass('/Patients') +
+                      'hover:bg-gray-700  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
+                    }
                   >
                     Pacientes
                   </a>
                   <a
                     href="/ControlPanel"
-                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                    className={
+                      buttonClass('/ControlPanel') +
+                      'hover:bg-gray-700  hover:text-white rounded-md px-[0.80rem] py-[0.60rem] text-base hover:tracking-wider font-medium transition-all duration-500'
+                    }
                   >
                     Panel de control
                   </a>
@@ -165,18 +175,6 @@ export const NavbarPsico = () => {
                   </button>
                 </div>
                 {/* END Profile */}
-                {/* 
-          <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          --> */}
-
                 {/*  PROFILE OPTIONS  */}
                 {optionsProfile && (
                   <div
@@ -186,7 +184,6 @@ export const NavbarPsico = () => {
                     aria-labelledby="user-menu-button"
                     tabIndex="-1"
                   >
-                    {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
                     <a
                       href="/MyProfile"
                       className="block px-4 py-2 text-sm text-gray-700"
@@ -227,7 +224,6 @@ export const NavbarPsico = () => {
         {openMenu && (
           <div className="sm:hidden" id="mobile-menu">
             <div className="px-2 pt-2 pb-3 space-y-1 ">
-              {/* cuando esta presionado: bg-gray-900 text-white  para agregar el path active */}
               <a
                 href="/MyProfile"
                 className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
