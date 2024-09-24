@@ -43,7 +43,7 @@ export const PatientsList = ({ patients }) => {
   const OpenRightAside = (patient) => {
     setRightAside(!rightAside);
     setSelectedUser(patient);
-    console.log(selectedUser);
+    console.log(patient);
   };
 
   return (
@@ -107,7 +107,9 @@ export const PatientsList = ({ patients }) => {
               <tr
                 key={patient._id}
                 className="transition duration-150 text-left hover:bg-[#918f9c] cursor-pointer"
-                onClick={() => OpenRightAside(patient)}
+                onClick={() => {
+                  OpenRightAside(patient);
+                }}
               >
                 <td className="px-4 py-2 border-b border-slate-400">
                   {patient.nombre}
@@ -135,7 +137,11 @@ export const PatientsList = ({ patients }) => {
           )}
         </tbody>
       </table>
-      {rightAside && <RightAsidePatient user={selectedUser} />}
+      <RightAsidePatient
+        isOpen={rightAside}
+        user={selectedUser}
+        onClose={OpenRightAside}
+      />
     </div>
   );
 };
