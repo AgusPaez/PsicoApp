@@ -56,21 +56,47 @@ export const PatientsComponent = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-1/6 px-4 py-2 mb-4 border border-gray-300 rounded-lg"
           />
-          <label className="relative inline-flex items-center ml-10 cursor-pointer">
-            <input
-              type="checkbox"
-              className="sr-only peer"
-              onClick={changueRender}
-            />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2  peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#7d65bf]"></div>
-          </label>
+
           <button
-            // onClick={() => setIsAddModalOpen(true)}
             onClick={openmodal}
             className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
           >
             Agregar Paciente
           </button>
+          <div className="absolute inline-flex gap-4 right-56">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.6em"
+              height="1.6em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M8.048 2.488a.75.75 0 0 1-.036 1.06l-4.286 4a.75.75 0 0 1-1.095-.076l-1.214-1.5a.75.75 0 0 1 1.166-.944l.708.875l3.697-3.451a.75.75 0 0 1 1.06.036M11.25 5a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75M8.048 9.488a.75.75 0 0 1-.036 1.06l-4.286 4a.75.75 0 0 1-1.095-.076l-1.214-1.5a.75.75 0 1 1 1.166-.944l.708.875l3.697-3.451a.75.75 0 0 1 1.06.036M11.25 12a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75m-3.202 4.488a.75.75 0 0 1-.036 1.06l-4.286 4a.75.75 0 0 1-1.095-.076l-1.214-1.5a.75.75 0 1 1 1.166-.944l.708.875l3.697-3.451a.75.75 0 0 1 1.06.036M11.25 19a.75.75 0 0 1 .75-.75h10a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75"
+                clipRule="evenodd"
+              />
+            </svg>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                onClick={changueRender}
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2  peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#7d65bf]"></div>
+            </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.6em"
+              height="1.6em"
+              viewBox="0 0 32 32"
+            >
+              <path
+                fill="currentColor"
+                d="M4.083 14H14V4.083H4.083zM17 4.083V14h9.917V4.083zm0 22.834h9.917V17H17zm-12.917 0H14V17H4.083z"
+              />
+            </svg>
+          </div>
         </div>
         {render ? (
           <PatientsCard patients={filteredPatients} />
