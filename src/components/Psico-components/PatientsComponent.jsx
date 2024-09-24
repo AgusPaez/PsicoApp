@@ -3,14 +3,21 @@ import React, { useEffect, useState } from 'react';
 //import components
 import { PatientsCard } from './PatientsCard';
 import { PatientsList } from './PatientsList';
+import { AddPatientModal } from './AddPatientModal';
 //import services
 import { findPatients } from '../../services/users';
 
 export const PatientsComponent = () => {
   //states
-  const [render, setRender] = useState(true);
+  const [render, setRender] = useState(false);
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [modal, setModal] = useState(false);
+
+  // open/close modal function
+  const openmodal = () => {
+    setModal(!modal);
+  };
 
   //fetch patients
   useEffect(() => {
@@ -57,12 +64,20 @@ export const PatientsComponent = () => {
             />
             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2  peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#7d65bf]"></div>
           </label>
+          <button
+            // onClick={() => setIsAddModalOpen(true)}
+            onClick={openmodal}
+            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+          >
+            Agregar Paciente
+          </button>
         </div>
         {render ? (
           <PatientsCard patients={filteredPatients} />
         ) : (
           <PatientsList patients={filteredPatients} />
         )}
+        {modal && <AddPatientModal onClose={openmodal} />}
       </div>
     </>
   );
