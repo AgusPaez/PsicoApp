@@ -6,9 +6,12 @@ import { InfoPatient } from './InfoPatient';
 export const PatientsCard = ({ patients }) => {
   //states
   const [openInfo, setOpenInfo] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
-  const openInfoPatient = () => {
+  //open modal + save patient
+  const openInfoPatient = (patient) => {
     setOpenInfo(!openInfo);
+    setSelectedPatient(patient);
   };
 
   return (
@@ -35,7 +38,7 @@ export const PatientsCard = ({ patients }) => {
                   {patient.fecha_nacimiento.split('T')[0]}
                 </p>
                 <button
-                  onClick={openInfoPatient}
+                  onClick={() => openInfoPatient(patient)}
                   className="px-4 py-2 text-sm text-white bg-[#7d65bf] rounded-lg hover:bg-[#645099] transition-all duration-300 hover:tracking-wider"
                 >
                   Saber más
@@ -49,7 +52,9 @@ export const PatientsCard = ({ patients }) => {
           </p>
         )}
       </div>
-      {openInfo && <InfoPatient />}
+      {openInfo && (
+        <InfoPatient patient={selectedPatient} closeModal={openInfoPatient} />
+      )}
     </div>
   );
 };
