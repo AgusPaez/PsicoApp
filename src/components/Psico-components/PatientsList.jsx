@@ -40,10 +40,15 @@ export const PatientsList = ({ patients }) => {
     setSortConfig({ key, direction });
     setSortedPatients(sortedData);
   };
+
+  //handle open right aside
   const OpenRightAside = (patient) => {
-    setRightAside(!rightAside);
+    setRightAside(true);
     setSelectedUser(patient);
-    console.log(patient);
+  };
+  //handle close aside
+  const CloseRightAside = () => {
+    setRightAside(false);
   };
 
   return (
@@ -140,7 +145,7 @@ export const PatientsList = ({ patients }) => {
       <RightAsidePatient
         isOpen={rightAside}
         user={selectedUser}
-        onClose={OpenRightAside}
+        onClose={CloseRightAside}
       />
     </div>
   );
