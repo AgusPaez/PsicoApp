@@ -4,10 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { RightAside } from './RightAside';
 import { AppointmentForm } from './AppointmentForm';
 // import service
-import { findAll } from '../../services/appointmentService';
-import { create } from '../../services/appointmentService';
-// styles from state field
-const estadoConsultaStyles = {
+import { findAll, create } from '../../services/appointmentService';
+
+export const estadoConsultaStyles = {
   pendiente: { text: 'PENDIENTE', color: 'text-yellow-500' },
   confirmada: { text: 'CONFIRMADA', color: 'text-blue-500' },
   finalizada: { text: 'FINALIZADA', color: 'text-green-600' },
@@ -77,7 +76,7 @@ const ListAppointment = () => {
     setIsAsideOpen(false);
   };
 
-  // fill the appointmen by name, lastname, email
+  // fill the appointment by name, lastname, email
   const filteredAppointments = appointments.filter((appointment) => {
     const searchLower = searchTerm.toLowerCase();
     return (
@@ -97,14 +96,14 @@ const ListAppointment = () => {
   };
 
   return (
-    <section className="">
-      <div className="pb-8 m-8 overflow-x-auto">
+    <section className="p-4 m-4">
+      <div className="pb-8 mx-8 overflow-x-auto">
         <input
           type="text"
           placeholder="Buscar por nombre, apellido, email."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-1/6 p-2 mb-4 border border-gray-400 round"
+          className="w-1/6 p-2 mb-4 border border-gray-400 rounded-lg"
         />
         <button
           onClick={() => setIsAddModalOpen(true)}
@@ -112,6 +111,10 @@ const ListAppointment = () => {
         >
           Agregar Cita
         </button>
+
+        <h2 className="mt-8 mb-6 text-2xl font-bold text-center text-gray-800">
+          Lista de citas
+        </h2>
 
         <AppointmentForm
           isOpen={isAddModalOpen}
@@ -125,7 +128,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
                 onClick={() => sortAppointments('nombre')}
               >
-                Nombre ‎
+                Nombre{' '}
                 {sortConfig.key === 'nombre'
                   ? sortConfig.direction === 'asc'
                     ? '⬆'
@@ -136,7 +139,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
                 onClick={() => sortAppointments('apellido')}
               >
-                Apellido ‎
+                Apellido{' '}
                 {sortConfig.key === 'apellido'
                   ? sortConfig.direction === 'asc'
                     ? '⬆'
@@ -147,7 +150,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
                 onClick={() => sortAppointments('edad')}
               >
-                Edad
+                Edad{' '}
                 {sortConfig.key === 'edad'
                   ? sortConfig.direction === 'asc'
                     ? '⬆'
@@ -162,7 +165,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
                 onClick={() => sortAppointments('email')}
               >
-                Email ‎
+                Email{' '}
                 {sortConfig.key === 'email'
                   ? sortConfig.direction === 'asc'
                     ? '⬆'
@@ -174,7 +177,7 @@ const ListAppointment = () => {
                 className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
                 onClick={() => sortAppointments('fecha_consulta')}
               >
-                Fecha Consulta
+                Fecha Consulta{' '}
                 {sortConfig.key === 'fecha_consulta'
                   ? sortConfig.direction === 'asc'
                     ? '⬆'
@@ -221,27 +224,22 @@ const ListAppointment = () => {
                   {new Date(appointment.fecha_consulta).toLocaleTimeString(
                     'es-ES',
                     {
-                      hour: '2-digit',
-                      minute: '2-digit',
+                      hour: 'numeric',
+                      minute: 'numeric',
                     }
-                  )}{' '}
-                  hs
+                  )}
                 </td>
-
                 <td
                   className={`px-4 py-2 border-b border-slate-400 ${
-                    estadoConsultaStyles[appointment.estado_consulta]?.color
+                    estadoConsultaStyles[appointment.estado_consulta].color
                   }`}
                 >
-                  {estadoConsultaStyles[appointment.estado_consulta]?.text}
+                  {estadoConsultaStyles[appointment.estado_consulta].text}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {/* <form>
-          <input type="text" placeholder="buscador" />
-        </form> */}
       </div>
 
       <RightAside
@@ -252,5 +250,5 @@ const ListAppointment = () => {
     </section>
   );
 };
-export { estadoConsultaStyles };
+
 export default ListAppointment;

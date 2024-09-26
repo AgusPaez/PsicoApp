@@ -54,7 +54,7 @@ export const PatientsComponent = () => {
             placeholder="Buscar paciente..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-1/6 px-4 py-2 mb-4 border border-gray-300 rounded-lg"
+            className="w-1/6 p-2 mb-4 border border-gray-400 rounded-lg"
           />
 
           <button
