@@ -1,5 +1,5 @@
 //imports
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //import services
 import { createProfile } from '../../services/users';
 //import hooks rhf
@@ -53,6 +53,19 @@ export const AddPatientModal = ({ onClose }) => {
       );
     }
   };
+
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -195,20 +208,14 @@ export const AddPatientModal = ({ onClose }) => {
                 </p>
               )}
             </div>
-            {/* Rol */}
+            {/* DNI */}
             <div className="mb-4">
-              <label className="block text-gray-700">Rol</label>
+              <label className="block text-gray-700">D.N.I.</label>
               <input
-                {...register('rol', {
-                  required: 'El rol es obligatoria',
-                })}
-                type="text"
+                {...register('dni')}
+                type="number"
                 className="w-full px-3 py-2 border rounded-lg shadow-sm  text-gray-400 bg-slate-100  shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                disabled={true}
               />
-              {errors.rol && (
-                <p className="text-xs text-red-500">{errors.rol.message}</p>
-              )}
             </div>
           </div>
           {/* Contraseña */}
@@ -252,6 +259,21 @@ export const AddPatientModal = ({ onClose }) => {
                 <p className="text-xs text-red-500">
                   {errors.confirmPassword.message}
                 </p>
+              )}
+            </div>
+            {/* Rol */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Rol</label>
+              <input
+                {...register('rol', {
+                  required: 'El rol es obligatoria',
+                })}
+                type="text"
+                className="w-full px-3 py-2 border rounded-lg shadow-sm  text-gray-400 bg-slate-100  shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                disabled={true}
+              />
+              {errors.rol && (
+                <p className="text-xs text-red-500">{errors.rol.message}</p>
               )}
             </div>
           </div>

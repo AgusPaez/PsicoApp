@@ -35,6 +35,7 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
     if (selectedPatient) {
       setValue('nombre', `${selectedPatient.nombre}`);
       setValue('apellido', `${selectedPatient.apellido}`);
+      setValue('dni', `${selectedPatient.dni}`);
       setValue('edad', calculateAge(selectedPatient.fecha_nacimiento));
       setValue('numero', `${selectedPatient.numero}`);
       setValue('email', `${selectedPatient.email}`);
@@ -42,11 +43,25 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
       // clean inputs
       setValue('nombre', '');
       setValue('apellido', '');
+      setValue('dni', '');
       setValue('edad', '');
       setValue('numero', '');
       setValue('email', '');
     }
   }, [selectedPatient, setValue]);
+
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
 
   //Calculate Age function
   const calculateAge = (birthDate) => {
@@ -180,11 +195,11 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
 
             {/* Número */}
             <div className="w-1/4 mb-4 ml-auto">
-              <label className="block text-gray-700">Número</label>
+              <label className="block text-gray-700">D.N.I.</label>
               <input
                 type="number"
-                {...register('numero', {
-                  required: 'El número es obligatorio',
+                {...register('dni', {
+                  required: 'El DNI es obligatorio',
                 })}
                 className={`${
                   selectedPatient
@@ -193,9 +208,9 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
                 } w-full px-3 py-2 border rounded-lg h-8 shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                 disabled={selectedPatient}
               />
-              {errors.numero && (
+              {errors.dni && (
                 <p className="text-xs text-right text-red-500">
-                  {errors.numero.message}
+                  {errors.dni.message}
                 </p>
               )}
             </div>
@@ -259,6 +274,27 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
               </select>
               {errors.estado_consulta && (
                 <p className="text-red-500">Este campo es requerido</p>
+              )}
+            </div>
+            {/* Número */}
+            <div className="w-1/3 mb-4 ml-auto">
+              <label className="block text-gray-700">Número</label>
+              <input
+                type="number"
+                {...register('numero', {
+                  required: 'El número es obligatorio',
+                })}
+                className={`${
+                  selectedPatient
+                    ? 'text-gray-400 bg-slate-100'
+                    : 'text-black hover:shadow-md hover:shadow-[#846bcacc]'
+                } w-full px-3 py-2 border rounded-lg h-8 shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
+                disabled={selectedPatient}
+              />
+              {errors.numero && (
+                <p className="text-xs text-right text-red-500">
+                  {errors.numero.message}
+                </p>
               )}
             </div>
           </div>

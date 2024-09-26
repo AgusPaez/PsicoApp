@@ -14,6 +14,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
+    dni: '',
     edad: '',
     motivo_consulta: '',
     derivacion: '',
@@ -29,6 +30,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
       setFormData({
         nombre: appointment.nombre || '',
         apellido: appointment.apellido || '',
+        dni: appointment.dni || '',
         edad: appointment.edad || '',
         motivo_consulta: appointment.motivo_consulta || '',
         derivacion: appointment.derivacion || '',
@@ -80,6 +82,8 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
         appointment._id,
         formData
       );
+      onClose();
+      window.location.reload();
       console.log('Cita actualizada:', updatedAppointment);
     } catch (error) {
       console.error('error', error);
@@ -91,6 +95,19 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
     const diff = Date.now() - new Date(birthDate).getTime();
     return Math.abs(new Date(diff).getUTCFullYear() - 1970);
   };
+
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
 
   return (
     <>
@@ -143,18 +160,21 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
 
           {appointment ? (
             <form onSubmit={handleSubmit} className="gap-6 m-6 space-y-4 ">
-              <div className="flex space-x-10">
-                {isUser && (
-                  <div>
+              <div className="flex w-full space-x-8">
+                <div className="flex items-center justify-center w-24 h-20 overflow-hidden bg-gray-200 border rounded-full shadow-sm">
+                  {dataUser?.imagenUrl ? (
                     <img
-                      src={dataUser?.imagenUrl || ''}
+                      src={dataUser.imagenUrl}
                       alt="Imagen de usuario"
-                      className="h-20 border rounded-full shadow-sm w-36 "
+                      className="object-cover w-full h-full"
                     />
-                  </div>
-                )}
-                <div>
-                  <label className="text-lg font-semibold">Nombre:</label>
+                  ) : (
+                    <span className="text-xs text-gray-500">Sin imagen</span> // Texto o ícono si no hay imagen
+                  )}
+                </div>
+
+                <div className="w-1/3">
+                  <label className="block text-gray-700">Nombre:</label>
                   <input
                     type="text"
                     name="nombre"
@@ -162,12 +182,14 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     disabled={isUser}
                     onChange={handleChange}
                     className={`${
-                      isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                    } w-full p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
+                      isUser
+                        ? 'text-gray-400 bg-slate-100'
+                        : 'text-black  hover:shadow-md hover:shadow-[#846bcacc]'
+                    } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
-                <div>
-                  <label className="text-lg font-semibold">Apellido:</label>
+                <div className="w-1/3">
+                  <label className="block text-gray-700">Apellido:</label>
                   <input
                     type="text"
                     name="apellido"
@@ -177,12 +199,14 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     disabled={isUser}
                     onChange={handleChange}
                     className={`${
-                      isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                    } w-full p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
+                      isUser
+                        ? 'text-gray-400 bg-slate-100'
+                        : 'text-black  hover:shadow-md hover:shadow-[#846bcacc]'
+                    } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
-                <div>
-                  <label className="text-lg font-semibold">Edad:</label>
+                <div className="w-16">
+                  <label className="block text-gray-700">Edad:</label>
                   <input
                     type="number"
                     name="edad"
@@ -193,8 +217,10 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     }
                     onChange={handleChange}
                     className={`${
-                      isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                    } w-12 p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
+                      isUser
+                        ? 'text-gray-400 bg-slate-100'
+                        : 'text-black  hover:shadow-md hover:shadow-[#846bcacc]'
+                    } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                     disabled={
                       isUser && dataUser?.fecha_nacimiento ? true : false
                     }
@@ -202,53 +228,72 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                 </div>
               </div>
               <div>
-                <label className="text-lg font-semibold ">
+                <label className="block text-gray-700">
                   Motivo de Consulta:
                 </label>
                 <textarea
                   name="motivo_consulta"
                   value={formData.motivo_consulta}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-xl min-h-11 max-h-24 shadow-sm shadow-[#00000069]"
+                  className="w-full px-3 py-2 border rounded-lg shadow-sm  min-h-11 max-h-24 shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-shadow duration-300"
                 />
               </div>
               {isUser && (
                 <>
-                  <div className="flex">
+                  <div className="flex w-full space-x-8">
                     <div>
-                      <label className="text-lg font-semibold">
+                      <label className="block text-gray-700">
                         Fecha de Nacimiento:
                       </label>
                       <input
                         type="text"
                         value={dataUser?.fecha_nacimiento.split('T')[0] || ''}
                         className={`${
-                          isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                        } w-32 p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
+                          isUser
+                            ? 'text-gray-400 bg-slate-100'
+                            : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                        } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                         disabled={
                           isUser && dataUser?.fecha_nacimiento ? true : false
                         }
                       />
                     </div>
-                    <div className="ml-8">
-                      <label className="text-lg font-semibold">
+                    <div className="">
+                      <label className="block text-gray-700">D.N.I. :</label>
+                      <input
+                        type="number"
+                        name="dni"
+                        value={isUser ? dataUser?.dni || '' : formData.dni}
+                        disabled={isUser}
+                        onChange={handleChange}
+                        className={`${
+                          isUser
+                            ? 'text-gray-400 bg-slate-100'
+                            : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                        } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-gray-700">
                         Obra Social:
                       </label>
                       <input
                         type="text"
                         value={dataUser?.obra_social || ''}
                         className={`${
-                          isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                        } w-2/3 p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
+                          isUser
+                            ? 'text-gray-400 bg-slate-100'
+                            : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                        } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                         disabled
                       />
                     </div>
                   </div>
                 </>
               )}
-              <div className="flex gap-6 place-content-evenly">
-                <div>
-                  <label className="text-lg font-semibold">Email:</label>
+              <div className="flex w-full gap-6">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Email:</label>
                   <input
                     type="email"
                     name="email"
@@ -256,14 +301,32 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     disabled={isUser}
                     onChange={handleChange}
                     className={`${
-                      isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                    } w-full p-2 border border-gray-300  rounded-xl shadow-sm shadow-[#00000069]`}
+                      isUser
+                        ? 'text-gray-400 bg-slate-100'
+                        : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                    } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
-                <div className="">
-                  <label className="text-lg font-semibold text-center">
-                    Numero:
-                  </label>
+                {isUser === false && (
+                  <div className="">
+                    <label className="block text-gray-700">D.N.I. :</label>
+                    <input
+                      type="number"
+                      name="dni"
+                      value={isUser ? dataUser?.dni || '' : formData.dni}
+                      disabled={isUser}
+                      onChange={handleChange}
+                      className={`${
+                        isUser
+                          ? 'text-gray-400 bg-slate-100'
+                          : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                      } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
+                    />
+                  </div>
+                )}
+
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Numero:</label>
                   <input
                     type="string"
                     name="numero"
@@ -271,24 +334,16 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     disabled={isUser}
                     onChange={handleChange}
                     className={`${
-                      isUser ? 'text-gray-400 bg-slate-100' : 'text-black'
-                    } w-2/3 p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]`}
-                  />
-                </div>
-                <div>
-                  <label className="text-lg font-semibold">Derivacion:</label>
-                  <input
-                    type="string"
-                    name="derivacion"
-                    value={formData.derivacion}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]"
+                      isUser
+                        ? 'text-gray-400 bg-slate-100'
+                        : 'text-black hover:shadow-md hover:shadow-[#846bcacc] '
+                    } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
               </div>
               <div className="flex place-content-between">
                 <div>
-                  <label className="text-lg font-semibold">
+                  <label className="block text-gray-700">
                     Fecha de Consulta:
                   </label>
                   <input
@@ -296,16 +351,26 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     name="fecha_consulta"
                     value={formData.fecha_consulta.split('T')[0]}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]"
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="text-lg font-semibold">Estado:</label>
+                  <label className="block text-gray-700">Derivacion:</label>
+                  <input
+                    type="string"
+                    name="derivacion"
+                    value={formData.derivacion}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700">Estado:</label>
                   <select
                     name="estado_consulta"
                     value={formData.estado_consulta}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-xl shadow-sm shadow-[#00000069]"
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   >
                     {Object.entries(estadoConsultaStyles).map(
                       ([key, { text }]) => (
@@ -318,20 +383,20 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                 </div>
               </div>
               <div>
-                <label className="text-lg font-semibold">
+                <label className="block text-gray-700">
                   Detalle de Consulta:
                 </label>
                 <textarea
                   name="detalle_consulta"
                   value={formData.detalle_consulta}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 max-h-28 min-h-20 rounded-xl  shadow-sm shadow-[#00000069]"
+                  className="w-full px-3 py-2 border max-h-28 min-h-20 rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc]  transition-shadow duration-300"
                 />
               </div>
               <div className="flex pr-2 place-content-between">
                 <button
                   type="submit"
-                  className="px-4 py-2 text-white transition-all duration-300 bg-blue-500 rounded hover:tracking-wider hover:bg-blue-600"
+                  className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
                 >
                   Guardar Cambios
                 </button>

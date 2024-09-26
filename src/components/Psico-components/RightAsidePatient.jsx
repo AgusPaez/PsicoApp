@@ -11,19 +11,20 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
   const [formData, setFormData] = useState({
     nombre: user?.nombre || '',
     apellido: user?.apellido || '',
+    dni: user?.dni || '',
     fecha_nacimiento: user?.fecha_nacimiento?.slice(0, 10) || 0,
     email: user?.email || '',
     numero: user?.numero || '',
     rol: user?.rol || 'paciente',
     obra_social: user?.obra_social || 'NO TIENE',
   });
-
-  //
+  //set data
   useEffect(() => {
     if (user) {
       setFormData({
         nombre: user.nombre || '',
         apellido: user.apellido || '',
+        dni: user.dni || '',
         fecha_nacimiento: user.fecha_nacimiento?.slice(0, 10) || 0,
         email: user.email || '',
         numero: user.numero || '',
@@ -37,7 +38,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
     const diff = Date.now() - new Date(birthDate).getTime();
     return Math.abs(new Date(diff).getUTCFullYear() - 1970);
   };
-
+  //desconstruct
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -58,6 +59,20 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
       console.log('Error al actualizar el perfil', error);
     }
   };
+
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
+
   //get appointments
   useEffect(() => {
     const GetAppointments = async () => {
@@ -81,7 +96,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
     };
 
     GetAppointments();
-  }, [user.email]);
+  }, []);
   return (
     <>
       {/* Overlay */}
@@ -126,158 +141,172 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
             </h2>
           </div>
 
-          <form className="gap-6 m-6 space-y-4 h-5/6" onSubmit={handleSubmit}>
-            <div className="flex w-full space-x-10">
-              <div className="w-1/5">
-                <img
-                  src={user?.imagenUrl || ''}
-                  alt="Imagen de usuario"
-                  className="w-24 h-24 border rounded-full shadow-sm"
-                />
+          {user ? (
+            <form className="gap-6 m-6 space-y-4 h-5/6" onSubmit={handleSubmit}>
+              <div className="flex w-full space-x-10">
+                <div className="w-1/5">
+                  <img
+                    src={user?.imagenUrl || ''}
+                    alt="Imagen de usuario"
+                    className="w-24 h-24 border rounded-full shadow-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700">Nombre:</label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700">Apellido:</label>
+                  <input
+                    type="text"
+                    name="apellido"
+                    value={formData.apellido}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-gray-700">Nombre:</label>
-                <input
-                  type="text"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700">Apellido:</label>
-                <input
-                  type="text"
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                />
-              </div>
-            </div>
 
-            <div className="flex w-full gap-6 pt-2 place-content-between">
-              <div className="w-1/2">
-                <label className="block text-gray-700">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                />
+              <div className="flex w-full gap-6 pt-2 place-content-between">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Número:</label>
+                  <input
+                    type="text"
+                    name="numero"
+                    value={formData.numero}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
+                <div className="w-16">
+                  <label className="block text-gray-700">Edad:</label>
+                  <input
+                    type="number"
+                    name="edad"
+                    value={calculateAge(formData.fecha_nacimiento)}
+                    disabled
+                    className="w-full px-3 py-2 text-gray-400 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
+                  />
+                </div>
               </div>
-              <div className="w-1/2">
-                <label className="block text-gray-700">Número:</label>
-                <input
-                  type="text"
-                  name="numero"
-                  value={formData.numero}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                />
-              </div>
-              <div className="w-16">
-                <label className="block text-gray-700">Edad:</label>
-                <input
-                  type="number"
-                  name="edad"
-                  value={calculateAge(formData.fecha_nacimiento)}
-                  disabled
-                  className="w-full px-3 py-2 text-gray-400 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
-                />
-              </div>
-            </div>
 
-            <div className="flex w-full gap-6 pt-10 place-content-between">
-              <div className="w-1/3">
-                <label className="block text-gray-700">
-                  Fecha de Nacimiento:
-                </label>
-                <input
-                  type="date"
-                  name="fecha_nacimiento"
-                  value={formData.fecha_nacimiento}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                />
+              <div className="flex w-full gap-6 pt-10 place-content-between">
+                <div className="w-1/4">
+                  <label className="block text-gray-700">
+                    Fecha de Nacimiento:
+                  </label>
+                  <input
+                    type="date"
+                    name="fecha_nacimiento"
+                    value={formData.fecha_nacimiento}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  />
+                </div>
+                <div className="w-1/5 mb-4">
+                  <label className="block text-gray-700">DNI:</label>
+                  <input
+                    type="number"
+                    name="dni"
+                    value={formData.dni}
+                    onChange={handleInputChange}
+                    className="w-full text-gray-700 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
+                  />
+                </div>
+                <div className="w-1/6 mb-4">
+                  <label className="block text-gray-700">Rol:</label>
+                  <input
+                    type="text"
+                    name="rol"
+                    value={formData.rol}
+                    onChange={handleInputChange}
+                    disabled
+                    className="w-full text-gray-400 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
+                  />
+                </div>
+                <div className="w-1/4">
+                  <label className="block text-gray-700">Obra Social</label>
+                  <select
+                    name="obra_social"
+                    value={formData.obra_social}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  >
+                    <option className="block text-gray-700" value="NO TIENE">
+                      NO TIENE
+                    </option>
+                    <option className="text-gray-700 " value="SANCOR">
+                      SANCOR
+                    </option>
+                    <option className="text-gray-700 " value="SANCOR SALUD">
+                      SANCOR SALUD
+                    </option>
+                    <option className="text-gray-700 " value="PROVINCIA">
+                      PROVINCIA
+                    </option>
+                    <option className="text-gray-700 " value="SWISS">
+                      SWISS
+                    </option>
+                    <option className="text-gray-700 " value="OSECAC">
+                      OSECAC
+                    </option>
+                    <option className="text-gray-700" value="JERARQUICOS">
+                      JERARQUICOS
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div className="w-1/5 mb-4">
-                <label className="block text-gray-700">Rol:</label>
-                <input
-                  type="text"
-                  name="rol"
-                  value={formData.rol}
-                  onChange={handleInputChange}
-                  disabled
-                  className="w-full text-gray-400 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
-                />
-              </div>
-              <div className="w-1/3">
-                <label className="block text-gray-700">Obra Social</label>
-                <select
-                  name="obra_social"
-                  value={formData.obra_social}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
-                >
-                  <option className="block text-gray-700" value="NO TIENE">
-                    NO TIENE
-                  </option>
-                  <option className="text-gray-700 " value="SANCOR">
-                    SANCOR
-                  </option>
-                  <option className="text-gray-700 " value="SANCOR SALUD">
-                    SANCOR SALUD
-                  </option>
-                  <option className="text-gray-700 " value="PROVINCIA">
-                    PROVINCIA
-                  </option>
-                  <option className="text-gray-700 " value="SWISS">
-                    SWISS
-                  </option>
-                  <option className="text-gray-700 " value="OSECAC">
-                    OSECAC
-                  </option>
-                  <option className="text-gray-700" value="JERARQUICOS">
-                    JERARQUICOS
-                  </option>
-                </select>
-              </div>
-            </div>
-            <p className="mt-4 text-sm text-gray-500">
-              Cuenta creada: {new Date(user.createdAt).toLocaleDateString()}
-            </p>
-            <p className="mt-0 text-sm text-gray-500">
-              Ultima actualizacion:{' '}
-              {new Date(user.updatedAt).toLocaleDateString()}
-            </p>
+              <p className="mt-4 text-sm text-gray-500">
+                Cuenta creada: {new Date(user.createdAt).toLocaleDateString()}
+              </p>
+              <p className="mt-0 text-sm text-gray-500">
+                Ultima actualizacion:{' '}
+                {new Date(user.updatedAt).toLocaleDateString()}
+              </p>
 
-            <p className="mt-0 text-sm text-gray-500">
-              Citas solicitadas: {countAppointments}
-            </p>
+              <p className="mt-0 text-sm text-gray-500">
+                Citas solicitadas: {countAppointments}
+              </p>
 
-            {/* Botones section */}
-            <div className="flex flex-col justify-between h-1/4">
-              <div className="flex-grow" />
-              <div className="flex justify-between pb-8 pr-2">
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
-                >
-                  Guardar Cambios
-                </button>
-                <button
-                  type="button"
-                  className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"
-                  onClick={() => console.log('Crear perfil')}
-                >
-                  Crear perfil
-                </button>
+              {/* Botones section */}
+              <div className="flex flex-col justify-between h-1/4">
+                <div className="flex-grow" />
+                <div className="flex justify-between pb-8 pr-2">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+                  >
+                    Guardar Cambios
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"
+                    onClick={() => console.log('Crear perfil')}
+                  >
+                    Crear perfil
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          ) : (
+            <p>No se seleccionó ningun paciente.</p>
+          )}
         </div>
       </aside>
     </>

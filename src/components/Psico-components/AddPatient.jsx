@@ -22,6 +22,19 @@ export const AddPatient = ({ close }) => {
       console.error('Error al conectarse con la API:', error);
     }
   };
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [close]);
+
   // O.S.
   const obraSocialOptions = [
     'NO TIENE',
