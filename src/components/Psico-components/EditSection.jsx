@@ -54,41 +54,89 @@ const EditSection = ({ select, onClose }) => {
       console.log('Study deleted successfully');
       //reset RemoveItem State
       setRemoveItem(false);
+      window.location.reload();
     } catch (error) {
       console.error('Failed to delete study:', error);
       //reset RemoveItem State
       setRemoveItem(false);
+      window.location.reload();
     }
   };
+  useEffect(() => {
+    // exit when press ESC function
+    const handleEsc = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
 
   return (
-    <div className="h-48 w-44 text-green-600">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          //defaultValue={select.titulo}
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-        />
+    <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 bg-black bg-opacity-50">
+      <div className="w-full max-w-md p-6 transition-all duration-300 transform scale-100 bg-white rounded-lg shadow-lg">
+        <h2 className="mb-4 text-lg font-bold">Editar Estudio</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <input
+              type="text"
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              placeholder="Nombre de carrera / curso"
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
 
-        <input
-          type="text"
-          //defaultValue={select.institucion}
-          value={institucion}
-          onChange={(e) => setInstitucion(e.target.value)}
-        />
+          <div className="mb-4">
+            <input
+              type="text"
+              value={institucion}
+              onChange={(e) => setInstitucion(e.target.value)}
+              placeholder="Nombre de institución"
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
 
-        <input
-          type="number"
-          //valuealue={select.anio}
-          value={anio}
-          onChange={(e) => setAnio(e.target.value)}
-        />
+          <div className="mb-4">
+            <input
+              type="number"
+              value={anio}
+              onChange={(e) => setAnio(e.target.value)}
+              placeholder="Año de egreso"
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
 
-        <button type="submit"> guardar</button>
-        <button onClick={changueRemove}> eliminar</button>
-      </form>
-      <button onClick={onClose}>cerrar</button>
+          <div className="flex justify-between">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 text-gray-700 transition-all duration-300 bg-gray-400 rounded hover:bg-gray-500 hover:tracking-widest"
+            >
+              Cancelar
+            </button>
+            <button
+              onClick={changueRemove}
+              className="px-4 py-2 text-white transition-all duration-300 bg-red-500 rounded hover:bg-red-600 hover:tracking-widest"
+            >
+              Eliminar
+            </button>
+
+            <button
+              type="submit"
+              className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
