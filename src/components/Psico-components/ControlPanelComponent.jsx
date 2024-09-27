@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { LayoutAboutMe } from '../Psico-components/LayoutAboutMe';
 import { LayoutStudies } from './LayoutStudies';
 import { LayoutPatients } from './LayoutPatients';
+import { AsideControlPanel } from './AsideControlPanel';
 
 export const ControlPanelComponent = () => {
   // states
@@ -28,38 +29,10 @@ export const ControlPanelComponent = () => {
   };
   return (
     <>
-      <section className="flex justify-center p-5 m-12 mt-20 text-gray-400 bg-black rounded-full ">
-        <h2>Panel de control</h2>
+      <section className="flex w-full h-[92vh]">
+        <AsideControlPanel changeSection={changeSection} />
+        {renderSection()}
       </section>
-      <section className="flex justify-center p-5 m-12 mt-20 mb-2 text-gray-400 bg-black rounded-full ">
-        <div>
-          <button
-            className="p-2 m-2 border hover:opacity-50"
-            onClick={() => changeSection(1)}
-          >
-            Personalizar "Sobre Mi"
-          </button>
-          <button
-            className="p-2 m-2 border hover:opacity-50"
-            onClick={() => changeSection(2)}
-          >
-            Personalizar "Estudios"
-          </button>
-          <button
-            className="p-2 m-2 border hover:opacity-50"
-            onClick={() => changeSection(3)}
-          >
-            Personalizar "Pacientes"
-          </button>
-          <button
-            className="p-2 m-2 border hover:opacity-50"
-            onClick={() => changeSection(4)}
-          >
-            Personalizar "Citas"
-          </button>
-        </div>
-      </section>
-      {renderSection()}
     </>
   );
 };
