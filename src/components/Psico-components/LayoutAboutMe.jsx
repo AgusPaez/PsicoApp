@@ -1,5 +1,7 @@
 //imports
 import React, { useEffect, useState } from 'react';
+//imports icons
+import { AboutMeICON } from '../../assets/icons/AboutMeICON';
 //import components
 //import EditSection from './EditSection';
 import { EditContent } from './EditContent';
@@ -29,12 +31,6 @@ export const LayoutAboutMe = () => {
   }, []);
   console.log('CONTENTMAIN: ', content);
 
-  // open menu to edit function - save contentMain
-  // const OpenEdit = (prop, prop2) => {
-  //   setEdit(true);
-  //   setSelected({ prop, prop2 });
-  // };
-
   const OpenEdit = (object) => {
     setEdit(true);
     setSelected(object);
@@ -55,55 +51,93 @@ export const LayoutAboutMe = () => {
 
   return (
     <>
-      <div className="flex justify-center p-5 m-8 my-12 text-gray-400 bg-black rounded-full ">
-        <h2>About Me</h2>
+      <section className="flex flex-col justify-center w-5/6 p-5 m-5 ml-10 text-white border border-blue-500 rounded-xl">
+        <div className="flex items-center justify-center gap-4">
+          {' '}
+          <AboutMeICON h={40} w={40} color={'#edf0ea'} />
+          <h2 className="font-semibold text-black">
+            EDICION SECCION: SOBRE MI
+          </h2>
+          <AboutMeICON h={40} w={40} color={'#edf0ea'} />
+        </div>
 
-        <div className="p-2 m-4">
-          <h3>Sobre mí:</h3>
+        {/* Sobre mi */}
+        <div className="relative p-1 m-1 mx-auto text-black group">
+          <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+            Sobre mí:
+            <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+          </h3>
           <p>{content.descripcionAboutMe}</p>
         </div>
-
-        <div className="p-2 m-4">
-          <h3>Estudio y Abordaje:</h3>
+        {/* Estudio y abordaje */}
+        <div className="relative p-1 m-1 mx-auto text-black group">
+          <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+            Estudio y abordaje:
+            <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+          </h3>
           <p>{content.descripcionEstudioAbordaje}</p>
         </div>
-
-        <div className="p-2 m-4">
-          <h3>Contacto:</h3>
-          <p>
-            <strong>Email:</strong> {content.contactoMail}
-          </p>
-          <p>
-            <strong>Teléfono:</strong> {content.contactoNumero}
-          </p>
-        </div>
-
-        <div className="p-2 m-4">
-          <h3>Objetivo:</h3>
+        {/* Objetivo */}
+        <div className="relative p-1 m-1 mx-auto text-black group">
+          <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+            Objetivo:
+            <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+          </h3>
           <p>{content.objetivo}</p>
         </div>
-
-        <div className="p-2 m-4">
-          <h3>Contenido:</h3>
+        {/* Contenido */}
+        <div className="relative p-1 m-1 mx-auto text-black group">
+          <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+            Contenido:
+            <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+          </h3>
           <p>{content.contenido1}</p>
           <p>{content.contenido2}</p>
         </div>
 
-        <div className="p-2 m-4">
-          <h3>Otros detalles:</h3>
-          <p>
-            <strong>Foto disponible:</strong>{' '}
-            {content.fotoPiscologo ? 'Sí' : 'No'}
-          </p>
-          <p>
-            <strong>Métodos de pago disponibles:</strong>{' '}
-            {content.medioPago ? 'Sí' : 'No'}
-          </p>
+        {/* Contacto */}
+        <div className="flex ">
+          <div className="relative p-1 m-1 mx-auto text-black group">
+            <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+              Contacto:
+              <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+            </h3>
+            <p>
+              <strong className="font-semibold">Email:</strong>{' '}
+              {content.contactoMail}
+            </p>
+
+            <p>
+              <strong className="font-semibold">Teléfono:</strong>{' '}
+              {content.contactoNumero}
+            </p>
+          </div>
+          {/* Otros detalles */}
+          <div className="relative p-1 m-1 mx-auto text-black group">
+            <h3 className="relative inline-block text-xl font-semibold transition-all duration-700 animate-pulse group-hover:scale-110">
+              Otros detalles:
+              <span className="block absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-bottom-right group-hover:origin-bottom-left"></span>
+            </h3>
+            <p>
+              <strong className="font-semibold">Foto disponible:</strong>{' '}
+              {content.fotoPiscologo ? 'Sí' : 'No'}
+            </p>
+
+            <p>
+              <strong className="font-semibold">
+                Métodos de pago disponibles:
+              </strong>{' '}
+              {content.medioPago ? 'Sí' : 'No'}
+            </p>
+          </div>
         </div>
-        <button className="m-2" onClick={() => OpenEdit(content)}>
-          Editar
+        <button
+          className="text-center py-1 px-2 mx-auto text-[#0084f0] hover:font-semibold hover:text-[#64b9ff] animate-pulse ease-in-out transition-all duration-500 hover:tracking-widest hover:scale-110"
+          onClick={() => OpenEdit(content)}
+        >
+          EDITAR
         </button>
-      </div>
+      </section>
       <div>
         {edit && (
           <EditContent select={selected} onClose={CloseEdit}></EditContent>
