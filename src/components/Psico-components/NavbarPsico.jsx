@@ -35,7 +35,7 @@ export const NavbarPsico = () => {
     <>
       <nav className="bg-gradient-to-r from-[#5b45ff] to-[#7d65bf]">
         <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
+          <div className="relative flex items-center justify-between h-[8vh]">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
               <button
