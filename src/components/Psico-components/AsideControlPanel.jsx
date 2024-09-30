@@ -9,14 +9,18 @@ import { AppointmentICON } from '../../assets/icons/AppointmentICON';
 
 export const AsideControlPanel = ({ changeSection, section }) => {
   //Button style
-  const buttonClass = (buttonSection) =>
-    `relative z-40 flex items-center justify-center w-9/12 gap-3 py-3 transition-all duration-500 border-b border-blue-500 
-    hover:scale-y-110 hover:z-50 hover:tracking-widest hover:font-semibold hover:w-11/12 hover:animate-pulse hover:bg-gray-800 hover:bg-opacity-5
-    ${
-      section === buttonSection
-        ? 'scale-y-110 z-50 tracking-widest font-bold w-11/12 animate-pulse bg-gray-800 bg-opacity-5'
-        : ''
-    }`;
+  const buttonClass = (buttonSection) => {
+    const isActive = section === buttonSection;
+    return `relative z-40 flex items-center justify-center ${
+      isActive ? 'w-11/12' : 'w-9/12'
+    } gap-3 py-3 transition-all duration-500 border-b border-blue-500 
+      hover:scale-y-110 hover:z-50 hover:tracking-widest hover:font-semibold hover:w-11/12 hover:animate-pulse hover:bg-gray-800 hover:bg-opacity-5
+      ${
+        isActive
+          ? 'scale-y-110 z-50 tracking-widest font-bold animate-pulse bg-gray-800 bg-opacity-5'
+          : ''
+      }`;
+  };
 
   return (
     <aside className="md:w-3/12 my-5 ml-4 border border-blue-500 rounded-xl">
