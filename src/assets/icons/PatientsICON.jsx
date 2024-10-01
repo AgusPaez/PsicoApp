@@ -4,6 +4,7 @@ export const PatientsICON = ({ h, w, color }) => {
   return (
     <>
       <svg
+        className="animate-pulse"
         xmlns="http://www.w3.org/2000/svg"
         width={w}
         height={h}
