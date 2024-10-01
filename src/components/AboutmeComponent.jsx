@@ -27,7 +27,8 @@ export const AboutmeComponent = () => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-purple-700/40 to-blue-500/40 font-libre">
+    <div className="w-full h-full font-libre">
+      {/* bg-gradient-to-br from-purple-700/40 to-blue-500/40 */}
       <PhotoDescription
         content={content.descripcionAboutMe}
         photo={content.fotoPiscologo}

@@ -17,17 +17,18 @@ export const AsideControlPanel = ({ changeSection, section }) => {
       hover:scale-y-110 hover:z-50 hover:tracking-widest hover:font-semibold hover:w-11/12 hover:animate-pulse hover:bg-gray-800 hover:bg-opacity-5
       ${
         isActive
-          ? 'scale-y-110 z-50 tracking-widest font-bold animate-pulse bg-gray-800 bg-opacity-5'
+          ? 'scale-y-105 z-50 tracking-widest font-bold animate-pulse bg-gradient-to-r from-[#4e407500] from-30% via-[#473a6b] via-50% to-[#4e407500] to-70% '
           : ''
       }`;
   };
+  // shadow-[0px_2px_0px_0px_rgba(59,130,246,0.8)]
 
   return (
-    <aside className="md:w-3/12 my-5 ml-4 border border-blue-500 rounded-xl">
+    <aside className="my-5 ml-4 border border-blue-500 md:w-3/12 rounded-xl bg-gradient-to-r from-[#fff0] via-[#4e4075] to-[#fff0]">
       <div className="flex w-full h-1/4">
-        <div className="flex flex-col items-center justify-center w-full p-2 m-4 mt-10 h-1/2 text-white">
+        <div className="flex flex-col items-center justify-center w-full p-2 m-4 mt-10 text-white h-1/2 ">
           <ControlPanelICON h={'2.5em'} w={'2.5em'} color={'#ffff'} />
-          <h1 className="text-lg block mt-2 animate-pulse">CONTROL PANEL</h1>
+          <h1 className="block mt-2 text-lg animate-pulse">CONTROL PANEL</h1>
         </div>
         {/* Buttons section */}
       </div>
