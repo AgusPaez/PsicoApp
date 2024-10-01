@@ -5,7 +5,7 @@ import { createProfile } from '../../services/users';
 //import hooks rhf
 import { useForm } from 'react-hook-form';
 
-export const AddPatientModal = ({ onClose }) => {
+export const AddPatientModal = ({ onClose, admin }) => {
   //states
   const [previewImage, setPreviewImage] = useState('');
   //rhf
@@ -86,7 +86,14 @@ export const AddPatientModal = ({ onClose }) => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="cursor-pointer w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+              className={`cursor-pointer w-full px-3 py-2 border rounded-lg shadow-sm 
+          ${
+            admin
+              ? 'shadow-blue-600  hover:shadow-blue-500'
+              : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+          }
+               hover:shadow-md 
+               transition-all duration-300`}
             />
           </div>
 
@@ -98,7 +105,14 @@ export const AddPatientModal = ({ onClose }) => {
                 {...register('nombre', {
                   required: 'El nombre es obligatorio',
                 })}
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.nombre && (
                 <p className="text-xs text-red-500">{errors.nombre.message}</p>
@@ -112,7 +126,14 @@ export const AddPatientModal = ({ onClose }) => {
                 {...register('apellido', {
                   required: 'El apellido es obligatorio',
                 })}
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.apellido && (
                 <p className="text-xs text-red-500">
@@ -135,7 +156,14 @@ export const AddPatientModal = ({ onClose }) => {
                   },
                 })}
                 type="email"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.email && (
                 <p className="text-xs text-red-500">{errors.email.message}</p>
@@ -150,7 +178,14 @@ export const AddPatientModal = ({ onClose }) => {
                   required: 'El numero es obligatorio y único',
                 })}
                 type="number"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.numero && (
                 <p className="text-xs text-red-500">{errors.numero.message}</p>
@@ -175,7 +210,14 @@ export const AddPatientModal = ({ onClose }) => {
                     );
                   },
                 })}
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.fecha_nacimiento && (
                 <p className="text-xs text-red-500">
@@ -192,7 +234,14 @@ export const AddPatientModal = ({ onClose }) => {
                   required: 'Este campo es obligatorio',
                 })}
                 defaultValue="NO TIENE"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               >
                 <option value="NO TIENE">NO TIENE</option>
                 <option value="SANCOR">SANCOR</option>
@@ -214,7 +263,14 @@ export const AddPatientModal = ({ onClose }) => {
               <input
                 {...register('dni')}
                 type="number"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm  text-gray-400 bg-slate-100  shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
             </div>
           </div>
@@ -231,7 +287,14 @@ export const AddPatientModal = ({ onClose }) => {
                   },
                 })}
                 type="password"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.password && (
                 <p className="text-xs text-red-500">
@@ -253,7 +316,14 @@ export const AddPatientModal = ({ onClose }) => {
                     'Las contraseñas no coinciden',
                 })}
                 type="password"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
+                  ${
+                    admin
+                      ? 'shadow-blue-600  hover:shadow-blue-500'
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                       hover:shadow-md 
+                       transition-all duration-300`}
               />
               {errors.confirmPassword && (
                 <p className="text-xs text-red-500">
@@ -269,7 +339,14 @@ export const AddPatientModal = ({ onClose }) => {
                   required: 'El rol es obligatoria',
                 })}
                 type="text"
-                className="w-full px-3 py-2 border rounded-lg shadow-sm  text-gray-400 bg-slate-100  shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                className={`w-full px-3 py-2 border rounded-lg shadow-sm   text-gray-400 bg-slate-100
+                  ${
+                    admin
+                      ? 'shadow-blue-600  '
+                      : 'shadow-[#846bcaf3] hover:shadow-[#846bcacc]'
+                  }
+                    
+                       transition-all duration-300`}
                 disabled={true}
               />
               {errors.rol && (
@@ -286,6 +363,15 @@ export const AddPatientModal = ({ onClose }) => {
             >
               Cancelar
             </button>
+            {admin && (
+              <button
+                type="button"
+                // onClick={onClose}
+                className="px-4 py-2 mr-2 text-gray-700 transition-all duration-300 bg-gray-500 rounded hover:bg-gray-600 hover:tracking-widest"
+              >
+                CREAR ADMIN
+              </button>
+            )}
             <button
               type="submit"
               className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
