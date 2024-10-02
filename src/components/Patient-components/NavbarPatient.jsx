@@ -13,10 +13,13 @@ export const NavbarPatient = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
   const navigate = useNavigate();
+
   //States
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
-  const buttonClass = (path) => `${isActive(path) ? 'bg-gray-700' : ''} 
+  const buttonClass = (path) => `${
+    isActive(path) ? 'bg-[#534949d8] tracking-widest' : ''
+  } 
 `;
   //context
   const { login, isAuthenticated, user, logout, dataLogin } = useAuth();
@@ -33,7 +36,7 @@ export const NavbarPatient = () => {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-zinc-700 to-purple-800">
+      <nav className="bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8]  h-[7.9vh] text-[#8b4513] z-50 relative opacity-90">
         <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -71,7 +74,7 @@ export const NavbarPatient = () => {
               <div className="flex items-center flex-shrink-0 ">
                 <img
                   onClick={Redirecto}
-                  className="h-10 xl:h-16 w-auto xl:absolute cursor-pointer  xl:-left-[8vh] 2xl:-left-[18vh] hover:drop-shadow-md"
+                  className="h-10 xl:h-16 w-auto xl:absolute cursor-pointer xl:-left-[8vh] 2xl:-left-[18vh] drop-shadow-sm hover:drop-shadow-xl transition-all duration-200"
                   src={SymbolPsico}
                   alt="Your Company"
                 />
@@ -81,8 +84,8 @@ export const NavbarPatient = () => {
                   <a
                     href="/AboutMePatient"
                     className={
-                      buttonClass('/AboutMe') +
-                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                      buttonClass('/AboutMePatient') +
+                      'text-gray-300  hover:bg-[#534949d8] hover:text-white rounded-md px-3 py-2 text-base font-medium hover:tracking-widest transition-all duration-300'
                     }
                     aria-current="page"
                   >
@@ -91,13 +94,13 @@ export const NavbarPatient = () => {
                   <a
                     href="/AppointmentPatient"
                     className={
-                      buttonClass('/Appointment') +
-                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                      buttonClass('/AppointmentPatient') +
+                      'text-gray-300  hover:bg-[#534949d8] hover:text-white rounded-md px-3 py-2 text-base font-medium hover:tracking-widest transition-all duration-300'
                     }
                   >
                     Citas
                   </a>
-                  <a
+                  {/* <a
                     href="/Studies"
                     className={
                       buttonClass('/Studies') +
@@ -105,12 +108,12 @@ export const NavbarPatient = () => {
                     }
                   >
                     Estudios
-                  </a>
+                  </a> */}
                   <a
                     onClick={logout}
                     className={
                       buttonClass('/Login') +
-                      'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                      'text-gray-300 cursor-pointer- hover:bg-[#463d3dd8] hover:text-white rounded-md px-3 py-2 text-base font-medium hover:tracking-widest transition-all duration-300'
                     }
                   >
                     Salir
@@ -144,7 +147,7 @@ export const NavbarPatient = () => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="w-8 h-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={dataLogin.imagenUrl}
                       alt="Foto de perfil"
                     />
                   </button>
@@ -162,27 +165,24 @@ export const NavbarPatient = () => {
                   >
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="z-50 block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-400 "
                       role="menuitem"
-                      tabIndex="-1"
                       id="user-menu-item-0"
                     >
                       Your Profile
                     </a>
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
-                      tabIndex="-1"
                       id="user-menu-item-1"
                     >
                       Settings
                     </a>
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
-                      tabIndex="-1"
                       id="user-menu-item-2"
                     >
                       Sign out
