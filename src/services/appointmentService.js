@@ -13,12 +13,7 @@ const create = async (data) => {
         'Content-Type': 'application/json',
       },
     });
-
-    if (response.ok) {
-      console.log('Recurso creado exitosamente.');
-    } else {
-      console.error('Error al crear el recurso.');
-    }
+    console.log('Recurso creado exitosamente.');
     return response.data;
   } catch (error) {
     console.error('Error:', error);
