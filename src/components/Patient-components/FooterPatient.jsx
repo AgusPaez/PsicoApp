@@ -4,7 +4,7 @@ import React from 'react';
 export const FooterPatient = () => {
   return (
     <>
-      <footer className="fixed bottom-0 w-full px-4 py-4 text-sm text-white bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8] ">
+      <footer className=" fixed bottom-0 w-full z-50 px-4 py-4 text-sm text-white bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8] ">
         <p>Copyright &copy; {new Date().getFullYear()} Agustin Paez</p>
         <ul className="flex justify-center mt-4 space-x-4">
           <li>

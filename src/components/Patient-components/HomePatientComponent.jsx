@@ -18,7 +18,7 @@ export const HomePatientComponent = () => {
   return (
     <>
       {/* Contenido principal */}
-      <div className="relative z-10 p-10 px-32">
+      <div className="relative z-10 flex-grow p-10 px-32">
         {/* Cabecera de bienvenida */}
         <div className="bg-[#dad4c4] bg-opacity-65 rounded-lg shadow-lg p-6 mb-8 ">
           <h1 className="text-4xl font-bold text-center mb-4 text-[#4a4a4a]">
