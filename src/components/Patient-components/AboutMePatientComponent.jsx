@@ -6,8 +6,10 @@ import { EditMyProfile } from './EditMyProfile';
 import { findAll } from '../../services/appointmentService';
 // import context
 import { useAuth } from '../../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 export const AboutMePatientComponent = () => {
+  const navigate = useNavigate();
   // context
   const { dataLogin } = useAuth();
   // states
@@ -46,9 +48,19 @@ export const AboutMePatientComponent = () => {
     setShowModal(!showModal);
   };
 
+  // redirect function
+  const handleNavigateAndScroll = (section) => {
+    navigate('/AppointmentPatient');
+    setTimeout(() => {
+      const formElement = document.getElementById(section);
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
   return (
     <>
-      <section className="relative z-40 flex p-6 space-x-32 justify-stretch mx-28 justify-items-start opacity-90">
+      <section className="relative z-40 flex flex-grow p-6 space-x-32 justify-stretch mx-28 justify-items-start opacity-90">
         <div className="bg-[#dad4c4] bg-opacity-65 border border-slate-400 rounded-lg shadow-lg ">
           <div className="p-6">
             <h1 className="mb-4 text-2xl font-bold">
@@ -137,10 +149,16 @@ export const AboutMePatientComponent = () => {
                 {new Date(lastAppointment.createdAt).toLocaleString()}
               </p>
               <div className="flex justify-between mt-6">
-                <button className="px-4 py-2 text-white transition-all duration-300 rounded bg-slate-600 hover:tracking-widest hover:bg-slate-700">
+                <button
+                  onClick={() => handleNavigateAndScroll('List-Appointment')}
+                  className="px-4 py-2 text-white transition-all duration-300 rounded bg-slate-600 hover:tracking-widest hover:bg-slate-700"
+                >
                   Ver Todas las Citas
                 </button>
-                <button className="px-4 py-2 text-white transition-all duration-300 bg-green-700 rounded hover:tracking-widest hover:bg-green-800">
+                <button
+                  onClick={() => handleNavigateAndScroll('appointment-form')}
+                  className="px-4 py-2 text-white transition-all duration-300 bg-green-700 rounded hover:tracking-widest hover:bg-green-800"
+                >
                   Pedir una Cita
                 </button>
               </div>
