@@ -5,7 +5,7 @@ import ListAppointment from '../../components/Psico-components/ListAppointments'
 export const AppointmentPsico = () => {
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-tr from-[#3d3763] to-[#69666e]">
+      <div className="min-h-screen bg-gradient-to-tr from-[#4e4075] to-[#3d315c]">
         <NavbarPsico />
         <ListAppointment />
       </div>

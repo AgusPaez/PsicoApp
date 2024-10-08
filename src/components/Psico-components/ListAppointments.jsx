@@ -121,125 +121,123 @@ const ListAppointment = () => {
           onClose={() => setIsAddModalOpen(false)}
           onSave={handleSaveNewAppointment}
         />
-        <table className="min-w-full text-left bg-white border border-gray-400">
-          <thead className="bg-[#9b8197b0]">
-            <tr>
-              <th
-                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
-                onClick={() => sortAppointments('nombre')}
-              >
-                Nombre{' '}
-                {sortConfig.key === 'nombre'
-                  ? sortConfig.direction === 'asc'
-                    ? '⬆'
-                    : '⬇'
-                  : ''}
-              </th>
-              <th
-                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
-                onClick={() => sortAppointments('apellido')}
-              >
-                Apellido{' '}
-                {sortConfig.key === 'apellido'
-                  ? sortConfig.direction === 'asc'
-                    ? '⬆'
-                    : '⬇'
-                  : ''}
-              </th>
-              <th
-                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
-                onClick={() => sortAppointments('edad')}
-              >
-                Edad{' '}
-                {sortConfig.key === 'edad'
-                  ? sortConfig.direction === 'asc'
-                    ? '⬆'
-                    : '⬇'
-                  : ''}
-              </th>
-              <th className="px-4 py-2 border-b border-slate-400">
-                Motivo Consulta
-              </th>
-
-              <th
-                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
-                onClick={() => sortAppointments('email')}
-              >
-                Email{' '}
-                {sortConfig.key === 'email'
-                  ? sortConfig.direction === 'asc'
-                    ? '⬆'
-                    : '⬇'
-                  : ''}
-              </th>
-
-              <th
-                className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
-                onClick={() => sortAppointments('fecha_consulta')}
-              >
-                Fecha Consulta{' '}
-                {sortConfig.key === 'fecha_consulta'
-                  ? sortConfig.direction === 'asc'
-                    ? '⬆'
-                    : '⬇'
-                  : ''}
-              </th>
-
-              <th className="px-4 py-2 border-b border-slate-400">Estado</th>
-            </tr>
-          </thead>
-          <tbody className="bg-[#d5d2e4]">
-            {filteredAppointments.map((appointment, index) => (
-              <tr
-                key={index}
-                className="text-left hover:bg-[#918f9c] cursor-pointer transition-all duration-150"
-                onClick={() => handleOpenAside(appointment)}
-              >
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {appointment.nombre}
-                </td>
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {appointment.apellido}
-                </td>
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {appointment.edad}
-                </td>
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {appointment.motivo_consulta}
-                </td>
-
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {appointment.email}
-                </td>
-                <td className="px-4 py-2 border-b border-slate-400">
-                  {new Date(appointment.fecha_consulta).toLocaleDateString(
-                    'es-ES',
-                    {
-                      year: 'numeric',
-                      month: 'numeric',
-                      day: 'numeric',
-                    }
-                  )}{' '}
-                  ||{' '}
-                  {new Date(appointment.fecha_consulta).toLocaleTimeString(
-                    'es-ES',
-                    {
-                      hour: 'numeric',
-                      minute: 'numeric',
-                    }
-                  )}
-                </td>
-                <td
-                  className={`px-4 py-2 border-b border-slate-400 ${
-                    estadoConsultaStyles[appointment.estado_consulta].color
-                  }`}
+        <div className="overflow-y-auto h-5/6 scrollbar scrollbar-thumb-blue-500 scrollbar-track-slate-600">
+          <table className="min-w-full overflow-hidden text-gray-300 bg-gray-800 rounded-md shadow-lg table-auto bg-opacity-30">
+            <thead>
+              <tr className="text-sm font-semibold tracking-wide text-left text-gray-200 uppercase bg-gray-700 bg-opacity-40">
+                <th
+                  className="px-4 py-2 transition-all duration-200 border-b border-gray-700 cursor-pointer hover:tracking-widest"
+                  onClick={() => sortAppointments('nombre')}
                 >
-                  {estadoConsultaStyles[appointment.estado_consulta].text}
-                </td>
+                  Nombre{' '}
+                  {sortConfig.key === 'nombre'
+                    ? sortConfig.direction === 'asc'
+                      ? '⬆'
+                      : '⬇'
+                    : ''}
+                </th>
+                <th
+                  className="px-4 py-2 transition-all duration-200 border-b border-gray-700 cursor-pointer hover:tracking-widest"
+                  onClick={() => sortAppointments('apellido')}
+                >
+                  Apellido{' '}
+                  {sortConfig.key === 'apellido'
+                    ? sortConfig.direction === 'asc'
+                      ? '⬆'
+                      : '⬇'
+                    : ''}
+                </th>
+                <th
+                  className="px-4 py-2 transition-all duration-200 border-b border-gray-700 cursor-pointer hover:tracking-widest"
+                  onClick={() => sortAppointments('edad')}
+                >
+                  Edad{' '}
+                  {sortConfig.key === 'edad'
+                    ? sortConfig.direction === 'asc'
+                      ? '⬆'
+                      : '⬇'
+                    : ''}
+                </th>
+                <th className="px-4 py-2 border-b border-gray-700">
+                  Motivo Consulta
+                </th>
+                <th
+                  className="px-4 py-2 transition-all duration-200 border-b border-gray-700 cursor-pointer hover:tracking-widest"
+                  onClick={() => sortAppointments('email')}
+                >
+                  Email{' '}
+                  {sortConfig.key === 'email'
+                    ? sortConfig.direction === 'asc'
+                      ? '⬆'
+                      : '⬇'
+                    : ''}
+                </th>
+                <th
+                  className="px-4 py-2 transition-all duration-200 border-b border-gray-700 cursor-pointer hover:tracking-widest"
+                  onClick={() => sortAppointments('fecha_consulta')}
+                >
+                  Fecha Consulta{' '}
+                  {sortConfig.key === 'fecha_consulta'
+                    ? sortConfig.direction === 'asc'
+                      ? '⬆'
+                      : '⬇'
+                    : ''}
+                </th>
+                <th className="px-4 py-2 border-b border-gray-700">Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredAppointments.map((appointment, index) => (
+                <tr
+                  key={index}
+                  className="transition-colors duration-200 cursor-pointer odd:bg-gray-800 odd:bg-opacity-40 hover:bg-gray-700"
+                  onClick={() => handleOpenAside(appointment)}
+                >
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {appointment.nombre}
+                  </td>
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {appointment.apellido}
+                  </td>
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {appointment.edad}
+                  </td>
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {appointment.motivo_consulta.slice(0, 60)}
+                  </td>
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {appointment.email}
+                  </td>
+                  <td className="px-4 py-2 text-sm border-b border-gray-700">
+                    {new Date(appointment.fecha_consulta).toLocaleDateString(
+                      'es-ES',
+                      {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                      }
+                    )}{' '}
+                    ||{' '}
+                    {new Date(appointment.fecha_consulta).toLocaleTimeString(
+                      'es-ES',
+                      {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                      }
+                    )}
+                  </td>
+                  <td
+                    className={`px-4 py-2 text-sm border-b border-gray-700 ${
+                      estadoConsultaStyles[appointment.estado_consulta].color
+                    }`}
+                  >
+                    {estadoConsultaStyles[appointment.estado_consulta].text}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <RightAside

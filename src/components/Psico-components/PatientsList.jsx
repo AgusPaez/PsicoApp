@@ -56,11 +56,11 @@ export const PatientsList = ({ patients }) => {
       <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">
         Lista de Pacientes
       </h2>
-      <table className="min-w-full bg-white border border-gray-400 rounded-lg shadow-lg table-auto">
-        <thead className="bg-[#9b8197b0]">
-          <tr className="text-left text-gray-700">
+      <table className="min-w-full overflow-hidden text-gray-300 bg-gray-800 border border-gray-400 rounded-md shadow-lg table-auto bg-opacity-30">
+        <thead className="bg-gray-700 bg-opacity-40">
+          <tr className="text-sm font-semibold tracking-wide text-gray-200 uppercase">
             <th
-              className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
+              className="px-4 py-3 text-left transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
               onClick={() => handleSort('nombre')}
             >
               Nombre{' '}
@@ -71,7 +71,7 @@ export const PatientsList = ({ patients }) => {
                 : ''}
             </th>
             <th
-              className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
+              className="px-4 py-3 text-left transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
               onClick={() => handleSort('apellido')}
             >
               Apellido{' '}
@@ -82,7 +82,7 @@ export const PatientsList = ({ patients }) => {
                 : ''}
             </th>
             <th
-              className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
+              className="px-4 py-3 text-left transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-widest"
               onClick={() => handleSort('email')}
             >
               Email{' '}
@@ -93,7 +93,7 @@ export const PatientsList = ({ patients }) => {
                 : ''}
             </th>
             <th
-              className="px-4 py-2 transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-wide"
+              className="px-4 py-3 text-left transition-all duration-200 border-b cursor-pointer border-slate-400 hover:tracking-wide"
               onClick={() => handleSort('fecha_nacimiento')}
             >
               Fecha Nacimiento{' '}
@@ -103,32 +103,34 @@ export const PatientsList = ({ patients }) => {
                   : '⬇'
                 : ''}
             </th>
-            <th className="px-4 py-2 border-b border-slate-400">Obra Social</th>
+            <th className="px-4 py-3 text-left border-b border-slate-400">
+              Obra Social
+            </th>
           </tr>
         </thead>
-        <tbody className="bg-[#d5d2e4]">
+        <tbody className="bg-gray-800 bg-opacity-40">
           {sortedPatients.length > 0 ? (
             sortedPatients.map((patient) => (
               <tr
                 key={patient._id}
-                className="transition duration-150 text-left hover:bg-[#918f9c] cursor-pointer"
+                className="transition duration-150 cursor-pointer odd:bg-gray-800 odd:bg-opacity-40 hover:bg-gray-700"
                 onClick={() => {
                   OpenRightAside(patient);
                 }}
               >
-                <td className="px-4 py-2 border-b border-slate-400">
+                <td className="px-4 py-2 text-sm border-b border-gray-700">
                   {patient.nombre}
                 </td>
-                <td className="px-4 py-2 border-b border-slate-400">
+                <td className="px-4 py-2 text-sm border-b border-gray-700">
                   {patient.apellido}
                 </td>
-                <td className="px-4 py-2 border-b border-slate-400">
+                <td className="px-4 py-2 text-sm border-b border-gray-700">
                   {patient.email}
                 </td>
-                <td className="px-4 py-2 border-b border-slate-400">
+                <td className="px-4 py-2 text-sm border-b border-gray-700">
                   {new Date(patient.fecha_nacimiento).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-2 border-b border-slate-400">
+                <td className="px-4 py-2 text-sm border-b border-gray-700">
                   {patient.obra_social}
                 </td>
               </tr>
@@ -142,6 +144,7 @@ export const PatientsList = ({ patients }) => {
           )}
         </tbody>
       </table>
+
       <RightAsidePatient
         isOpen={rightAside}
         user={selectedUser}
