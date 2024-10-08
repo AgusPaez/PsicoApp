@@ -1,5 +1,7 @@
 //imports
 import React, { useEffect } from 'react';
+//import components
+import { ListAppointment } from './ListAppointment';
 //import hooks rhf
 import { useForm } from 'react-hook-form';
 //import services
@@ -33,7 +35,9 @@ export const AppointmentFormPatient = () => {
       //set data
       setValue('nombre', dataLogin.nombre || '');
       setValue('apellido', dataLogin.apellido || '');
+      setValue('dni', dataLogin.dni || '');
       setValue('email', dataLogin.email || '');
+      setValue('obra_social', dataLogin.obra_social || '');
       setValue('edad', edad || '');
       setValue('numero', dataLogin.numero || '');
     }
@@ -44,21 +48,28 @@ export const AppointmentFormPatient = () => {
       //call service
       const response = await create(data);
       console.log('cita creada correctamente');
+      window.location.reload();
     } catch (error) {
       console.error('Error al intentar crear una cita', error);
     }
   };
 
   return (
-    <section className="h-[81.2vh] 2xl:h-[86vh] grid grid-cols-1 gap-10 bg-cover bg-center">
-      <div className="p-10">
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 m-6 ">
-          <h2 className="ml-4 text-lg">Agendá tu cita</h2>
-          <div className="flex w-full gap-6 my-4">
-            <div className="w-2/5">
+    <section className="min-h-[81.2vh] 2xl:h-[86vh] bg-cover bg-center relative z-40 p-10 px-32  flex-grow">
+      <ListAppointment />
+      <div id="appointment-form"></div>
+      <div className="rounded-2xl bg-[#dad4c4] bg-opacity-65 border border-slate-400 mb-28">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 m-6">
+          <div className="flex items-center justify-center gap-4 p-2 m-4">
+            <h2 className="font-semibold text-black">SOLICITAR CITA</h2>
+          </div>
+
+          <div className="flex w-full gap-8 my-4">
+            <div className="w-4/12 p-4 m-2 ">
+              <label className="pb-4"> Nombre : </label>
               <input
                 placeholder="Nombre"
-                className="w-full p-4 m-2 h-9 rounded-2xl opacity-60 focus:opacity-80"
+                className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
                 id="nombre"
                 {...register('nombre', { required: true })}
                 disabled
@@ -69,10 +80,12 @@ export const AppointmentFormPatient = () => {
                 </span>
               )}
             </div>
-            <div className="w-2/5">
+
+            <div className="w-4/12 p-4 m-2 ">
+              <label className=""> Apellido : </label>
               <input
                 placeholder="Apellido"
-                className="w-full p-4 m-2 rounded-2xl h-9 opacity-60 focus:opacity-80"
+                className="w-full rounded-xl h-9 opacity-60 focus:opacity-70 p-1.5 bg-[#f7f5ef] text-slate-600"
                 id="apellido"
                 {...register('apellido', { required: true })}
                 disabled
@@ -83,10 +96,21 @@ export const AppointmentFormPatient = () => {
                 </span>
               )}
             </div>
-            <div className="w-1/5">
+            <div className="w-3/12 p-4 m-2">
+              <label className=""> D.N.I. : </label>
+              <input
+                placeholder="dni"
+                className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
+                id="dni"
+                {...register('dni')}
+                disabled
+              />
+            </div>
+            <div className="p-4 m-2">
+              <label className=""> Edad : </label>
               <input
                 placeholder="Edad"
-                className="w-full p-4 m-2 h-9 rounded-2xl opacity-60 focus:opacity-80"
+                className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
                 id="edad"
                 {...register('edad', { required: true })}
                 disabled
@@ -98,58 +122,98 @@ export const AppointmentFormPatient = () => {
               )}
             </div>
           </div>
-          <div>
-            <input
-              placeholder="Email"
-              className="w-full p-4 m-2 my-4 h-9 rounded-2xl opacity-60 focus:opacity-80"
-              id="email"
-              {...register('email')}
-              disabled
-            />
-          </div>
-          <div className="flex w-full gap-6 my-4">
-            <div className="w-1/2">
+          <div className="flex w-full gap-8 my-4">
+            <div className="w-5/12 p-4 m-2 ">
+              <label> Email : </label>
+              <input
+                placeholder="Email"
+                className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
+                id="email"
+                {...register('email')}
+                disabled
+              />
+            </div>
+            <div className="p-4 m-2">
+              <label> Numero Cel : </label>
               <input
                 placeholder="Número de telefono"
-                className="w-full p-4 m-2 h-9 rounded-2xl opacity-60"
+                className="w-full h-9 rounded-xl opacity-60 p-1.5 bg-[#f7f5ef] text-slate-600"
                 id="numero"
                 {...register('numero', { required: true })}
                 disabled
               />
               {errors.numero && errors.numero.type === 'required' && (
-                <span className="text-red-500 text-xs m-2 mt-0.5 absolute ml-4">
+                <span className="text-red-500 text-xs m-2 mt-0.5 absolute ml-4 ">
                   El número es obligatorio
                 </span>
               )}
             </div>
-            <div className="w-1/2">
+
+            <div className="p-4 m-2">
+              <label> Obra Social : </label>
               <input
-                placeholder="Derivación"
-                className="w-full p-4 m-2 h-9 rounded-2xl opacity-60 focus:opacity-80"
-                id="derivacion"
-                {...register('derivacion')}
+                placeholder="Obra Social"
+                className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
+                id="obra_social"
+                {...register('obra_social')}
+                disabled
               />
             </div>
           </div>
-          <div className="my-6">
-            <textarea
-              placeholder="Motivo de consulta"
-              className="w-full p-4 m-2 text-left max-h-44 min-h-20 rounded-2xl opacity-60 focus:opacity-80"
-              id="motivo_consulta"
-              {...register('motivo_consulta', { required: true })}
-            />
-            {errors.motivo_consulta && (
-              <span className="text-red-500 text-xs m-2 mt-0.5 absolute ml-4">
-                El motivo consulta es obligatorio
-              </span>
-            )}
+          <div className="flex w-full gap-6 my-4">
+            <div className="w-1/2 ">
+              <div className="flex h-1/2">
+                <div className="w-1/2 p-4 m-2">
+                  <label htmlFor="fecha_consulta">
+                    Fecha y hora de consulta:
+                  </label>
+                  <input
+                    type="datetime-local"
+                    placeholder="fecha de consulta"
+                    className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-black"
+                    id="fecha_consulta"
+                    {...register('fecha_consulta', { required: true })}
+                  />
+                  {errors.fecha_consulta &&
+                    errors.fecha_consulta.type === 'required' && (
+                      <span className="text-red-500 text-xs m-2 mt-0.5">
+                        La fecha de la consulta es obligatoria
+                      </span>
+                    )}
+                </div>
+                <div className="w-1/2 p-4 m-2 ">
+                  <label> Derivacion : </label>
+                  <input
+                    className="w-full h-9 p-1.5 rounded-xl opacity-60 focus:opacity-80 bg-[#f7f5ef]  text-black"
+                    id="derivacion"
+                    {...register('derivacion')}
+                  />
+                </div>
+              </div>
+              <div className="flex items-end justify-center p-4 mb-4 h-1/2">
+                <button
+                  className="w-4/12 h-12 mb-5 transition-all duration-300 hover:w-5/12 hover:font-semibold hover:tracking-wider rounded-2xl bg-slate-400 hover:bg-slate-500"
+                  type="submit"
+                >
+                  Enviar
+                </button>
+              </div>
+            </div>
+
+            <div className="w-1/2 p-4 m-2">
+              <label> Motivo de consulta: </label>
+              <textarea
+                className="w-full text-left max-h-40 min-h-40 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-black"
+                id="motivo_consulta"
+                {...register('motivo_consulta', { required: true })}
+              />
+              {errors.motivo_consulta && (
+                <span className="text-red-500 text-xs m-2 mt-0.5">
+                  El motivo de consulta es obligatorio
+                </span>
+              )}
+            </div>
           </div>
-          <button
-            className="w-32 h-12 m-2 rounded-full bg-slate-400 hover:bg-slate-600"
-            type="submit"
-          >
-            Enviar
-          </button>
         </form>
       </div>
     </section>
