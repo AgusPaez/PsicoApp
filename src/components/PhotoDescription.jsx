@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { getMyProfile } from '../services/users';
 //import image
 import image from '../assets/images/firma.png';
-export const PhotoDescription = ({ content, photo }) => {
+export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
   //states
   const [info, setInfo] = useState([]);
 
@@ -24,38 +24,40 @@ export const PhotoDescription = ({ content, photo }) => {
 
   return (
     <>
-      <section className="flex h-auto mx-10 mt-auto ">
-        <div className="flex items-center justify-center flex-1 my-16 mt-10 ml-4 text-center">
-          <div className="flex flex-col items-center">
-            <span className="m-4 mt-20 text-4xl">
-              {info.nombre}, {info.apellido}
-            </span>
-            <div className="flex items-center justify-center m-4 mt-8 ml-40">
-              <img src={image} width={250} height={250} />
-            </div>
-          </div>
-          <div className="absolute flex flex-1 w-60 border-r-2 border-r-[#d4d4d4] rounded-[185px] rounded-br-lg h-[10rem] left-[16.2rem] top-20 px-14"></div>
-        </div>
-
-        <div className="relative flex items-center justify-center flex-1 px-2 mx-10 mt-0">
+      <div className="flex flex-wrap justify-between ">
+        {/* Columna izquierda: Imagen y Descripción */}
+        <div className="w-full p-8 mb-8 rounded-lg md:w-1/2 md:mb-0">
           {photo ? (
             <img
-              className="rounded-b-[180px] w-full h-96 top-0 px-4 absolute"
+              className="object-cover mx-auto mb-6 border-2 border-[#9cbcfc] rounded-full w-72 h-72"
               src="https://www.shutterstock.com/image-photo/happy-professional-middle-eastern-female-260nw-2101132801.jpg"
               alt="imagen del profesional"
-              width={550}
-              height={550}
             />
           ) : (
             <h2>Imagen no disponible!</h2>
           )}
-          <div className="absolute flex flex-1 w-full border-b-4 border-b-[#d4d4d4] rounded-[185px] h-[25rem] top-0 px-14"></div>
+
+          <h2 className="mt-8 mb-4 text-3xl font-bold text-center ">
+            Lic. {info.nombre}, {info.apellido}
+          </h2>
+          <div className="absolute flex items-center justify-center m-4 mt-8 ml-40 top-72"></div>
+          <p className="px-3 pt-2 mt-4 mb-6 text-lg text-center text-gray-700">
+            {content}
+          </p>
+          <div className="text-center">
+            <button className="px-6 py-2  bg-[#8cabe7] rounded-full border border-[#7491c7] hover:bg-[#7491c7] hover:border-[#627daf] tracking-wide hover:tracking-widest transition-all duration-300 animate-pulse ">
+              CONTACTAR
+            </button>
+          </div>
         </div>
-        <div className="flex items-center justify-center flex-1 m-2 mt-24 mr-4">
-          {content}
-          <div className="absolute flex flex-1 w-60 border-l-2 border-l-[#d4d4d4] rounded-[185px] rounded-bl-lg h-[10rem] right-[16.5rem] top-20 px-14"></div>
+
+        {/* Columna derecha: Misión y Visión */}
+        <div className="w-full p-8  border-l-2 border-[#8cabe7] lg md:w-1/2 py-20 my-20">
+          <h2 className="mb-4 text-3xl font-bold ">Misión</h2>
+          <p className="mb-6 text-lg text-gray-700">{objetivo}</p>
+          <p className="mb-6 text-lg text-gray-700">{content1}</p>
         </div>
-      </section>
+      </div>
     </>
   );
 };

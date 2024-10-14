@@ -27,19 +27,26 @@ export const AboutmeComponent = () => {
   }, []);
 
   return (
-    <div className="w-full h-full font-libre">
+    <div className="z-30 w-full h-full ">
       {/* bg-gradient-to-br from-purple-700/40 to-blue-500/40 */}
-      <PhotoDescription
-        content={content.descripcionAboutMe}
-        photo={content.fotoPiscologo}
-      />
-      <Approach content={content.descripcionEstudioAbordaje} />
-      <Vision content={content.contenido1} />
-      <Pay content={content.medioPago} />
-      <Contact
-        contentMail={content.contactoMail}
-        contentNro={content.contactoNumero}
-      />
+      <div className="relative w-full h-auto min-h-screen p-8 ">
+        <PhotoDescription
+          content={content.descripcionAboutMe}
+          photo={content.fotoPiscologo}
+          objetivo={content.objetivo}
+          content1={content.contenido2}
+        />
+        {/* <Vision content={content.contenido1} /> */}
+        {/* Sección de Estudios y Abordaje */}
+        <Approach content={content.descripcionEstudioAbordaje} />
+        {/* Métodos de Pago */}
+        <Pay content={content.medioPago} />
+        {/* Sección de Contacto */}
+        <Contact
+          contentMail={content.contactoMail}
+          contentNro={content.contactoNumero}
+        />
+      </div>
     </div>
   );
 };
