@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 //import services
 import { updateMyProfile } from '../../services/users';
 import { getAppointmentsByEmail } from '../../services/appointmentService';
-
+//import Spinner
+import { LoadingSpinner } from '../LoadingSpinner';
 export const RightAsidePatient = ({ isOpen, user, onClose }) => {
   //states
   const [countAppointments, setCountAppointments] = useState(0);
+  const [loading, setLoading] = useState(false);
   //set data
   const [formData, setFormData] = useState({
     nombre: user?.nombre || '',
@@ -51,10 +53,14 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
     e.preventDefault();
     try {
       //call service and send data
-      const UpdateProfile = await updateMyProfile(user._id, formData);
-      console.log('Perfil Actualizado:', UpdateProfile);
-      onClose();
-      window.location.reload();
+      setLoading(true);
+      setTimeout(() => {
+        const UpdateProfile = updateMyProfile(user._id, formData);
+        console.log('Perfil Actualizado:', UpdateProfile);
+        setLoading(false);
+        onClose();
+        window.location.reload();
+      }, 4000);
     } catch (error) {
       console.log('Error al actualizar el perfil', error);
     }
@@ -291,9 +297,15 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                   <button
                     type="submit"
                     className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+                    disabled={loading}
                   >
-                    Guardar Cambios
+                    {loading ? 'Cargando...' : 'Guardar cambios'}
                   </button>
+                  {loading && (
+                    <div className="mt-4">
+                      <LoadingSpinner />
+                    </div>
+                  )}
                   <button
                     type="button"
                     className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"

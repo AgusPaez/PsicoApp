@@ -1,14 +1,18 @@
 //imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //import components
 import { ListAppointment } from './ListAppointment';
 //import hooks rhf
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 //import services
 import { create } from '../../services/appointmentService';
 //import context
 import { useAuth } from '../../context/AuthProvider';
+// import Spinner
+import { LoadingSpinner } from '../LoadingSpinner';
 export const AppointmentFormPatient = () => {
+  //states
+  const [loading, setLoading] = useState(false);
   //context
   const { dataLogin } = useAuth();
   //rhf
@@ -45,10 +49,14 @@ export const AppointmentFormPatient = () => {
 
   const onSubmit = async (data) => {
     try {
-      //call service
-      const response = await create(data);
-      console.log('cita creada correctamente');
-      window.location.reload();
+      setLoading(true);
+      setTimeout(() => {
+        //call service
+        const response = create(data);
+        console.log('cita creada correctamente');
+        setLoading(false);
+        window.location.reload();
+      }, 4000);
     } catch (error) {
       console.error('Error al intentar crear una cita', error);
     }
@@ -194,12 +202,17 @@ export const AppointmentFormPatient = () => {
                 <button
                   className="w-4/12 h-12 mb-5 transition-all duration-300 hover:w-5/12 hover:font-semibold hover:tracking-wider rounded-2xl bg-slate-400 hover:bg-slate-500"
                   type="submit"
+                  disabled={loading}
                 >
-                  Enviar
+                  {loading ? 'Cargando...' : 'Enviar'}
                 </button>
+                {loading && (
+                  <div className="mx-5 mt-4 mb-8">
+                    <LoadingSpinner />
+                  </div>
+                )}
               </div>
             </div>
-
             <div className="w-1/2 p-4 m-2">
               <label> Motivo de consulta: </label>
               <textarea

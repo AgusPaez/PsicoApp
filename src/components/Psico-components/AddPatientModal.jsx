@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { createProfile } from '../../services/users';
 //import hooks rhf
 import { useForm } from 'react-hook-form';
+//import Spinner
+import { LoadingSpinner } from '../LoadingSpinner';
 
 export const AddPatientModal = ({ onClose, admin }) => {
   //states
   const [previewImage, setPreviewImage] = useState('');
+  const [loading, setLoading] = useState(false);
   //rhf
   const {
     register,
@@ -41,11 +44,16 @@ export const AddPatientModal = ({ onClose, admin }) => {
       if (data.image) {
         formData.append('image', data.image);
       }
-      //call service
-      const response = await createProfile(formData);
-      console.log('Profile created successfully:', response);
-      //close modal after create data
-      onClose();
+      setLoading(true);
+      setTimeout(() => {
+        //call service
+        const response = createProfile(formData);
+        console.log('Profile created successfully:', response);
+        setLoading(false);
+        //close modal after create data
+        onClose();
+        window.location.reload();
+      }, 4000);
     } catch (error) {
       console.error(
         'Failed to create profile:',
@@ -363,6 +371,11 @@ export const AddPatientModal = ({ onClose, admin }) => {
             >
               Cancelar
             </button>
+            {loading && (
+              <div className="mt-4">
+                <LoadingSpinner />
+              </div>
+            )}
             {admin && (
               <button
                 type="button"
@@ -375,8 +388,9 @@ export const AddPatientModal = ({ onClose, admin }) => {
             <button
               type="submit"
               className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+              disabled={loading}
             >
-              Guardar
+              {loading ? 'Cargando...' : 'Guardar'}
             </button>
           </div>
         </form>

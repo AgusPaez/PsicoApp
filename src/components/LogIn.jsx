@@ -1,6 +1,8 @@
 //imports
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+//import spinner
+import { LoadingSpinner } from './LoadingSpinner';
 //imports Images
 import loginIcon from '../assets/icons/PhUserDuotone.png';
 //import context
@@ -10,6 +12,7 @@ export const LogIn = () => {
   //states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   //context
   const { login, isLogin, dataLogin } = useAuth();
   //navigate
@@ -17,7 +20,11 @@ export const LogIn = () => {
   // hSumbit function
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(email, password);
+    setLoading(true);
+    setTimeout(() => {
+      login(email, password);
+      setLoading(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -117,11 +124,17 @@ export const LogIn = () => {
             <button
               type="submit"
               className="relative flex justify-center w-3/5 px-4 py-3 mb-4 text-sm font-medium hover:font-bold tracking-wide hover:tracking-wider transition-all duration-700 text-white bg-[#666666] border border-transparent rounded-md group hover:bg-[#424242] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={loading}
             >
-              Iniciar sesión
+              {loading ? 'Cargando...' : 'Iniciar sesión'}
             </button>
           </div>
         </form>
+        {loading && (
+          <div className="mt-4">
+            <LoadingSpinner />
+          </div>
+        )}
       </div>
     </div>
   );

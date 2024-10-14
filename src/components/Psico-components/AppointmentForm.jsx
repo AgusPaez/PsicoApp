@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { findPatients } from '../../services/users';
 // import hooks rhf
 import { useForm } from 'react-hook-form';
+//import spinner
+import { LoadingSpinner } from '../LoadingSpinner';
 
 export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
   //states
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [loading, setLoading] = useState(false);
   //rhf
   const {
     register,
@@ -70,8 +73,13 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
   };
 
   const onSubmit = (data) => {
-    onSave(data);
-    onClose();
+    setLoading(true);
+    setTimeout(() => {
+      onSave(data);
+      setLoading(false);
+      onClose();
+      window.location.reload();
+    }, 4000);
   };
 
   if (!isOpen) return null;
@@ -317,11 +325,17 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
             >
               Cancelar
             </button>
+            {loading && (
+              <div className="mt-4">
+                <LoadingSpinner />
+              </div>
+            )}
             <button
               type="submit"
               className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+              disabled={loading}
             >
-              Guardar
+              {loading ? 'Cargando...' : 'Guardar'}
             </button>
           </div>
         </form>

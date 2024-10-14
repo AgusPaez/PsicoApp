@@ -5,12 +5,15 @@ import { getUserByEmail } from '../../services/users';
 import { updateAppointment } from '../../services/appointmentService';
 // import Styles
 import { estadoConsultaStyles } from './ListAppointments';
+//import Spinner
+import { LoadingSpinner } from '../LoadingSpinner';
 
 export const RightAside = ({ isOpen, onClose, appointment }) => {
   //states
   const [isUser, setIsUser] = useState(false);
   const [dataUser, setDataUser] = useState('');
   const [inEmail, setInEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -76,15 +79,16 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
   //submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       // call service and send data + id
-      const updatedAppointment = await updateAppointment(
-        appointment._id,
-        formData
-      );
-      onClose();
-      window.location.reload();
-      console.log('Cita actualizada:', updatedAppointment);
+      setTimeout(() => {
+        const updatedAppointment = updateAppointment(appointment._id, formData);
+        setLoading(false);
+        onClose();
+        window.location.reload();
+        console.log('Cita actualizada:', updatedAppointment);
+      }, 4000);
     } catch (error) {
       console.error('error', error);
     }
@@ -397,14 +401,21 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                 <button
                   type="submit"
                   className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"
+                  disabled={loading}
                 >
-                  Guardar Cambios
+                  {loading ? 'Cargando...' : 'Guardar Cambios'}
                 </button>
+                {loading && (
+                  <div className="mt-4">
+                    <LoadingSpinner />
+                  </div>
+                )}
                 {isUser && (
                   <button className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700">
                     Editar perfil
                   </button>
                 )}
+
                 {isUser == false && (
                   <button className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700">
                     Crear perfil
