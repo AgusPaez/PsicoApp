@@ -9,7 +9,7 @@ export const Footer = () => {
       <ul className="flex justify-center mt-4 space-x-7">
         <li>
           <a
-            href="#"
+            href="/AboutMe"
             className="transition-all duration-500 text-slate-600 hover:text-white hover:tracking-widest"
           >
             Sobre mi
@@ -17,7 +17,7 @@ export const Footer = () => {
         </li>
         <li>
           <a
-            href="#"
+            href="/Appointment"
             className="transition-all duration-500 text-slate-600 hover:text-white hover:tracking-widest"
           >
             Contacto
