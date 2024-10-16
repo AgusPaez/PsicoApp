@@ -12,6 +12,7 @@ export const LogIn = () => {
   //states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   //context
   const { login, isLogin, dataLogin } = useAuth();
@@ -22,7 +23,7 @@ export const LogIn = () => {
     event.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      login(email, password);
+      login(email, password, rememberMe);
       setLoading(false);
     }, 4000);
   };
@@ -43,6 +44,11 @@ export const LogIn = () => {
       }
     }
   }, [isLogin, navigate, dataLogin.rol]);
+
+  // Handles the change in the checkbox
+  const handleRememberMeChange = (event) => {
+    setRememberMe(event.target.checked);
+  };
 
   return (
     <div className="flex items-center justify-center flex-grow bg-center bg-cover ">
@@ -95,7 +101,9 @@ export const LogIn = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="hidden peer "
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                  className="hidden peer"
                 />
                 <span className="top-1 inline-block relative h-5 w-5 bg-black rounded-full peer-checked:shadow-[0px_0px_30px_#09f] peer-checked:after:opacity-100 after:content-[''] after:absolute after:border-solid  after:border-r-0 after:border-b-0 after:border-[0.2em] after:w-[0.5em] after:h-[0.7em] after:left-[0.39em] after:top-[0.18em]  after:border-[#6aabff] after:rotate-[210deg] after:opacity-0 after:transition-opacity after:duration-300 after:ease transition-all duration-700 "></span>
 

@@ -20,22 +20,20 @@ export const AuthProvider = ({ children }) => {
 
   // Sinc with localStorage
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem('dataLogin'));
+    const storedData =
+      JSON.parse(localStorage.getItem('dataLogin')) ||
+      JSON.parse(sessionStorage.getItem('dataLogin'));
     if (storedData && storedData !== dataLogin) {
-      localStorage.setItem('dataLogin', JSON.stringify(dataLogin));
+      if (storedData.rememberMe) {
+        localStorage.setItem('dataLogin', JSON.stringify(dataLogin));
+      } else {
+        sessionStorage.setItem('dataLogin', JSON.stringify(dataLogin));
+      }
     }
   }, [dataLogin]);
 
-  // useEffect(() => {
-  //   if (!dataLogin || !dataLogin.userLogin) {
-  //     console.error('No hay datos de login');
-  //   } else {
-  //     localStorage.setItem('dataLogin', JSON.stringify(dataLogin));
-  //   }
-  // }, [dataLogin]);
-
   // login function
-  const login = async (email, password) => {
+  const login = async (email, password, rememberMe) => {
     try {
       const response = await axios.post(`${baseUrl}${urlLogin}`, {
         email,
@@ -43,7 +41,14 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.status) {
         const userData = { ...response.data, userLogin: true };
-        localStorage.setItem('dataLogin', JSON.stringify(userData));
+
+        // Stores user data based on the "rememberMe" state
+        if (rememberMe) {
+          localStorage.setItem('dataLogin', JSON.stringify(userData));
+        } else {
+          sessionStorage.setItem('dataLogin', JSON.stringify(userData));
+        }
+
         setDataLogin(userData);
         setIsLogin(true);
 
@@ -65,6 +70,7 @@ export const AuthProvider = ({ children }) => {
   // logOut function
   const logout = () => {
     localStorage.removeItem('dataLogin');
+    sessionStorage.removeItem('dataLogin');
     setDataLogin({ userLogin: false });
     setIsLogin(false);
     navigate('/Login');
