@@ -187,54 +187,65 @@ const ListAppointment = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredAppointments.map((appointment, index) => (
-                <tr
-                  key={index}
-                  className="transition-colors duration-200 cursor-pointer odd:bg-gray-800 odd:bg-opacity-40 hover:bg-gray-700"
-                  onClick={() => handleOpenAside(appointment)}
-                >
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {appointment.nombre}
-                  </td>
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {appointment.apellido}
-                  </td>
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {appointment.edad}
-                  </td>
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {appointment.motivo_consulta.slice(0, 60)}
-                  </td>
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {appointment.email}
-                  </td>
-                  <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {new Date(appointment.fecha_consulta).toLocaleDateString(
-                      'es-ES',
-                      {
-                        year: 'numeric',
-                        month: 'numeric',
-                        day: 'numeric',
-                      }
-                    )}{' '}
-                    ||{' '}
-                    {new Date(appointment.fecha_consulta).toLocaleTimeString(
-                      'es-ES',
-                      {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      }
-                    )}
-                  </td>
-                  <td
-                    className={`px-4 py-2 text-sm border-b border-gray-700 ${
-                      estadoConsultaStyles[appointment.estado_consulta].color
-                    }`}
+              {filteredAppointments.length > 0 ? (
+                filteredAppointments.map((appointment, index) => (
+                  <tr
+                    key={index}
+                    className="transition-colors duration-200 cursor-pointer odd:bg-gray-800 odd:bg-opacity-40 hover:bg-gray-700"
+                    onClick={() => handleOpenAside(appointment)}
                   >
-                    {estadoConsultaStyles[appointment.estado_consulta].text}
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {appointment.nombre}
+                    </td>
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {appointment.apellido}
+                    </td>
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {appointment.edad}
+                    </td>
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {appointment.motivo_consulta.slice(0, 60)}
+                    </td>
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {appointment.email}
+                    </td>
+                    <td className="px-4 py-2 text-sm border-b border-gray-700">
+                      {new Date(appointment.fecha_consulta).toLocaleDateString(
+                        'es-ES',
+                        {
+                          year: 'numeric',
+                          month: 'numeric',
+                          day: 'numeric',
+                        }
+                      )}{' '}
+                      ||{' '}
+                      {new Date(appointment.fecha_consulta).toLocaleTimeString(
+                        'es-ES',
+                        {
+                          hour: 'numeric',
+                          minute: 'numeric',
+                        }
+                      )}
+                    </td>
+                    <td
+                      className={`px-4 py-2 text-sm border-b border-gray-700 ${
+                        estadoConsultaStyles[appointment.estado_consulta].color
+                      }`}
+                    >
+                      {estadoConsultaStyles[appointment.estado_consulta].text}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="7"
+                    className="px-4 py-2 text-center text-gray-500"
+                  >
+                    No se encontraron citas.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
