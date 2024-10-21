@@ -7,11 +7,16 @@ import imagenAppointmente from '../assets/images/imagenAppointment.png';
 import { create } from '../services/appointmentService';
 //import Spinner
 import { LoadingSpinner } from './LoadingSpinner';
+//import Alert
+import { Alerts } from './Alerts';
 
 export const AppointmentForm = () => {
   //states
   const [inputType, setInputType] = useState('text');
   const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [negAlert, setNegAlert] = useState(false);
+  const [object, setObject] = useState({});
   // validations
   const {
     register,
@@ -20,17 +25,22 @@ export const AppointmentForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // event.preventDefault();
     setLoading(true);
     try {
-      setTimeout(() => {
-        const response = create(data);
+      setTimeout(async () => {
+        const response = await create(data);
+        setObject(response);
         setLoading(false);
+        setShowAlert(true);
       }, 4000);
     } catch (error) {
       console.error('Error al conectarse con la API:', error);
       setLoading(false);
+      setNegAlert(true);
     }
+  };
+  const handleAlertClose = () => {
+    setShowAlert(false);
   };
 
   const back = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700" opacity="0.59"><defs><linearGradient gradientTransform="rotate(147, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient"><stop stop-color="hsl(315, 100%, 72%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 80%)" stop-opacity="1" offset="100%"></stop></linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -189,6 +199,29 @@ export const AppointmentForm = () => {
             />
           </div>
         </section>
+        {negAlert && (
+          <Alerts
+            section={'appointment'}
+            condition={'error'}
+            title={'Error al registrar la cita'}
+            message={
+              'Error al intentar enviar los datos, porfavor intente nuevamente mas tarde.'
+            }
+            time={5000}
+            onClose={handleAlertClose}
+          />
+        )}
+        {showAlert && (
+          <Alerts
+            section={'appointment'}
+            object={object}
+            condition={'success'}
+            title={'Cita enviada correctamente'}
+            message={'Los detalles de la cita:'}
+            time={0}
+            onClose={handleAlertClose}
+          />
+        )}
       </div>
     </>
   );

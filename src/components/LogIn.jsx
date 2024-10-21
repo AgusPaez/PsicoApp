@@ -7,6 +7,8 @@ import { LoadingSpinner } from './LoadingSpinner';
 import loginIcon from '../assets/icons/PhUserDuotone.png';
 //import context
 import { useAuth } from '../context/AuthProvider';
+//import Alert
+import { Alerts } from './Alerts';
 
 export const LogIn = () => {
   //states
@@ -14,6 +16,7 @@ export const LogIn = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   //context
   const { login, isLogin, dataLogin } = useAuth();
   //navigate
@@ -22,9 +25,11 @@ export const LogIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
+    setShowAlert(false);
     setTimeout(() => {
       login(email, password, rememberMe);
       setLoading(false);
+      setShowAlert(true);
     }, 4000);
   };
 
@@ -144,6 +149,17 @@ export const LogIn = () => {
           </div>
         )}
       </div>
+      {showAlert && (
+        <Alerts
+          section={'login'}
+          condition={'error'}
+          title={'Credenciales incorrectas'}
+          message={
+            'El usuario o la contraseña son incorrectos. Por favor, inténtalo de nuevo.'
+          }
+          time={5500}
+        />
+      )}
     </div>
   );
 };
