@@ -21,7 +21,7 @@ export const ListAppointment = () => {
     };
     fetchAppointment();
   }, []);
-  setOpenAdd(!openAdd);
+  // setOpenAdd(!openAdd);
 
   return (
     <>

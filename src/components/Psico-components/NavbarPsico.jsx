@@ -11,7 +11,7 @@ export const NavbarPsico = () => {
   const isActive = (path) => location.pathname === path;
   const [openMenu, setOpenMenu] = useState(false);
   const [optionsProfile, setOptionsProfile] = useState(false);
-  const { logout } = useAuth();
+  const { logout, dataLogin } = useAuth();
   const navigate = useNavigate();
 
   const showMenu = () => {
@@ -159,7 +159,7 @@ export const NavbarPsico = () => {
                 <div>
                   <button
                     type="button"
-                    className="relative flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex text-sm bg-gray-800 rounded-full focus:outline-none hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -169,7 +169,7 @@ export const NavbarPsico = () => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="w-8 h-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={dataLogin.imagenUrl}
                       alt="Foto de perfil"
                     />
                   </button>
@@ -186,7 +186,7 @@ export const NavbarPsico = () => {
                   >
                     <a
                       href="/MyProfile"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
@@ -195,7 +195,7 @@ export const NavbarPsico = () => {
                     </a>
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-1"
@@ -204,8 +204,7 @@ export const NavbarPsico = () => {
                     </a>
                     <a
                       onClick={logout}
-                      //href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
+                      className="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-400"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
