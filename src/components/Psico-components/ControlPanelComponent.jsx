@@ -5,10 +5,13 @@ import { LayoutAboutMe } from '../Psico-components/LayoutAboutMe';
 import { LayoutStudies } from './LayoutStudies';
 import { LayoutPatients } from './LayoutPatients';
 import { AsideControlPanel } from './AsideControlPanel';
+import { useLocation } from 'react-router-dom';
 
 export const ControlPanelComponent = () => {
+  const location = useLocation();
+  const { Section } = location.state || {};
   // states
-  const [section, setSection] = useState(1);
+  const [section, setSection] = useState(Section || 1);
 
   //changue variables sections
   const changeSection = (nro) => {

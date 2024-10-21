@@ -7,9 +7,11 @@ import { updateAppointment } from '../../services/appointmentService';
 import { estadoConsultaStyles } from './ListAppointments';
 //import Spinner
 import { LoadingSpinner } from '../LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 
 export const RightAside = ({ isOpen, onClose, appointment }) => {
   //states
+  const navigate = useNavigate();
   const [isUser, setIsUser] = useState(false);
   const [dataUser, setDataUser] = useState('');
   const [inEmail, setInEmail] = useState('');
@@ -112,6 +114,11 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
       window.removeEventListener('keydown', handleEsc);
     };
   }, [onClose]);
+
+  const handleClick = () => {
+    const Section = 3;
+    navigate('/ControlPanel', { state: { formData, Section } });
+  };
 
   return (
     <>
@@ -411,13 +418,19 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   </div>
                 )}
                 {isUser && (
-                  <button className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700">
+                  <button
+                    onClick={handleClick}
+                    className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"
+                  >
                     Editar perfil
                   </button>
                 )}
 
                 {isUser == false && (
-                  <button className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700">
+                  <button
+                    onClick={handleClick}
+                    className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"
+                  >
                     Crear perfil
                   </button>
                 )}
