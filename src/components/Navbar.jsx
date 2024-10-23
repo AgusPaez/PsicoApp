@@ -28,9 +28,9 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className=" bg-gradient-to-r from-[#6aabff70] to-purple-300 z-10">
+    <nav className=" bg-gradient-to-r from-[#6aabff70] to-purple-300  z-50  ">
       <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-[4.5rem]">
+        <div className="relative flex items-center justify-between h-16">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* <!-- Mobile menu button--> */}
             <button

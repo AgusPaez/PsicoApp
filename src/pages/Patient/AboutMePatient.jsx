@@ -8,7 +8,7 @@ import { AboutMePatientComponent } from '../../components/Patient-components/Abo
 export const AboutMePatient = () => {
   return (
     <>
-      <div className="relative min-h-screen bg-[#f5f0e1] text-[#4a4a4a]">
+      <div className="grid grid-rows-[auto_1fr_auto] relative min-h-dvh bg-[#f5f0e1] text-[#4a4a4a]">
         {/* Imagen de fondo */}
         <div
           className="absolute inset-0 bg-center bg-cover opacity-30 blur-[2px]"

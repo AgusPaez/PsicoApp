@@ -10,7 +10,7 @@ export const BackgroundMain = ({ children }) => {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-center bg-cover"
+      className="flex flex-col bg-center bg-cover min-h-dvh"
       style={{
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
           svgBackground

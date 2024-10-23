@@ -8,10 +8,10 @@ import { AppointmentFormPatient } from '../../components/Patient-components/Appo
 export const AppointmentPatient = () => {
   return (
     <>
-      <div className="relative  flex-col min-h-screen bg-[#f5f0e1] text-[#4a4a4a]">
+      <div className="grid grid-rows-[auto_1fr_auto] relative min-h-dvh bg-[#f5f0e1] text-[#4a4a4a]">
         {/* Imagen de fondo */}
         <div
-          className="absolute inset-0 bg-center bg-cover opacity-30 blur-[2px] "
+          className="absolute inset-0 bg-center bg-cover opacity-30 blur-[2px]"
           style={{
             backgroundImage:
               "url('https://img.freepik.com/vector-gratis/hierbas-botanicas-minimalistas-flores-silvestres-estilo-vintage_23-2148424504.jpg')",

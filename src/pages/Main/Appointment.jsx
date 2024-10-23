@@ -10,20 +10,17 @@ import Fondo from '../../assets/images/fondo.jpg';
 
 export const Appointment = () => {
   return (
-    <>
-      <div className="relative z-0">
-        {/* Imagen de fondo */}
-        <div
-          className="absolute inset-0 bg-center bg-cover opacity-60 blur-[2.5px] z-0"
-          style={{ backgroundImage: `url(${Fondo})` }}
-        ></div>
-
-        <BackgroundMain>
-          <Navbar></Navbar>
-          <AppointmentForm></AppointmentForm>
-          <Footer></Footer>
-        </BackgroundMain>
-      </div>
-    </>
+    <div className="relative z-0 grid grid-rows-[auto_1fr_auto] min-h-dvh">
+      {/* Imagen de fondo */}
+      <div
+        className="absolute inset-0 bg-center bg-cover opacity-60 blur-[2.5px] z-0"
+        style={{ backgroundImage: `url(${Fondo})` }}
+      ></div>
+      <BackgroundMain>
+        <Navbar />
+        <AppointmentForm />
+        <Footer />
+      </BackgroundMain>
+    </div>
   );
 };
