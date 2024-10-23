@@ -1,7 +1,8 @@
-import { useContext, createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//imports
 import React from 'react';
 import axios from 'axios';
+import { useContext, createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // variables
 const baseUrl = import.meta.env.VITE_API_URL;
@@ -12,8 +13,11 @@ const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
   //console.log('CONTEXT component rendered');
+  // states
   const [dataLogin, setDataLogin] = useState(
-    JSON.parse(localStorage.getItem('dataLogin')) || {}
+    JSON.parse(localStorage.getItem('dataLogin')) ||
+      JSON.parse(sessionStorage.getItem('dataLogin')) ||
+      {}
   );
   const [isLogin, setIsLogin] = useState(dataLogin?.userLogin || false);
   const navigate = useNavigate();

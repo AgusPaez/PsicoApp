@@ -26,8 +26,8 @@ export const LogIn = () => {
     event.preventDefault();
     setLoading(true);
     setShowAlert(false);
-    setTimeout(() => {
-      login(email, password, rememberMe);
+    setTimeout(async () => {
+      await login(email, password, rememberMe);
       setLoading(false);
       setShowAlert(true);
     }, 4000);
@@ -157,7 +157,7 @@ export const LogIn = () => {
           message={
             'El usuario o la contraseña son incorrectos. Por favor, inténtalo de nuevo.'
           }
-          time={5500}
+          time={4500}
         />
       )}
     </div>
