@@ -2,11 +2,11 @@ import React from 'react';
 
 export const Pay = ({ content }) => {
   return (
-    <div className="my-28 border-t-2 border-[#8cabe7] mx-28 ">
+    <div className="mt-28 mb-20 md:my-28 border-t-2 border-[#8cabe7] md:mx-28 ">
       {content ? (
         <section className="my-16">
           <h2 className="mb-12 text-3xl text-center ">Métodos de Pago</h2>
-          <div className="flex justify-center space-x-12 animate-pulse">
+          <div className="flex justify-center pt-4 m-2 space-x-4 md:space-x-12 animate-pulse">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="transition-all duration-500 hover:scale-125"

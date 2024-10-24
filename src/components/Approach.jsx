@@ -3,29 +3,32 @@ import React from 'react';
 export const Approach = ({ content }) => {
   return (
     <section>
-      <div className="relative my-16 border-t-2 mx-28 border-[#8cabe7]">
+      <div className="relative my-16 border-t-2 md:mx-28 border-[#8cabe7]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="3.5em"
           height="3.5em"
-          viewBox="0 0 20 20"
+          viewBox="0 0 24 24"
           className="absolute left-6 top-6"
         >
           <path
-            fill="#8cabe7"
-            d="M10 11.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3M5 10a4.999 4.999 0 0 1 9.996-.055l-2.412 2.413a3.499 3.499 0 1 0-.228.228l-2.083 2.083q-.156.156-.288.33A5 5 0 0 1 5.001 10m4.995-6.5c3.28 0 5.991 2.43 6.434 5.587a2.9 2.9 0 0 1 1.515.031a7.998 7.998 0 1 0-8.935 8.816q.013-.14.049-.282l.297-1.188A6.498 6.498 0 0 1 9.996 3.5m.985 11.876l4.828-4.828a1.87 1.87 0 1 1 2.643 2.644l-4.827 4.828a2.2 2.2 0 0 1-1.02.578l-1.498.375a.89.89 0 0 1-1.078-1.079l.374-1.497a2.2 2.2 0 0 1 .578-1.02"
+            fill="none"
+            stroke="#8cabe7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M4.26 10.147a60 60 0 0 0-.491 6.347A48.6 48.6 0 0 1 12 20.904a48.6 48.6 0 0 1 8.232-4.41a61 61 0 0 0-.491-6.347m-15.482 0a51 51 0 0 0-2.658-.813A60 60 0 0 1 12 3.493a60 60 0 0 1 10.399 5.84q-1.345.372-2.658.814m-15.482 0A51 51 0 0 1 12 13.489a50.7 50.7 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5a.75.75 0 0 0 0 1.5m0 0v-3.675A55 55 0 0 1 12 8.443m-7.007 11.55A5.98 5.98 0 0 0 6.75 15.75v-1.5"
           />
         </svg>
         <h1 className="m-2 my-10 text-3xl ml-28">Abordaje y estudio</h1>
-        <p className="px-16 text-lg "> {content} </p>
+        <p className="px-4 mt-4 text-lg text-center text-gray-700 md:px-16 ">
+          {content}
+        </p>
       </div>
 
-      <section className="relative px-4 my-16">
-        {/* <h2 className="mb-12 text-4xl font-bold text-center text-indigo-600">
-          Estudios y Abordaje
-        </h2> */}
-        <div className="grid grid-cols-1 my-20 space-x-10 text-center md:flex md:justify-around mx-28">
-          <div className="relative w-[38%] p-8 rounded-lg shadow-md shadow-[#8cabe7] border-t border-b border-[#99b9fa] bg-[#99b9fa] bg-opacity-30 hover:bg-[#99b9fa] hover:tracking-wide transition-all duration-300 hover:bg-opacity-50 cursor-pointer">
+      <section className="relative md:px-4 md:my-16">
+        <div className="grid grid-cols-1 text-center md:my-20 md:space-x-10 md:flex md:justify-around md:mx-28">
+          <div className="relative md:w-[38%] mb-12 h-5/6 p-8 rounded-lg shadow-md shadow-[#8cabe7] border-t border-b border-[#99b9fa] bg-[#99b9fa] bg-opacity-30 hover:bg-[#99b9fa] hover:tracking-wide transition-all duration-300 hover:bg-opacity-50 cursor-pointer">
             <div className="absolute top-[-20px] left-[-20px] bg-[#8cabe7] text-white text-2xl rounded-full px-4 py-2 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +48,7 @@ export const Approach = ({ content }) => {
             <p className="text-gray-700">Universidad de Buenos Aires, 2012</p>
           </div>
 
-          <div className="relative w-[38%] p-8 rounded-lg shadow-md shadow-[#8cabe7] border-t border-b border-[#99b9fa] bg-[#99b9fa] bg-opacity-30 hover:bg-[#99b9fa] hover:tracking-wide transition-all duration-300 hover:bg-opacity-50 cursor-pointer">
+          <div className="relative md:w-[38%] p-8 h-full rounded-lg shadow-md shadow-[#8cabe7] border-t border-b border-[#99b9fa] bg-[#99b9fa] bg-opacity-30 hover:bg-[#99b9fa] hover:tracking-wide transition-all duration-300 hover:bg-opacity-50 cursor-pointer">
             <div className="absolute top-[-20px] left-[-20px] bg-[#8cabe7] text-white text-2xl rounded-full px-4 py-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

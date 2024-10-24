@@ -8,8 +8,9 @@ export const Contact = ({ contentMail, contentNro }) => {
   const Nav = () => navigate('/Appointment');
 
   return (
-    <section className="flex h-full py-24 mx-12 border-t-2 border-[#8cabe7] ">
-      <div className="flex items-center justify-center flex-1">
+    <section className="md:flex h-full py-24 md:mx-12 border-t-2 border-[#8cabe7] ">
+      <h2 className="mb-12 text-3xl text-center ">Contacto</h2>
+      <div className="flex items-center justify-center flex-1 pb-4 mb-4">
         <button
           onClick={Nav}
           className="flex items-center bg-[#8cabe7] justify-center gap-8 p-4 my-auto text-2xl text-center shadow-sm rounded-es-3xl rounded-e-2xl hover:bg-[#7a96ce] tracking-wide hover:scale-110 transition-all duration-500"
@@ -29,7 +30,7 @@ export const Contact = ({ contentMail, contentNro }) => {
           CONTACTO DIRECTO
         </button>{' '}
       </div>
-      <div className="flex-1 m-2 ml-10 border-l border-[#8cabe7] mb-9">
+      <div className="flex-1 m-2 md:ml-10 border-l border-r md:border-r-0 border-[#8cabe7] mb-9">
         <h2 className="p-4 pl-6 my-8 text-2xl ">Redes sociales</h2>
         <div className="pl-6">
           <div className="flex items-center gap-6 py-4 transition-all duration-300 cursor-pointer hover:tracking-widest ">

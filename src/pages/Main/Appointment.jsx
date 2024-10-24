@@ -13,7 +13,7 @@ export const Appointment = () => {
     <div className="relative z-0 grid grid-rows-[auto_1fr_auto] min-h-dvh">
       {/* Imagen de fondo */}
       <div
-        className="absolute inset-0 bg-center bg-cover opacity-60 blur-[2.5px] z-0"
+        className="absolute inset-0 bg-center bg-cover opacity-60 blur-[2.5px] z-0 "
         style={{ backgroundImage: `url(${Fondo})` }}
       ></div>
       <BackgroundMain>
