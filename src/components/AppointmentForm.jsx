@@ -52,45 +52,67 @@ export const AppointmentForm = () => {
   return (
     <>
       <section
-        className="z-50 flex flex-grow gap-10 bg-center bg-cover "
+        className="z-50 flex-grow gap-10 bg-center bg-cover md:flex "
         style={{
           backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
             back
           )}")`,
         }}
       >
-        <div className="p-10">
-          <form onSubmit={handleSubmit(onSubmit)} className="p-6 m-6 ">
-            <h2 className="ml-4 text-xl animate-slide">Agendá tu cita</h2>
-            <div className="flex w-full gap-6 my-4">
-              <div className="w-2/5">
-                <input
-                  placeholder="Nombre"
-                  className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 rounded-xl opacity-60 focus:bg-slate-100 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
-                  id="nombre"
-                  {...register('nombre', { required: true })}
-                />
+        <div className="px-2 py-3 mx-1 md:p-10 ">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="p-1.5 m-1.5 md:p-6 md:m-6"
+          >
+            <h2 className="text-xl text-center md:ml-4 animate-slide md:text-start">
+              Agendá tu cita
+            </h2>
+            <div className="w-full gap-6 my-4 md:flex">
+              <div className="flex gap-6">
+                <div className="w-9/12 mb-5 md:mb-0 md:w-full">
+                  <input
+                    placeholder="Nombre"
+                    className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 rounded-xl opacity-60 focus:bg-slate-100 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                    id="nombre"
+                    {...register('nombre', { required: true })}
+                  />
 
-                {errors.nombre && errors.nombre.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 ml-5 mt-0.5 absolute">
-                    El nombre es obligatorio
-                  </span>
-                )}
+                  {errors.nombre && errors.nombre.type === 'required' && (
+                    <span className=" text-red-500 text-xs m-2 ml-5 mt-0.5 absolute">
+                      El nombre es obligatorio
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex w-3/12 md:hidden ">
+                  <input
+                    placeholder="Edad"
+                    className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                    id="edad"
+                    {...register('edad', { required: true })}
+                  />
+                  {errors.edad && errors.edad.type === 'required' && (
+                    <span className="absolute -ml-4 mt-[54px] text-xs text-red-500 ">
+                      La edad es obligatoria
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="w-2/5">
+
+              <div className="flex w-full md:w-2/5">
                 <input
                   placeholder="Apellido"
-                  className="w-full p-4 m-2  h-9 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full md:w-full p-4 m-2 h-9 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="apellido"
                   {...register('apellido', { required: true })}
                 />
                 {errors.apellido && errors.apellido.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 ml-5 mt-0.5 absolute">
+                  <span className="absolute m-2 mt-[54px] ml-5 text-xs text-red-500 ">
                     El apellido es obligatorio
                   </span>
                 )}
               </div>
-              <div className="w-1/5">
+              <div className="hidden w-1/5 md:flex ">
                 <input
                   placeholder="Edad"
                   className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
@@ -98,40 +120,40 @@ export const AppointmentForm = () => {
                   {...register('edad', { required: true })}
                 />
                 {errors.edad && errors.edad.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 mt-0.5 absolute">
+                  <span className=" text-red-500 text-xs m-2 mt-[54px] absolute">
                     La edad es obligatoria
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="flex w-full gap-6 my-4">
-              <div className="w-1/2">
+            <div className="w-full md:h-[68px] gap-6 md:my-4 md:flex">
+              <div className="flex mb-4 md:w-1/2">
                 <input
                   placeholder="Email"
-                  className="w-full p-4 m-2 my-4 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2 md:my-4 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="email"
                   {...register('email', { required: false })}
                 />
               </div>
 
-              <div className="w-1/2">
+              <div className="flex md:w-1/2">
                 <input
                   placeholder="Número de telefono"
-                  className="w-full p-4 m-2  my-4 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                  className="w-full p-4 m-2  md:my-4 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="numero"
                   {...register('numero', { required: true })}
                 />
                 {errors.numero && errors.numero.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 mt-0.5 absolute ml-4 ">
+                  <span className=" text-red-500 text-xs m-2 mt-[54px] absolute ml-4 ">
                     El número es obligatorio
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="flex w-full gap-6 my-4">
-              <div className="w-5/12">
+            <div className="flex w-full gap-4 my-4">
+              <div className="flex md:w-5/12">
                 <input
                   type={inputType}
                   // onFocus={}
@@ -143,13 +165,13 @@ export const AppointmentForm = () => {
                 />
                 {errors.fecha_consulta &&
                   errors.fecha_consulta.type === 'required' && (
-                    <span className=" text-red-500 text-xs m-2 mt-0.5 absolute ml-4">
+                    <span className=" text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
                       La fecha de consulta es obligatoria
                     </span>
                   )}
               </div>
 
-              <div className="w-7/12">
+              <div className="flex md:w-7/12">
                 <input
                   placeholder="Derivación"
                   className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
@@ -159,7 +181,7 @@ export const AppointmentForm = () => {
               </div>
             </div>
 
-            <div className="my-6">
+            <div className="flex my-6">
               <textarea
                 placeholder="Motivo de consulta"
                 className="w-full p-4 m-2 text-left max-h-44 min-h-20 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
@@ -168,7 +190,7 @@ export const AppointmentForm = () => {
               />
               {errors.motivo_consulta &&
                 errors.motivo_consulta.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 mt-0.5 absolute ml-4">
+                  <span className=" text-red-500 text-xs m-2 mt-[100px] absolute ml-4">
                     El motivo consulta es obligatorio
                   </span>
                 )}
@@ -189,7 +211,7 @@ export const AppointmentForm = () => {
             </div>
           </form>
         </div>
-        <div className="flex items-center justify-center mb-40">
+        <div className="items-center justify-center hidden mb-40 md:flex">
           <img src={imagenAppointmente} alt="imagen" width={400} height={400} />
         </div>
         {negAlert && (
