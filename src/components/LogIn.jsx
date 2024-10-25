@@ -57,9 +57,9 @@ export const LogIn = () => {
 
   return (
     <div className="flex items-center justify-center flex-grow bg-center bg-cover ">
-      <div className="relative w-1/3 px-8 py-6 transition-all duration-700 border border-gray-300 rounded-lg shadow-md shadow-[#6aabff6e] hover:shadow-xl hover:shadow-[#6aabff60] hover:border-gray-400">
-        <div className="flex items-center justify-center m-4 ">
-          <div className="flex items-center justify-center w-24 h-24 p-2 m-2 bg-[#424242] rounded-full">
+      <div className="relative md:w-1/3 px-8 py-10 md:px-8 md:py-6 transition-all duration-700 border border-gray-300 rounded-lg shadow-md shadow-[#6aabff6e] hover:shadow-xl hover:shadow-[#6aabff60] hover:border-gray-400">
+        <div className="flex items-center justify-center m-2 md:m-4 ">
+          <div className="flex items-center justify-center md:w-24 w-20 h-20 md:h-24 md:p-2 p-1 m-1 md:m-2 bg-[#424242] rounded-full">
             <img src={loginIcon} width={45} height={45} />
           </div>
         </div>
@@ -99,7 +99,7 @@ export const LogIn = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex items-center">
               <label className="cursor-pointer">
                 <input
@@ -116,17 +116,17 @@ export const LogIn = () => {
                   htmlFor="remember-me"
                   id="remember-me"
                   name="remember-me"
-                  className=" ml-2 text-sm text-[#7a7a7a] hover:text-[#5f5f5f] hover:tracking-wide transition-all duration-700 "
+                  className="ml-1 md:ml-2 md:text-sm text-xs text-[#7a7a7a] hover:text-[#5f5f5f] md:hover:tracking-wide transition-all duration-700 "
                 >
                   Recordarme
                 </label>
               </label>
             </div>
 
-            <div className="text-sm">
+            <div className="flex items-end text-xs md:text-sm">
               <a
                 href="#"
-                className="font-medium text-[#7a7a7a] hover:text-[#5f5f5f] hover:tracking-wide hover:underline pr-2 transition-all duration-700 "
+                className="font-medium m-1 p-1 mt-2.5 text-[#7a7a7a] hover:text-[#5f5f5f] md:hover:tracking-wide md:hover:underline pr-0 transition-all duration-700 "
               >
                 ¿Olvidaste tu contraseña?
               </a>

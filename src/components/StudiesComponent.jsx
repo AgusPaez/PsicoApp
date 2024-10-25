@@ -28,7 +28,7 @@ export const StudiesComponent = () => {
     <>
       <section className="mb-16">
         <div className="grid h-1/3">
-          <div className="flex items-center justify-center p-2 m-2 mt-20">
+          <div className="flex items-center justify-center p-2 m-2 mt-10 md:mt-20">
             <svg
               preserveAspectRatio="xMidYMid meet"
               data-bbox="53.245 47.211 93.512 105.578"
@@ -57,31 +57,35 @@ export const StudiesComponent = () => {
             </svg>
           </div>
           <div>
-            <h2 className="flex items-center justify-center p-0 mt-4 text-4xl">
+            <h2 className="flex items-center justify-center p-0 mt-4 text-3xl md:text-4xl">
               Lic. Antonella Rabiti
             </h2>
           </div>
           <div>
-            <h2 className="flex items-center justify-center mt-2 text-3xl">
+            <h2 className="flex items-center justify-center mt-2 text-2xl md:text-3xl">
               Psicologia Clinica
             </h2>
           </div>
         </div>
-        <div className="h-auto ">
+        <div className="h-auto mx-2">
           <h2 className="flex items-center justify-center p-2 mt-8 mb-6 text-lg">
             Formación
           </h2>
-          <div className="">
+          <div className="p-1 m-1">
             <ul>
               {studies.map((study) => (
                 <li
                   key={study._id}
-                  className="flex items-center justify-center p-0 m-0 transition-all duration-300 hover:tracking-wide"
+                  className="flex items-center justify-center gap-4 p-2.5 m-2.5 md:p-1.5 md:m-1.5 transition-all duration-300 hover:tracking-wide"
                 >
-                  <img src={graduadoItem} height={22} width={22}></img>
-                  <a className="flex items-center justify-center m-0 my-1 ml-4 text-lg">
-                    {study.titulo}, {study.institucion} ({study.anio})
-                  </a>
+                  <div className="w-1/12 mt-2 mb-auto md:w-auto">
+                    <img src={graduadoItem} height={22} width={22}></img>
+                  </div>
+                  <div className="w-11/12 md:w-auto">
+                    <a className="flex items-center justify-center m-0 my-1 text-base text-center md:ml-4 md:text-lg">
+                      {study.titulo}, {study.institucion} ({study.anio})
+                    </a>
+                  </div>
                   <br />
                 </li>
               ))}
