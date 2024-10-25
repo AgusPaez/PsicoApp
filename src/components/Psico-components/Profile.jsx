@@ -35,25 +35,25 @@ export const Profile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-96 my-28">
-      <div className="absolute w-full max-w-lg p-8 text-center bg-white rounded-lg shadow-xl">
-        <div className="relative w-32 h-32 mx-auto mb-4">
+    <div className="flex items-center justify-center my-16 h-96 md:my-28">
+      <div className="absolute w-3/4 max-w-lg p-4 text-center bg-white rounded-lg shadow-xl md:w-full md:p-8">
+        <div className="relative w-32 h-32 mx-auto md:mb-4">
           <img
-            className="object-cover w-32 h-32 mx-auto mb-4 transition-transform duration-500 ease-in-out rounded-full shadow-md hover:scale-125"
+            className="object-cover w-24 h-24 mx-auto mb-4 transition-transform duration-500 ease-in-out rounded-full shadow-md md:w-32 md:h-32 hover:scale-125"
             alt="foto de perfil"
             src={profile.imagenUrl}
           />
         </div>
-        <h1 className="mb-2 text-2xl font-bold transition-all duration-500 ease-in-out hover:tracking-wide">
+        <h1 className="mb-2 text-xl font-bold transition-all duration-500 ease-in-out md:text-2xl hover:tracking-wide">
           {profile.apellido}, {profile.nombre}
         </h1>
-        <p className="mb-4 text-lg text-gray-700 transition-all duration-300 ease-in-out hover:tracking-wide">
+        <p className="mb-4 text-base text-gray-700 transition-all duration-300 ease-in-out md:text-lg hover:tracking-wide">
           {profile.email}
         </p>
 
         <button
           onClick={handleEditClick}
-          className="px-6 py-2 transition-all duration-500 ease-in-out hover:tracking-wide text-white bg-[#644fff] rounded-lg hover:bg-[#503ce7]"
+          className="px-6 py-2 text-sm transition-all duration-500 ease-in-out hover:tracking-wide text-white bg-[#644fff] rounded-lg hover:bg-[#503ce7]"
         >
           Editar Datos personales
         </button>

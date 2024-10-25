@@ -61,23 +61,23 @@ export const Welcome = () => {
   }, []);
   return (
     <>
-      <section className="flex flex-col items-center  justify-center mx-16 mt-6 text-gray-200 rounded-lg bg-gradient-to-tr from-[#4e4075] to-[#3d315c] shadow-lg border border-blue-500">
-        <h1 className="m-4 text-3xl font-bold">
+      <section className="flex flex-col items-center justify-center mx-4 md:mx-16 mt-3 md:mt-6 text-gray-200 rounded-lg bg-gradient-to-tr from-[#4e4075] to-[#3d315c] shadow-transparent md:shadow-lg border-transparent md:border md:border-blue-500">
+        <h1 className="m-4 text-2xl font-bold md:text-3xl">
           ¡Bienvenido, {dataLogin.nombre}!
         </h1>
         <img
           src={dataLogin.imagenUrl}
           alt="Perfil"
-          className="w-20 h-20 mt-2 rounded-full"
+          className="w-16 h-16 mt-1 rounded-full md:w-20 md:h-20 md:mt-2"
         />
-        <p className="mb-8 text-lg">
+        <p className="p-3 mb-4 text-base md:mb-8 md:text-lg">
           Nos alegra que estés aquí. Como psicólogo, tienes un impacto
           importante en la vida de tus pacientes. Aquí puedes gestionar tu
           perfil y tus citas.
         </p>
-        <div className="flex w-full gap-10 px-16 justify-evenly">
-          <div className="w-full max-w-2xl p-6 mb-6 bg-gray-800 bg-opacity-50 border border-blue-500 rounded-lg">
-            <h2 className="mb-4 text-2xl font-semibold">
+        <div className="w-full gap-10 px-3 md:px-16 md:flex justify-evenly">
+          <div className="w-full max-w-2xl p-4 mb-6 bg-gray-800 bg-opacity-50 border border-blue-500 rounded-lg md:p-6">
+            <h2 className="mb-4 text-xl font-semibold md:text-2xl">
               Detalles de tu Perfil
             </h2>
             <p>
@@ -106,7 +106,7 @@ export const Welcome = () => {
           </div>
 
           <div className="w-full max-w-2xl p-6 mb-6 bg-gray-800 bg-opacity-50 border border-blue-500 rounded-lg">
-            <h2 className="mb-4 text-2xl font-semibold">
+            <h2 className="mb-4 text-xl font-semibold md:text-2xl">
               Resumen de Actividad
             </h2>
             <p>Como psicólogo, actualmente tienes:</p>
@@ -123,35 +123,50 @@ export const Welcome = () => {
             </ul>
           </div>
         </div>
-        <div className="flex py-10 space-x-8">
+        <div className="grid grid-cols-3 px-3 pt-3 space-x-3 md:flex md:space-x-8 md:py-10">
           <button
             onClick={() => navigate('/MyProfile')}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+            className="md:text-base text-sm px-4 py-2 mb-7 md:mb-4 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
           >
             Mi perfil
           </button>
           <button
             onClick={() => navigate('/AppointmentPsico')}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+            className="md:text-base text-sm px-4 py-2 mb-7 md:mb-4 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
           >
             Ver Citas
           </button>
           <button
             onClick={() => navigate('/Patients')}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+            className="md:text-base text-sm px-4 py-2 mb-7 md:mb-4 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
           >
             Ver Pacientes
           </button>
           <button
             onClick={() => navigate('/ControlPanel')}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+            className="hidden md:block px-4 py-2  mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
           >
             Panel de control
           </button>
 
           <button
             onClick={logout}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#6954a1] rounded hover:bg-[#594688] hover:font-semibold hover:scale-105"
+            className="hidden md:block px-4 py-2  mb-4 ml-8 text-black transition-all duration-300 bg-[#6954a1] rounded hover:bg-[#594688] hover:font-semibold hover:scale-105"
+          >
+            SALIR
+          </button>
+        </div>
+        <div className="grid items-start w-full grid-cols-2 gap-3 px-3 md:hidden">
+          <button
+            onClick={() => navigate('/ControlPanel')}
+            className=" w-full md:text-base text-sm px-4 py-2 mb-10 md:mb-4 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+          >
+            Panel de control
+          </button>
+
+          <button
+            onClick={logout}
+            className="w-full md:text-base text-sm px-4 py-2 mb-10 md:mb-4 md:ml-8 text-black transition-all duration-300 bg-[#6954a1] rounded hover:bg-[#594688] hover:font-semibold hover:scale-105"
           >
             SALIR
           </button>
