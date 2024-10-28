@@ -225,26 +225,30 @@ export const NavbarPsico = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 ">
               <a
                 href="/MyProfile"
-                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                className={
+                  buttonClass('/MyProfile') +
+                  'block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 hover:text-white'
+                }
                 aria-current="page"
               >
                 Mi perfil
               </a>
               <a
                 href="/AppointmentPsico"
-                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                className={
+                  buttonClass('/AppointmentPsico') +
+                  'block px-3 py-2 text-base font-medium  text-white rounded-md hover:bg-gray-700 hover:text-white'
+                }
               >
                 Citas
               </a>
-              <a
-                href="/Studies"
-                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-              >
-                Estudios
-              </a>
+
               <a
                 href="/ControlPanel"
-                className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                className={
+                  buttonClass('/ControlPanel') +
+                  'block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 hover:text-white'
+                }
               >
                 Panel de Control
               </a>
