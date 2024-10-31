@@ -218,7 +218,7 @@ export const NavbarPatient = () => {
               >
                 Citas
               </a>
-              <a
+              {/* <a
                 href="/Studies"
                 className={
                   buttonClass('/Studies') +
@@ -226,7 +226,7 @@ export const NavbarPatient = () => {
                 }
               >
                 Estudios
-              </a>
+              </a> */}
               <a
                 onClick={logout}
                 className={

@@ -63,18 +63,21 @@ export const AppointmentFormPatient = () => {
   };
 
   return (
-    <section className="min-h-[81.2vh] 2xl:h-[86vh] bg-cover bg-center relative z-40 p-10 px-32  flex-grow">
+    <section className="min-h-[81.2vh] 2xl:h-[86vh] bg-cover bg-center relative z-40 p-6 px-3 md:p-8 md:px-6 lg:p-10 lg:px-32 flex-grow">
       <ListAppointment />
       <div id="appointment-form"></div>
       <div className="rounded-2xl bg-[#dad4c4] bg-opacity-65 border border-slate-400 mb-28">
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 m-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="p-1 m-1 md:p-6 md:m-6"
+        >
           <div className="flex items-center justify-center gap-4 p-2 m-4">
             <h2 className="font-semibold text-black">SOLICITAR CITA</h2>
           </div>
 
-          <div className="flex w-full gap-8 my-4">
-            <div className="w-4/12 p-4 m-2 ">
-              <label className="pb-4"> Nombre : </label>
+          <div className="w-full gap-8 my-4 md:flex">
+            <div className="p-1 m-2 md:p-4 md:w-4/12 ">
+              <label className="mb-2"> Nombre : </label>
               <input
                 placeholder="Nombre"
                 className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-slate-600"
@@ -89,7 +92,7 @@ export const AppointmentFormPatient = () => {
               )}
             </div>
 
-            <div className="w-4/12 p-4 m-2 ">
+            <div className="p-1 m-2 md:p-4 md:w-4/12 ">
               <label className=""> Apellido : </label>
               <input
                 placeholder="Apellido"
@@ -104,7 +107,7 @@ export const AppointmentFormPatient = () => {
                 </span>
               )}
             </div>
-            <div className="w-3/12 p-4 m-2">
+            <div className="p-1 m-2 md:p-4 md:w-3/12">
               <label className=""> D.N.I. : </label>
               <input
                 placeholder="dni"
@@ -114,7 +117,7 @@ export const AppointmentFormPatient = () => {
                 disabled
               />
             </div>
-            <div className="p-4 m-2">
+            <div className="p-1 m-2 md:p-4">
               <label className=""> Edad : </label>
               <input
                 placeholder="Edad"
@@ -130,8 +133,8 @@ export const AppointmentFormPatient = () => {
               )}
             </div>
           </div>
-          <div className="flex w-full gap-8 my-4">
-            <div className="w-5/12 p-4 m-2 ">
+          <div className="w-full gap-8 my-4 md:flex">
+            <div className="p-1 m-2 md:p-4 md:w-5/12 ">
               <label> Email : </label>
               <input
                 placeholder="Email"
@@ -141,7 +144,7 @@ export const AppointmentFormPatient = () => {
                 disabled
               />
             </div>
-            <div className="p-4 m-2">
+            <div className="p-1 m-2 md:p-4">
               <label> Numero Cel : </label>
               <input
                 placeholder="Número de telefono"
@@ -157,7 +160,7 @@ export const AppointmentFormPatient = () => {
               )}
             </div>
 
-            <div className="p-4 m-2">
+            <div className="p-1 m-2 md:p-4">
               <label> Obra Social : </label>
               <input
                 placeholder="Obra Social"
@@ -168,10 +171,10 @@ export const AppointmentFormPatient = () => {
               />
             </div>
           </div>
-          <div className="flex w-full gap-6 my-4">
-            <div className="w-1/2 ">
-              <div className="flex h-1/2">
-                <div className="w-1/2 p-4 m-2">
+          <div className="w-full gap-6 my-4 md:flex">
+            <div className="md:w-1/2 ">
+              <div className="md:flex md:h-1/2">
+                <div className="p-1 m-2 md:p-4 md:w-1/2">
                   <label htmlFor="fecha_consulta">
                     Fecha y hora de consulta:
                   </label>
@@ -189,7 +192,7 @@ export const AppointmentFormPatient = () => {
                       </span>
                     )}
                 </div>
-                <div className="w-1/2 p-4 m-2 ">
+                <div className="p-1 m-2 md:p-4 md:w-1/2 ">
                   <label> Derivacion : </label>
                   <input
                     className="w-full h-9 p-1.5 rounded-xl opacity-60 focus:opacity-80 bg-[#f7f5ef]  text-black"
@@ -198,7 +201,7 @@ export const AppointmentFormPatient = () => {
                   />
                 </div>
               </div>
-              <div className="flex items-end justify-center p-4 mb-4 h-1/2">
+              <div className="items-end justify-center hidden p-4 mb-4 md:flex h-1/2">
                 <button
                   className="w-4/12 h-12 mb-5 transition-all duration-300 hover:w-5/12 hover:font-semibold hover:tracking-wider rounded-2xl bg-slate-400 hover:bg-slate-500"
                   type="submit"
@@ -213,7 +216,7 @@ export const AppointmentFormPatient = () => {
                 )}
               </div>
             </div>
-            <div className="w-1/2 p-4 m-2">
+            <div className="p-1 m-2 md:p-4 md:w-1/2">
               <label> Motivo de consulta: </label>
               <textarea
                 className="w-full text-left max-h-40 min-h-40 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-black"
@@ -226,6 +229,20 @@ export const AppointmentFormPatient = () => {
                 </span>
               )}
             </div>
+            <div className="flex justify-center md:hidden">
+              <button
+                className="w-4/12 h-12 mb-5 transition-all duration-300 hover:w-5/12 hover:font-semibold hover:tracking-wider rounded-2xl bg-slate-400 hover:bg-slate-500"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? 'Cargando...' : 'Enviar'}
+              </button>
+            </div>
+            {loading && (
+              <div className="mx-5 mt-4 mb-8">
+                <LoadingSpinner />
+              </div>
+            )}
           </div>
         </form>
       </div>
