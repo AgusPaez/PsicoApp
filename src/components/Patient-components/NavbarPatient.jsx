@@ -36,7 +36,7 @@ export const NavbarPatient = () => {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8]  h-[7.9vh] text-[#8b4513] z-50 relative opacity-90">
+      <nav className="bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8]  text-[#8b4513] z-50 relative opacity-90">
         <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -198,11 +198,11 @@ export const NavbarPatient = () => {
         {/* Mobile Menu */}
         {openMenu && (
           <div className="sm:hidden" id="mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 ">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8] ">
               <a
                 href="/AboutMePatient"
                 className={
-                  buttonClass('/AboutMe') +
+                  buttonClass('/AboutMePatient') +
                   'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                 }
                 aria-current="page"
@@ -212,7 +212,7 @@ export const NavbarPatient = () => {
               <a
                 href="/AppointmentPatient"
                 className={
-                  buttonClass('/Appointment') +
+                  buttonClass('/AppointmentPatient') +
                   'text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                 }
               >
