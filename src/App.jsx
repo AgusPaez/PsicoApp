@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import './App.css';
 //Imports Pages
 // MAIN PAGES
@@ -19,13 +24,18 @@ import { ControlPanel } from './pages/Psico/ControlPanel';
 import { AppointmentPsico } from './pages/Psico/AppointmentPsico';
 // PROTECTED
 import { ProtectedRoute } from './components/ProtectedRoute';
-
+Navigate;
 function App() {
   return (
     <>
       <Routes>
         {/* main routes*/}
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          //  element={<Home />}
+          element={<Navigate to="/AboutMe" replace />}
+        />
+
         <Route path="/AboutMe" element={<AboutMe />} />
         <Route path="/Appointment" element={<Appointment />} />
         <Route path="/Studies" element={<Studies />} />

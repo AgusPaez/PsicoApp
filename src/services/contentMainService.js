@@ -6,7 +6,7 @@ const baseUrl = import.meta.env.VITE_API_URL;
 //url
 const url = 'contentMain';
 //id
-const id = '/66c5f96f730d89e0c1270b0c';
+const id = '/6729195adaf65b986d34e3ba';
 
 //fetch content main
 const getContent = async () => {

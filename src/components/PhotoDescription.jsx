@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { getMyProfile } from '../services/users';
 //import image
 import image from '../assets/images/firma.png';
+import { useNavigate } from 'react-router-dom';
 export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
   //states
   const [info, setInfo] = useState([]);
@@ -12,7 +13,7 @@ export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
     //call service
     const fetchInfo = async () => {
       try {
-        const id = '66bcc06f93afd85e1c31f15b';
+        const id = '67291ac4daf65b986d34e3c4';
         const response = await getMyProfile(id);
         setInfo(response.data);
       } catch (error) {
@@ -21,6 +22,8 @@ export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
     };
     fetchInfo();
   }, []);
+  const navigate = useNavigate();
+  const Nav = () => navigate('/Appointment');
 
   return (
     <>
@@ -38,7 +41,10 @@ export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
 
           <div className="absolute flex items-center justify-center m-4 mt-8 ml-40 top-72"></div>
           <div className="flex justify-center mx-auto mt-4 ">
-            <button className="px-6 py-2 bg-[#8cabe7] rounded-full border border-[#7491c7] hover:bg-[#7491c7] hover:border-[#627daf] tracking-wide hover:tracking-widest transition-all duration-300 animate-pulse ">
+            <button
+              onClick={Nav}
+              className="px-6 py-2 bg-[#8cabe7] rounded-full border border-[#7491c7] hover:bg-[#7491c7] hover:border-[#627daf] tracking-wide hover:tracking-widest transition-all duration-300 animate-pulse "
+            >
               CONTACTAR
             </button>
           </div>
