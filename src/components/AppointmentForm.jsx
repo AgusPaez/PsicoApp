@@ -96,20 +96,23 @@ export const AppointmentForm = () => {
                     </span>
                   )}
                 </div>
-
-                <div className="flex w-3/12 md:hidden ">
-                  <input
-                    placeholder="Edad"
-                    className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
-                    id="edad"
-                    {...register('edad', { required: true })}
-                  />
-                  {errors.edad && errors.edad.type === 'required' && (
-                    <span className="absolute -ml-4 mt-[54px] text-xs text-red-500 ">
-                      La edad es obligatoria
-                    </span>
-                  )}
-                </div>
+                {window.innerWidth < 768 ? (
+                  <div className="flex w-3/12 md:hidden ">
+                    <input
+                      placeholder="Edad"
+                      className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                      id="edad"
+                      {...register('edad', { required: true })}
+                    />
+                    {errors.edad && errors.edad.type === 'required' && (
+                      <span className="absolute -ml-4 mt-[54px] text-xs text-red-500 ">
+                        La edad es obligatoria
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <div> </div>
+                )}
               </div>
 
               <div className="flex w-full md:w-2/5">
@@ -125,19 +128,23 @@ export const AppointmentForm = () => {
                   </span>
                 )}
               </div>
-              <div className="hidden w-1/5 md:flex ">
-                <input
-                  placeholder="Edad"
-                  className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
-                  id="edad"
-                  {...register('edad', { required: true })}
-                />
-                {errors.edad && errors.edad.type === 'required' && (
-                  <span className=" text-red-500 text-xs m-2 mt-[54px] absolute">
-                    La edad es obligatoria
-                  </span>
-                )}
-              </div>
+              {window.innerWidth >= 768 ? (
+                <div className="hidden w-1/5 md:flex ">
+                  <input
+                    placeholder="Edad"
+                    className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+                    id="edad"
+                    {...register('edad', { required: true })}
+                  />
+                  {errors.edad && errors.edad.type === 'required' && (
+                    <span className=" text-red-500 text-xs m-2 mt-[54px] absolute">
+                      La edad es obligatoria
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <div> </div>
+              )}
             </div>
             <div className="w-full md:h-[68px] gap-6 md:my-4 md:flex">
               <div className="flex mb-4 md:w-1/2">
