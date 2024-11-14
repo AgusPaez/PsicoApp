@@ -74,8 +74,8 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
 
   const onSubmit = (data) => {
     setLoading(true);
-    setTimeout(() => {
-      onSave(data);
+    setTimeout(async () => {
+      await onSave(data);
       setLoading(false);
       onClose();
       window.location.reload();

@@ -84,8 +84,11 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
     setLoading(true);
     try {
       // call service and send data + id
-      setTimeout(() => {
-        const updatedAppointment = updateAppointment(appointment._id, formData);
+      setTimeout(async () => {
+        const updatedAppointment = await updateAppointment(
+          appointment._id,
+          formData
+        );
         setLoading(false);
         onClose();
         window.location.reload();

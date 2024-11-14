@@ -45,9 +45,9 @@ export const AddPatientModal = ({ onClose, admin }) => {
         formData.append('image', data.image);
       }
       setLoading(true);
-      setTimeout(() => {
+      setTimeout(async () => {
         //call service
-        const response = createProfile(formData);
+        const response = await createProfile(formData);
         console.log('Profile created successfully:', response);
         setLoading(false);
         //close modal after create data
@@ -269,7 +269,9 @@ export const AddPatientModal = ({ onClose, admin }) => {
             <div className="mb-4">
               <label className="block text-gray-700">D.N.I.</label>
               <input
-                {...register('dni')}
+                {...register('dni', {
+                  required: 'El dni es obligatorio',
+                })}
                 type="number"
                 className={`w-full px-3 py-2 border rounded-lg shadow-sm hover:shadow-md 
                   ${
@@ -281,6 +283,9 @@ export const AddPatientModal = ({ onClose, admin }) => {
                        transition-all duration-300`}
               />
             </div>
+            {errors.dni && (
+              <p className="text-xs text-red-500">{errors.dni.message}</p>
+            )}
           </div>
           {/* Contraseña */}
           <div className="flex w-full space-x-10">

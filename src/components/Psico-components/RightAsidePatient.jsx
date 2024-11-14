@@ -54,8 +54,8 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
     try {
       //call service and send data
       setLoading(true);
-      setTimeout(() => {
-        const UpdateProfile = updateMyProfile(user._id, formData);
+      setTimeout(async () => {
+        const UpdateProfile = await updateMyProfile(user._id, formData);
         console.log('Perfil Actualizado:', UpdateProfile);
         setLoading(false);
         onClose();

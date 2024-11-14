@@ -63,6 +63,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
         const updatedProfile = await updateMyProfile(profile._id, formData);
         console.log('Profile updated successfully:', updatedProfile);
         setLoading(false);
+        window.location.reload();
       }, 4000);
     } catch (error) {
       console.error('Failed to update profile:', error);
