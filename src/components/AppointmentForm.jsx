@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 //Import Hook
 import { useForm } from 'react-hook-form';
 //images
@@ -17,12 +17,25 @@ export const AppointmentForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [negAlert, setNegAlert] = useState(false);
   const [object, setObject] = useState({});
+  const [isMayor, setIsMayor] = useState(true);
+  const [edadInformativa, setEdadInformativa] = useState('');
   // validations
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+  const edad = watch('edad');
+  useEffect(() => {
+    if (edad < 18 && edad !== undefined) {
+      setEdadInformativa(
+        'Si sos menor a 18 años debes asistir con tus padres a la primera sesión o con su consentimiento firmado'
+      );
+    } else {
+      setEdadInformativa('');
+    }
+  }, [edad]);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -126,7 +139,6 @@ export const AppointmentForm = () => {
                 )}
               </div>
             </div>
-
             <div className="w-full md:h-[68px] gap-6 md:my-4 md:flex">
               <div className="flex mb-4 md:w-1/2">
                 <input
@@ -151,7 +163,6 @@ export const AppointmentForm = () => {
                 )}
               </div>
             </div>
-
             <div className="flex w-full gap-4 my-4">
               <div className="flex md:w-5/12">
                 <input
@@ -180,7 +191,6 @@ export const AppointmentForm = () => {
                 />
               </div>
             </div>
-
             <div className="flex my-6">
               <textarea
                 placeholder="Motivo de consulta"
@@ -195,17 +205,56 @@ export const AppointmentForm = () => {
                   </span>
                 )}
             </div>
-            <div className="flex">
-              <button
-                className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-slate-600 bg-[#6aabffb7] border border-transparent rounded-lg group hover:bg-[#5091e6c2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Cargando...' : 'Enviar'}
-              </button>
-              {loading && (
-                <div className="mx-6 mt-4">
-                  <LoadingSpinner />
+            <div className="flex-row hidden w-full md:flex">
+              <div className="w-1/3">
+                {' '}
+                <button
+                  className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-slate-600 bg-[#6aabffb7] border border-transparent rounded-lg group hover:bg-[#5091e6c2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? 'Cargando...' : 'Enviar'}
+                </button>
+              </div>
+              <div className="w-1/3">
+                {loading && (
+                  <div className="mx-6 mt-4">
+                    <LoadingSpinner />
+                  </div>
+                )}
+              </div>
+              {edadInformativa && (
+                <div className="w-1/3  bg-slate-600 rounded-md px-2 py-1 text-yellow-500 text-xs m-2 mt-[10px]  ">
+                  {edadInformativa && <span>{edadInformativa}</span>}
+                </div>
+              )}
+            </div>
+            {/* SEPARACION */}
+            <div className="flex flex-row w-full md:hidden">
+              <div className="w-1/3">
+                {' '}
+                <button
+                  className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-slate-600 bg-[#6aabffb7] border border-transparent rounded-lg group hover:bg-[#5091e6c2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? 'Cargando...' : 'Enviar'}
+                </button>
+              </div>
+              <div className="w-1/3">
+                {loading && (
+                  <div className="mx-6 mt-4">
+                    <LoadingSpinner />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="w-full md:hidden">
+              {edadInformativa && (
+                <div className="w-full bg-slate-600 rounded-md px-2 py-1 text-yellow-500 text-xs m-2 mt-[10px]  ">
+                  {edadInformativa && (
+                    <span className="p-2">{edadInformativa}</span>
+                  )}
                 </div>
               )}
             </div>
