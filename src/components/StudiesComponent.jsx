@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import graduadoItem from '../assets/icons/graduado.png';
 //imports services
 import { fetchAllStudies } from '../services/StudiesService';
+import { getMyProfile } from '../services/users';
 // import components
 import { SliderTitles } from '../components/SliderTitles';
 
 export const StudiesComponent = () => {
   //state use for studies
   const [studies, setStudies] = useState([]);
+  const [profesionalRegistration, setProfesionalRegistration] = useState();
   //fetch studies
   useEffect(() => {
     const fetchStudies = async () => {
@@ -21,9 +23,23 @@ export const StudiesComponent = () => {
         console.error('Error fetching studies', error);
       }
     };
+    const getProfesionalRegistration = async () => {
+      try {
+        //call service
+        const ProfesionalRegistration = await getMyProfile(
+          '67291ac4daf65b986d34e3c4'
+        );
+        // update Profesional registration
+        setProfesionalRegistration(
+          ProfesionalRegistration.data.matricula_profesional
+        );
+      } catch (error) {
+        console.error('Error get Profesional Registration', error);
+      }
+    };
     fetchStudies();
+    getProfesionalRegistration();
   }, []);
-
   return (
     <>
       <section className="mb-16">
@@ -64,6 +80,11 @@ export const StudiesComponent = () => {
           <div>
             <h2 className="flex items-center justify-center mt-2 text-2xl md:text-3xl">
               Psicologia Clinica
+            </h2>
+          </div>
+          <div>
+            <h2 className="flex items-center justify-center mt-2 text-base md:text-lg">
+              Matricula Profesional: {profesionalRegistration}
             </h2>
           </div>
         </div>

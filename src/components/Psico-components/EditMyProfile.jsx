@@ -34,6 +34,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
         'fecha_nacimiento',
         profile.fecha_nacimiento ? profile.fecha_nacimiento.slice(0, 10) : ''
       );
+      setValue('matricula_profesional', profile.matricula_profesional || '');
       setValue('obra_social', profile.obra_social || 'NO TIENE');
       setPreviewImage(profile.imagenUrl || '');
     }
@@ -96,14 +97,25 @@ export const EditMyProfile = ({ profile, onClose }) => {
             className="object-cover w-16 h-16 mx-auto rounded-full md:mb-4 md:w-32 md:h-32"
           />
         )}
-        <div className="px-3">
-          <label className="pl-4 text-sm"> Imagen de perfil </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="cursor-pointer w-full p-4 md:mx-2 text-left min-h-12 transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-4 md:h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
-          />
+        <div className="flex w-full">
+          <div className="px-3 ">
+            <label className="pl-4 text-sm"> Imagen de perfil</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="cursor-pointer w-full p-4 md:mx-2 text-left min-h-12 transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-4 md:h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+            />
+            <div className="">
+              <label className="pl-4 text-sm"> Matricula </label>
+              <input
+                type="number"
+                placeholder="Matricula Profesional"
+                {...register('matricula_profesional', { required: true })}
+                className="w-full p-4 md:mx-2 text-left transition-all duration-500 border-b shadow-[#644fff] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-4 md:h-9 placeholder-[#7a7a7a] bg-[#c9ccce] hover:bg-[#aab4bb] focus:bg-[#aab4bb] rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
+              />
+            </div>
+          </div>
         </div>
         <div className="flex w-full gap-2 px-3 md:gap-4">
           <div className="w-1/2">

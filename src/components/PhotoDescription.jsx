@@ -5,7 +5,13 @@ import { getMyProfile } from '../services/users';
 //import image
 import image from '../assets/images/firma.png';
 import { useNavigate } from 'react-router-dom';
-export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
+export const PhotoDescription = ({
+  content,
+  photo,
+  content1,
+  objetivo,
+  profesionalRegistration,
+}) => {
   //states
   const [info, setInfo] = useState([]);
 
@@ -65,6 +71,9 @@ export const PhotoDescription = ({ content, photo, content1, objetivo }) => {
           <h2 className="mb-4 text-3xl font-bold text-center md:mt-8 ">
             Lic. {info.nombre}, {info.apellido}
           </h2>
+          <h4 className="p-2 m-2 text-center">
+            Matricula : {profesionalRegistration}
+          </h4>
           <p className="px-3 pt-2 mt-4 mb-6 text-lg text-center text-gray-700">
             {content}
           </p>
