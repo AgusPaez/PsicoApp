@@ -10,6 +10,7 @@ import { Contact } from './Contact';
 //imports Services
 import { getContent } from '../services/contentMainService';
 import { getMyProfile } from '../services/users';
+import GoogleMapComponent from './GoogleMapComponent';
 
 export const AboutmeComponent = () => {
   // states
@@ -63,6 +64,7 @@ export const AboutmeComponent = () => {
           contentMail={content.contactoMail}
           contentNro={content.contactoNumero}
         />
+        <GoogleMapComponent />
       </div>
     </div>
   );
