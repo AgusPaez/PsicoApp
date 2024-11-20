@@ -135,7 +135,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
 
       {/* Aside */}
       <aside
-        className={`fixed top-0 right-0 h-full w-5/12 z-50 bg-gradient-to-r from-[#e7e7e7fb] to-[#fdfdfdfd] shadow-lg transform transition-transform duration-700 ${
+        className={`fixed top-0 right-0 h-full w-[100%] overflow-auto md:w-5/12 z-50 bg-gradient-to-r from-[#e7e7e7fb] to-[#fdfdfdfd] shadow-lg transform transition-transform duration-700 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -161,21 +161,30 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
               />
             </svg>
           </button>
-          <div className="flex place-content-between">
+          <div className="md:flex place-content-between">
             <h2 className="mx-6 mb-4 text-2xl font-bold">
               Detalles de la Cita
             </h2>
             {isUser ? (
-              <h2 className="my-2 mr-12"> ✔️ este user tiene cuenta</h2>
+              <h2 className="my-2 ml-6 md:ml-0 md:mr-12">
+                {' '}
+                ✔️ este user tiene cuenta
+              </h2>
             ) : (
-              <h2 className="my-2 mr-12"> ❌ este user NO tiene cuenta</h2>
+              <h2 className="my-2 ml-6 md:ml-0 md:mr-12">
+                {' '}
+                ❌ este user NO tiene cuenta
+              </h2>
             )}
           </div>
 
           {appointment ? (
-            <form onSubmit={handleSubmit} className="gap-6 m-6 space-y-4 ">
-              <div className="flex w-full space-x-8">
-                <div className="flex items-center justify-center w-24 h-20 overflow-hidden bg-gray-200 border rounded-full shadow-sm">
+            <form
+              onSubmit={handleSubmit}
+              className="gap-6 m-2 space-y-4 md:m-6 "
+            >
+              <div className="w-full md:space-x-8 md:flex">
+                <div className="flex items-center justify-center w-24 h-20 overflow-hidden bg-gray-200 border rounded-full shadow-sm ">
                   {dataUser?.imagenUrl ? (
                     <img
                       src={dataUser.imagenUrl}
@@ -183,11 +192,11 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                       className="object-cover w-full h-full"
                     />
                   ) : (
-                    <span className="text-xs text-gray-500">Sin imagen</span> // Texto o ícono si no hay imagen
+                    <span className="text-xs text-gray-500">Sin imagen</span>
                   )}
                 </div>
 
-                <div className="w-1/3">
+                <div className="grid md:w-1/3">
                   <label className="block text-gray-700">Nombre:</label>
                   <input
                     type="text"
@@ -202,7 +211,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
-                <div className="w-1/3">
+                <div className="md:w-1/3">
                   <label className="block text-gray-700">Apellido:</label>
                   <input
                     type="text"
@@ -219,7 +228,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                     } w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300`}
                   />
                 </div>
-                <div className="w-16">
+                <div className="md:w-16">
                   <label className="block text-gray-700">Edad:</label>
                   <input
                     type="number"
@@ -249,12 +258,12 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   name="motivo_consulta"
                   value={formData.motivo_consulta}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg shadow-sm  min-h-11 max-h-24 shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-shadow duration-300"
+                  className="w-full px-3 py-2 border rounded-lg shadow-sm  min-h-16 md:min-h-11 max-h-24 shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-shadow duration-300"
                 />
               </div>
               {isUser && (
                 <>
-                  <div className="flex w-full space-x-8">
+                  <div className="w-full md:space-x-8 md:flex">
                     <div>
                       <label className="block text-gray-700">
                         Fecha de Nacimiento:
@@ -305,8 +314,8 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   </div>
                 </>
               )}
-              <div className="flex w-full gap-6">
-                <div className="w-1/2">
+              <div className="w-full gap-6 md:flex">
+                <div className="md:w-1/2">
                   <label className="block text-gray-700">Email:</label>
                   <input
                     type="email"
@@ -339,7 +348,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   </div>
                 )}
 
-                <div className="w-1/2">
+                <div className="md:w-1/2">
                   <label className="block text-gray-700">Numero:</label>
                   <input
                     type="string"
@@ -355,15 +364,15 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   />
                 </div>
               </div>
-              <div className="flex place-content-between">
+              <div className="md:flex place-content-between">
                 <div>
                   <label className="block text-gray-700">
                     Fecha de Consulta:
                   </label>
                   <input
-                    type="date"
+                    type="datetime-local"
                     name="fecha_consulta"
-                    value={formData.fecha_consulta.split('T')[0]}
+                    value={formData.fecha_consulta}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   />

@@ -117,7 +117,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
 
       {/* Aside */}
       <aside
-        className={`fixed top-0 right-0 h-full w-5/12 z-50 bg-gradient-to-r from-[#e7e7e7fb] to-[#fdfdfdfd] shadow-lg transform transition-transform duration-700 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-[100%] overflow-auto md:w-5/12 z-50 bg-gradient-to-r from-[#e7e7e7fb] to-[#fdfdfdfd] shadow-lg transform transition-transform duration-700 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -141,16 +141,19 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
               />
             </svg>
           </button>
-          <div className="flex place-content-between">
+          <div className="md:flex place-content-between">
             <h2 className="mx-6 mb-4 text-2xl font-bold">
               Detalles del Paciente
             </h2>
           </div>
 
           {user ? (
-            <form className="gap-6 m-6 space-y-4 h-5/6" onSubmit={handleSubmit}>
-              <div className="flex w-full space-x-10">
-                <div className="w-1/5">
+            <form
+              className="m-2 space-y-4 md:gap-6 md:m-6 md:h-5/6"
+              onSubmit={handleSubmit}
+            >
+              <div className="w-full md:flex md:space-x-10">
+                <div className="md:w-1/5">
                   <img
                     src={user?.imagenUrl || ''}
                     alt="Imagen de usuario"
@@ -179,8 +182,8 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                 </div>
               </div>
 
-              <div className="flex w-full gap-6 pt-2 place-content-between">
-                <div className="w-1/2">
+              <div className="w-full gap-6 md:pt-2 md:flex place-content-between">
+                <div className="md:w-1/2">
                   <label className="block text-gray-700">Email:</label>
                   <input
                     type="email"
@@ -190,7 +193,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                     className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="md:w-1/2">
                   <label className="block text-gray-700">Número:</label>
                   <input
                     type="text"
@@ -200,7 +203,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                     className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   />
                 </div>
-                <div className="w-16">
+                <div className="md:w-16">
                   <label className="block text-gray-700">Edad:</label>
                   <input
                     type="number"
@@ -212,8 +215,8 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                 </div>
               </div>
 
-              <div className="flex w-full gap-6 pt-10 place-content-between">
-                <div className="w-1/4">
+              <div className="w-full gap-6 md:flex md:pt-10 place-content-between">
+                <div className="md:w-1/4">
                   <label className="block text-gray-700">
                     Fecha de Nacimiento:
                   </label>
@@ -225,7 +228,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                     className="w-full px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
                   />
                 </div>
-                <div className="w-1/5 mb-4">
+                <div className="mb-4 md:w-1/5">
                   <label className="block text-gray-700">DNI:</label>
                   <input
                     type="number"
@@ -235,7 +238,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                     className="w-full text-gray-700 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
                   />
                 </div>
-                <div className="w-1/6 mb-4">
+                <div className="mb-4 md:w-1/6">
                   <label className="block text-gray-700">Rol:</label>
                   <input
                     type="text"
@@ -246,7 +249,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                     className="w-full text-gray-400 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] transition-all duration-300"
                   />
                 </div>
-                <div className="w-1/4">
+                <div className="md:w-1/4">
                   <label className="block text-gray-700">Obra Social</label>
                   <select
                     name="obra_social"

@@ -46,24 +46,24 @@ export const PatientsComponent = () => {
 
   return (
     <>
-      <div className="p-4 m-4">
+      <div className="p-1.5 pt-3 m-1.5 mt-3 md:p-4 md:m-4">
         {/* Buscador */}
-        <div className="pl-4 ml-4">
+        <div className="grid w-full md:flex md:pl-4 md:ml-4">
           <input
             type="text"
             placeholder="Buscar paciente..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-1/6 p-2 mb-4 border border-gray-400 rounded-lg"
+            className="order-2 w-full p-2 mb-2 border border-gray-400 rounded-lg md:mb-4 md:order-1 md:w-[29.5%]"
           />
-
           <button
             onClick={openmodal}
-            className="px-4 py-2 mb-4 ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:scale-105"
+            className="md:ml-8 hover:scale-105 order-1 md:order-2 md:w-1/6 w-full px-4 py-2 mb-5 md:mb-4  text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:tracking-wide "
           >
             Agregar Paciente
           </button>
-          <div className="absolute inline-flex gap-4 right-56">
+
+          <div className="absolute hidden gap-4 md:inline-flex top-28 right-56">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1.6em"

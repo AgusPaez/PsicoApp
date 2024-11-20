@@ -77,9 +77,9 @@ export const AddPatientModal = ({ onClose, admin }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-lg p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
+      <div className="w-full h-[98%] overflow-auto max-w-lg p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
         <h2 className="mb-4 text-xl font-semibold">Agregar Nuevo Paciente</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="overflow-auto" onSubmit={handleSubmit(onSubmit)}>
           {/* Imagen */}
           <div className="mb-4">
             <label className="block text-gray-700">Foto de perfil</label>
@@ -106,8 +106,8 @@ export const AddPatientModal = ({ onClose, admin }) => {
           </div>
 
           {/* Nombre */}
-          <div className="flex w-full space-x-10">
-            <div className="w-1/2 mb-4">
+          <div className="w-full md:flex md:space-x-10">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Nombre</label>
               <input
                 {...register('nombre', {
@@ -128,7 +128,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
             </div>
 
             {/* Apellido */}
-            <div className="w-1/2 mb-4">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Apellido</label>
               <input
                 {...register('apellido', {
@@ -152,8 +152,8 @@ export const AddPatientModal = ({ onClose, admin }) => {
           </div>
 
           {/* Email */}
-          <div className="flex w-full space-x-10">
-            <div className="w-1/2 mb-4">
+          <div className="w-full md:space-x-10 md:flex">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Email</label>
               <input
                 {...register('email', {
@@ -179,7 +179,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
             </div>
 
             {/* Numero */}
-            <div className="w-1/2 mb-4">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Número</label>
               <input
                 {...register('numero', {
@@ -202,7 +202,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
           </div>
 
           {/* Fecha de Nacimiento */}
-          <div className="flex space-x-10">
+          <div className="md:flex md:space-x-10">
             <div className="mb-4">
               <label className="block text-gray-700">Fecha de Nacimiento</label>
               <input
@@ -288,8 +288,8 @@ export const AddPatientModal = ({ onClose, admin }) => {
             )}
           </div>
           {/* Contraseña */}
-          <div className="flex w-full space-x-10">
-            <div className="w-1/2 mb-4">
+          <div className="w-full md:flex md:space-x-10">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Contraseña</label>
               <input
                 {...register('password', {
@@ -317,7 +317,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
             </div>
 
             {/* Confirmar Contraseña */}
-            <div className="w-1/2 mb-4">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">
                 Confirmar Contraseña
               </label>
