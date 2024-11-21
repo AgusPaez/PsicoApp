@@ -50,9 +50,9 @@ export const AppointmentFormPatient = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      setTimeout(() => {
+      setTimeout(async () => {
         //call service
-        const response = create(data);
+        const response = await create(data);
         console.log('cita creada correctamente');
         setLoading(false);
         window.location.reload();
@@ -210,7 +210,7 @@ export const AppointmentFormPatient = () => {
                   {loading ? 'Cargando...' : 'Enviar'}
                 </button>
                 {loading && (
-                  <div className="mx-5 mt-4 mb-8">
+                  <div className="hidden mx-5 mt-4 mb-8 md:flex">
                     <LoadingSpinner />
                   </div>
                 )}
@@ -239,7 +239,7 @@ export const AppointmentFormPatient = () => {
               </button>
             </div>
             {loading && (
-              <div className="mx-5 mt-4 mb-8">
+              <div className="flex mx-5 mt-4 mb-8 md:hidden">
                 <LoadingSpinner />
               </div>
             )}

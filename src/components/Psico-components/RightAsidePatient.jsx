@@ -102,7 +102,7 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
     };
 
     GetAppointments();
-  }, []);
+  }, [user.email]);
   return (
     <>
       {/* Overlay */}
