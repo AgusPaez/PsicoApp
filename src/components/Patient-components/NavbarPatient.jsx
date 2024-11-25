@@ -36,7 +36,7 @@ export const NavbarPatient = () => {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8]  text-[#8b4513] z-50 relative opacity-90">
+      <nav className="bg-gradient-to-r from-[#7a6b6bd8]  via-[#949191] via-50% to-[#7a6b6bd8]  text-[#8b4513] z-40 relative opacity-90">
         <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -157,35 +157,29 @@ export const NavbarPatient = () => {
                 {/*  PROFILE OPTIONS  */}
                 {optionsProfile && (
                   <div
-                    className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 z-50 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
                     tabIndex="-1"
                   >
                     <a
-                      href="#"
+                      href="/AboutMePatient"
                       className="z-50 block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-400 "
                       role="menuitem"
                       id="user-menu-item-0"
                     >
-                      Your Profile
+                      Ver perfil
                     </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
-                      role="menuitem"
-                      id="user-menu-item-1"
-                    >
-                      Settings
-                    </a>
+
                     <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
                       id="user-menu-item-2"
+                      onClick={logout}
                     >
-                      Sign out
+                      Cerrar Sesion
                     </a>
                   </div>
                 )}

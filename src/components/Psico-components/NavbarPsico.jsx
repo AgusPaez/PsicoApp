@@ -191,9 +191,9 @@ export const NavbarPsico = () => {
                       tabIndex="-1"
                       id="user-menu-item-0"
                     >
-                      Your Profile
+                      Ver perfil
                     </a>
-                    <a
+                    {/* <a
                       href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
                       role="menuitem"
@@ -201,7 +201,7 @@ export const NavbarPsico = () => {
                       id="user-menu-item-1"
                     >
                       Settings
-                    </a>
+                    </a> */}
                     <a
                       onClick={logout}
                       className="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-slate-400"
@@ -209,7 +209,7 @@ export const NavbarPsico = () => {
                       tabIndex="-1"
                       id="user-menu-item-2"
                     >
-                      Sign out
+                      Cerrar Sesion
                     </a>
                   </div>
                 )}

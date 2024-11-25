@@ -52,6 +52,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
 
       // close modal after updating data
       close();
+      window.location.reload();
     } catch (error) {
       console.error(
         'Failed to update profile:',

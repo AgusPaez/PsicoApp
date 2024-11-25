@@ -77,7 +77,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full h-[98%] overflow-auto max-w-lg p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
+      <div className="w-full overflow-auto max-w-lg p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
         <h2 className="mb-4 text-xl font-semibold">Agregar Nuevo Paciente</h2>
         <form className="overflow-auto" onSubmit={handleSubmit(onSubmit)}>
           {/* Imagen */}
@@ -381,7 +381,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
                 <LoadingSpinner />
               </div>
             )}
-            {admin && (
+            {/* {admin && (
               <button
                 type="button"
                 // onClick={onClose}
@@ -389,7 +389,7 @@ export const AddPatientModal = ({ onClose, admin }) => {
               >
                 CREAR ADMIN
               </button>
-            )}
+            )} */}
             <button
               type="submit"
               className="px-4 py-2 text-white bg-[#5b45ff] rounded hover:bg-[#4837ca] hover:tracking-widest transition-all duration-300"

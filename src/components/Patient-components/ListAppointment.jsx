@@ -46,48 +46,60 @@ export const ListAppointment = () => {
               </tr>
             </thead>
             <tbody>
-              {appointment.map((appointment, index) => (
-                <tr
-                  key={index}
-                  className="transition-all duration-500 cursor-pointer
+              {appointment.length > 0 ? (
+                appointment.map((appointment, index) => (
+                  <tr
+                    key={index}
+                    className="transition-all duration-500 cursor-pointer
                 even:bg-gradient-to-r even:from-[#685b5bd8] even:via-[#646161] even:via-50% even:to-[#685b5bd8] 
                 odd:bg-gradient-to-r odd:from-[#9b8989d8] odd:via-[#6b6969] odd:via-50% odd:to-[#9b8989d8]
                 hover:bg-gradient-to-r hover:from-[#4a4040] hover:via-[#383636] hover:to-[#4a4040]"
-                >
-                  <td className="px-2 py-2 text-sm border-b border-gray-700">
-                    {new Date(appointment.fecha_consulta).toLocaleDateString(
-                      'es-ES',
-                      {
-                        year: 'numeric',
-                        month: 'numeric',
-                        day: 'numeric',
-                      }
-                    )}{' '}
-                    ||{' '}
-                    {new Date(appointment.fecha_consulta).toLocaleTimeString(
-                      'es-ES',
-                      {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      }
-                    )}{' '}
-                    hs
-                  </td>
+                  >
+                    <td className="px-2 py-2 text-sm border-b border-gray-700">
+                      {new Date(appointment.fecha_consulta).toLocaleDateString(
+                        'es-ES',
+                        {
+                          year: 'numeric',
+                          month: 'numeric',
+                          day: 'numeric',
+                        }
+                      )}{' '}
+                      ||{' '}
+                      {new Date(appointment.fecha_consulta).toLocaleTimeString(
+                        'es-ES',
+                        {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        }
+                      )}{' '}
+                      hs
+                    </td>
 
-                  <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
-                    {appointment.derivacion}
-                  </td>
-                  <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
-                    {dataLogin.obra_social}
-                  </td>
-                  <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
-                    {appointment.estado_consulta}
-                  </td>
-                  <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
-                    {appointment.motivo_consulta.slice(0, 50)} ...
-                  </td>
+                    <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
+                      {appointment.derivacion}
+                    </td>
+                    <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
+                      {dataLogin.obra_social}
+                    </td>
+                    <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
+                      {appointment.estado_consulta}
+                    </td>
+                    <td className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase">
+                      {appointment.motivo_consulta.slice(0, 50)} ...
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  {' '}
+                  <td
+                    colSpan="3"
+                    className="px-2 py-2 text-sm border-b border-gray-700 first-letter:uppercase"
+                  >
+                    No tienes citas en tu historial
+                  </td>{' '}
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

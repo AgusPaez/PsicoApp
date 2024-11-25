@@ -42,14 +42,16 @@ export const PhotoDescription = ({
               alt="imagen del profesional"
             />
           ) : (
-            <h2>Imagen no disponible!</h2>
+            <div className="justify-center w-full h-20 text-center md:h-36">
+              Imagen no disponible
+            </div>
           )}
 
           <div className="absolute flex items-center justify-center m-4 mt-8 ml-40 top-72"></div>
           <div className="flex justify-center mx-auto mt-4 ">
             <button
               onClick={Nav}
-              className="px-6 py-2 bg-[#8cabe7] rounded-full border border-[#7491c7] hover:bg-[#7491c7] hover:border-[#627daf] tracking-wide hover:tracking-widest transition-all duration-300 animate-pulse "
+              className="px-6 py-2 mb-8 bg-[#8cabe7] rounded-full border border-[#7491c7] hover:bg-[#7491c7] hover:border-[#627daf] tracking-wide hover:tracking-widest transition-all duration-300 animate-pulse "
             >
               CONTACTAR
             </button>

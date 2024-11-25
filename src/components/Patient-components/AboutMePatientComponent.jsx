@@ -60,7 +60,7 @@ export const AboutMePatientComponent = () => {
   };
   return (
     <>
-      <section className="relative z-40 grid flex-grow grid-cols-1 p-4 md:p-6 md:flex md:space-x-32 md:justify-stretch md:mx-28 justify-items-start opacity-90">
+      <section className="relative z-30 grid flex-grow grid-cols-1 p-4 md:p-6 md:flex md:space-x-32 md:justify-stretch md:mx-28 justify-items-start opacity-90">
         <div className="bg-[#dad4c4] bg-opacity-65 border w-full md:w-4/12 border-slate-400 rounded-lg shadow-lg ">
           <div className="p-3 md:p-6">
             <h1 className="mb-4 text-xl font-bold md:text-2xl">

@@ -63,7 +63,7 @@ export const AppointmentFormPatient = () => {
   };
 
   return (
-    <section className="min-h-[81.2vh] 2xl:h-[86vh] bg-cover bg-center relative z-40 p-6 px-3 md:p-8 md:px-6 lg:p-10 lg:px-32 flex-grow">
+    <section className="min-h-[81.2vh] 2xl:h-[86vh] bg-cover bg-center relative z-30 p-6 px-3 md:p-8 md:px-6 lg:p-10 lg:px-32 flex-grow">
       <ListAppointment />
       <div id="appointment-form"></div>
       <div className="rounded-2xl bg-[#dad4c4] bg-opacity-65 border border-slate-400 mb-28">
