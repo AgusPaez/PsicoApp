@@ -67,7 +67,7 @@ export const LayoutPatients = () => {
     setaddGroups(!addGroups);
   };
   const processBondsData = (bonds, users) => {
-    // Crear un mapa para buscar usuarios rápidamente por su ID, concatenando nombre y apellido
+    // create map for search users. concat name + lastname
     const userMap = new Map(
       users.map((user) => [user._id, `${user.nombre} ${user.apellido}`])
     );
@@ -90,6 +90,7 @@ export const LayoutPatients = () => {
   const processPatientsData = (patients, bonds) => {
     const bondUserIds = new Set(
       bonds.flatMap((bond) => [
+        bond.titular,
         bond.pareja,
         bond.hijo_1,
         bond.hijo_2,
@@ -163,9 +164,7 @@ export const LayoutPatients = () => {
         </div>
         <div className="flex items-center justify-center gap-4 p-2 m-4 text-white ">
           <PatientsICON h={40} w={40} color={'#edf0ea'} />
-          <h2 className="font-semibold text-black ">
-            EDICION SECCION: GRUPO FAMILIAR
-          </h2>
+          <h2 className="font-semibold text-black ">GRUPOS FAMILIARES</h2>
           <PatientsICON h={40} w={40} color={'#edf0ea'} />
         </div>
         <div className="overflow-y-auto h-5/6 scrollbar scrollbar-thumb-blue-500 scrollbar-track-slate-600">

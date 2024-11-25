@@ -104,16 +104,16 @@ export const Group = ({ onClose }) => {
                   </option>
                 ))}
               </select>
-              {errors.pareja && (
+              {errors.titular && (
                 <span className="text-xs text-red-500">
-                  Seleccionar pareja es obligatorio
+                  Seleccionar el titular es obligatorio
                 </span>
               )}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700">Pareja</label>
               <select
-                {...register('pareja', { required: true })}
+                {...register('pareja')}
                 className="w-full p-2 border rounded"
               >
                 <option value="">Seleccionar pareja</option>
@@ -123,11 +123,6 @@ export const Group = ({ onClose }) => {
                   </option>
                 ))}
               </select>
-              {errors.pareja && (
-                <span className="text-xs text-red-500">
-                  Seleccionar pareja es obligatorio
-                </span>
-              )}
             </div>
           </div>
           {[1, 2, 3, 4, 5].map((i) => (
