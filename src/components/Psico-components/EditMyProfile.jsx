@@ -17,35 +17,34 @@ export const EditMyProfile = ({ profile, onClose }) => {
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
   const [previewImage, setPreviewImage] = useState('');
   const { logout } = useAuth();
 
-  //set values
   useEffect(() => {
+    //set values
     if (profile) {
-      setValue('nombre', profile.nombre || '');
-      setValue('apellido', profile.apellido || '');
-      setValue('dni', profile.dni || '');
-      setValue('email', profile.email || '');
-      setValue('rol', profile.rol || '');
-      setValue('numero', profile.numero || '');
-      setValue(
-        'fecha_nacimiento',
-        profile.fecha_nacimiento ? profile.fecha_nacimiento.slice(0, 10) : ''
-      );
-      setValue('matricula_profesional', profile.matricula_profesional || '');
-      setValue('obra_social', profile.obra_social || 'NO TIENE');
+      reset({
+        id: profile._id || '',
+        matricula_profesional: profile.matricula_profesional || '',
+        nombre: profile.nombre || '',
+        apellido: profile.apellido || '',
+        dni: profile.dni || '',
+        email: profile.email || '',
+        numero: profile.numero || '',
+        fecha_nacimiento: profile.fecha_nacimiento.split('T')[0] || '',
+      });
       setPreviewImage(profile.imagenUrl || '');
     }
-  }, [profile, setValue]);
+  }, [profile, reset]);
 
   //handle image function
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setPreviewImage(URL.createObjectURL(file));
-      setValue('imagen', file);
+      setValue('image', file);
     }
   };
 
@@ -54,10 +53,14 @@ export const EditMyProfile = ({ profile, onClose }) => {
     setLoading(true);
     try {
       const formData = new FormData();
-      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+      Object.keys(data).forEach((key) => {
+        if (key !== 'image') {
+          formData.append(key, data[key]);
+        }
+      });
 
-      if (data.imagen) {
-        formData.append('imagen', data.imagen);
+      if (data.image) {
+        formData.append('image', data.image);
       }
       setTimeout(async () => {
         //call service

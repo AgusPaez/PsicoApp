@@ -1,5 +1,5 @@
 //imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import hooks rhf
 import { useForm } from 'react-hook-form';
 //import services
@@ -8,35 +8,64 @@ import { updateMyProfile, deleteProfile } from '../../services/users';
 import { useAuth } from '../../context/AuthProvider';
 
 export const EditMyProfile = ({ profile, onClose }) => {
+  //states
+  const [previewImage, setPreviewImage] = useState('');
+  const [loading, setLoading] = useState(false);
   const { logout } = useAuth();
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
   useEffect(() => {
+    //set values
     if (profile) {
-      setValue('nombre', profile.nombre || '');
-      setValue('apellido', profile.apellido || '');
-      setValue('email', profile.email || '');
-      setValue('numero', profile.numero || '');
-      setValue('fecha_nacimiento', profile.fecha_nacimiento || '');
-      setValue('obra_social', profile.obra_social || '');
-      setValue('imagenUrl', profile.imagenUrl || '');
+      reset({
+        id: profile._id || '',
+        nombre: profile.nombre || '',
+        apellido: profile.apellido || '',
+        dni: profile.dni || '',
+        email: profile.email || '',
+        numero: profile.numero || '',
+        obra_social: profile.obra_social || '',
+        fecha_nacimiento: profile.fecha_nacimiento.split('T')[0] || '',
+      });
+      setPreviewImage(profile.imagenUrl || '');
     }
-  }, [profile, setValue]);
+  }, [profile, reset]);
 
+  //on Submit function
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      const response = await updateMyProfile(profile._id, data);
-      console.log('Perfil actualizado:', response);
-      //onClose();
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        if (key !== 'image') {
+          formData.append(key, data[key]);
+        }
+      });
+
+      if (data.image) {
+        formData.append('image', data.image);
+      }
+      setTimeout(async () => {
+        //call service
+        const updatedProfile = await updateMyProfile(profile._id, formData);
+        console.log('Profile updated successfully:', updatedProfile);
+        setLoading(false);
+        window.location.reload();
+      }, 4000);
     } catch (error) {
-      console.error('Error al intentar actualizar el perfil', error);
+      console.error('Failed to update profile:', error);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3500);
     }
   };
+
   //delete profile function
   const deleteMyProfile = async () => {
     try {
@@ -47,13 +76,33 @@ export const EditMyProfile = ({ profile, onClose }) => {
       console.error('Error al intentar eliminar el perfil', error);
     }
   };
+  //preview image
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreviewImage(URL.createObjectURL(file));
+      setValue('image', file);
+    }
+  };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg ">
         <h2 className="mb-4 text-lg font-bold">Editar Perfil</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="mb-2">
+            {previewImage && (
+              <img
+                src={previewImage}
+                alt="Previsualización"
+                className="object-cover w-16 h-16 mx-auto rounded-full md:mb-4 md:w-32 md:h-32"
+              />
+            )}
+            <label htmlFor="imagenUrl" className="block text-sm font-medium">
+              Foto de perfil
+            </label>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+
             <label htmlFor="nombre" className="block text-sm font-medium">
               Nombre
             </label>
@@ -68,7 +117,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               </span>
             )}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="apellido" className="block text-sm font-medium">
               Apellido
             </label>
@@ -83,7 +132,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               </span>
             )}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
@@ -98,7 +147,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               </span>
             )}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="numero" className="block text-sm font-medium">
               Número de Teléfono
             </label>
@@ -113,7 +162,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               </span>
             )}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label
               htmlFor="fecha_nacimiento"
               className="block text-sm font-medium"
@@ -122,6 +171,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
             </label>
             <input
               id="fecha_nacimiento"
+              type="date"
               className="w-full p-2 border border-gray-300 rounded"
               {...register('fecha_nacimiento', { required: true })}
             />
@@ -131,7 +181,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               </span>
             )}
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="obra_social" className="block text-sm font-medium">
               Obra Social
             </label>
@@ -150,16 +200,6 @@ export const EditMyProfile = ({ profile, onClose }) => {
             </select>
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="imagenUrl" className="block text-sm font-medium">
-              URL de la Imagen
-            </label>
-            <input
-              id="imagenUrl"
-              className="w-full p-2 border border-gray-300 rounded"
-              {...register('imagenUrl')}
-            />
-          </div>
           <div className="flex justify-end space-x-4">
             <button
               type="submit"
@@ -179,7 +219,7 @@ export const EditMyProfile = ({ profile, onClose }) => {
               type="submit"
               className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
             >
-              Guardar Cambios
+              {loading ? 'Guardando...' : 'Guardar cambios'}
             </button>
           </div>
         </form>
