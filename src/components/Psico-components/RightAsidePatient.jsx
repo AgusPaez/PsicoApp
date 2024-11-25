@@ -5,10 +5,16 @@ import { updateMyProfile } from '../../services/users';
 import { getAppointmentsByEmail } from '../../services/appointmentService';
 //import Spinner
 import { LoadingSpinner } from '../LoadingSpinner';
+// Import the service
+import { findAll } from '../../services/bond';
+import { findPatients } from '../../services/users';
+
 export const RightAsidePatient = ({ isOpen, user, onClose }) => {
   //states
   const [countAppointments, setCountAppointments] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [bonds, setBonds] = useState([]);
+  const [users, setUsers] = useState([]);
   //set data
   const [formData, setFormData] = useState({
     nombre: user?.nombre || '',
@@ -33,8 +39,65 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
         rol: user.rol || 'paciente',
         obra_social: user.obra_social || 'NO TIENE',
       });
+
+      const fetchBonds = async () => {
+        try {
+          const response = await findAll();
+          const response2 = await findPatients();
+
+          // Filter bonds
+          const userBonds = response.filter(
+            (bond) =>
+              bond.titular === user._id ||
+              bond.pareja === user._id ||
+              bond.hijo_1 === user._id ||
+              bond.hijo_2 === user._id ||
+              bond.hijo_3 === user._id ||
+              bond.hijo_4 === user._id ||
+              bond.hijo_5 === user._id
+          );
+
+          const familyMembers = userBonds
+            .map((bond) => {
+              const familyIds = [
+                { id: bond.titular, role: 'Titular' },
+                { id: bond.pareja, role: 'Pareja' },
+                { id: bond.hijo_1, role: 'Hijo 1' },
+                { id: bond.hijo_2, role: 'Hijo 2' },
+                { id: bond.hijo_3, role: 'Hijo 3' },
+                { id: bond.hijo_4, role: 'Hijo 4' },
+                { id: bond.hijo_5, role: 'Hijo 5' },
+              ];
+
+              // Filter users
+              return response2
+                .filter((user) =>
+                  familyIds.some((family) => family.id === user._id)
+                )
+                .map((user) => {
+                  // Asigna el rol correspondiente
+                  const familyRole = familyIds.find(
+                    (family) => family.id === user._id
+                  );
+                  return { ...user, role: familyRole?.role };
+                });
+            })
+            .flat();
+
+          console.log('family members', familyMembers);
+          setUsers(familyMembers);
+          console.log('users', users);
+          setBonds(userBonds);
+          console.log('userBOND', userBonds);
+        } catch (error) {
+          console.error('Error fetching family bonds:', error);
+        }
+      };
+
+      fetchBonds();
     }
   }, [user]);
+
   //calculate age function
   const calculateAge = (birthDate) => {
     const diff = Date.now() - new Date(birthDate).getTime();
@@ -292,7 +355,39 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
               <p className="mt-0 text-sm text-gray-500">
                 Citas solicitadas: {countAppointments}
               </p>
+              {users.length > 0 ? (
+                <div>
+                  {bonds.map((bond, index) => (
+                    <div key={index}>
+                      <span className="mt-0 text-sm text-gray-500">
+                        Tipo de vinculo:
+                        <strong className="uppercase"> {bond.tipo} </strong>
+                      </span>{' '}
+                      <br></br>
+                      <span className="mt-0 text-sm text-gray-500">
+                        Nombre de vinculo :{' '}
+                        <strong className="uppercase">
+                          {bond.nombre_vinculo}
+                        </strong>
+                      </span>
+                    </div>
+                  ))}
 
+                  <ul>
+                    {users.map((user, index) => (
+                      <li key={index} className="mt-0 text-sm text-gray-500">
+                        {user.nombre} {user.apellido} -{' '}
+                        <strong>{user.role}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="mt-0 text-sm text-gray-500">
+                  {' '}
+                  Este usuario NO tiene vinculo ( familia - pareja){' '}
+                </p>
+              )}
               {/* Botones section */}
               <div className="flex flex-col justify-between h-1/4">
                 <div className="flex-grow" />
