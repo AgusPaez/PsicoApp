@@ -6,6 +6,7 @@ import { PatientsICON } from '../../assets/icons/PatientsICON';
 import { EditPatients } from './EditPatients';
 import { AddPatientModal } from './AddPatientModal';
 import { AddPatient } from './AddPatient';
+import { EditGroup } from './EditGroup';
 //import services
 import { findPatients, deleteProfile } from '../../services/users';
 import { Group } from './Group';
@@ -19,6 +20,8 @@ export const LayoutPatients = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [addGroups, setaddGroups] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [openEditGroup, setOpenEditGroup] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState(null);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -46,7 +49,7 @@ export const LayoutPatients = () => {
       await deleteProfile(id);
       console.log('user eliminado');
       //refresh the patients list after deletion
-      //setPatients(patients.filter(patient => patient._id !== id));
+      setpatients(patients.filter((patient) => patient._id !== id));
     } catch (error) {
       console.log('erro al tratar de elimnar el user');
     }
@@ -56,6 +59,13 @@ export const LayoutPatients = () => {
   const OpenEdit = (id) => {
     setOpenEdit(!openEdit);
     setSelected(id);
+  };
+  // function to open edit modal GROUP
+  const OpenEditGroupo = (id) => {
+    setSelectedGroup(id);
+    setOpenEditGroup(!openEditGroup);
+
+    console.log('BOND id', selectedGroup);
   };
 
   // function to open add modal
@@ -183,6 +193,7 @@ export const LayoutPatients = () => {
                 <tr
                   key={index}
                   className="transition-colors duration-200 cursor-pointer odd:bg-gray-800 odd:bg-opacity-40 hover:bg-gray-700"
+                  onClick={() => OpenEditGroupo(bond._id)}
                 >
                   <td className="px-2 py-2 text-sm border-b border-gray-700">
                     {bond.nombre_vinculo || 'Sin nombre'}
@@ -231,6 +242,9 @@ export const LayoutPatients = () => {
           />
         )}
         {addGroups && <Group onClose={AddGroup} />}
+        {openEditGroup && (
+          <EditGroup groupData={selectedGroup} onClose={OpenEditGroupo} />
+        )}
       </div>
     </>
   );

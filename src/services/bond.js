@@ -31,26 +31,35 @@ const findAll = async () => {
   }
 };
 
-// //get user (email) function
-// const getAppointmentsByEmail = async (email) => {
-//   try {
-//     const response = await axios.get(`${baseUrl}${url}${emailUrl}${email}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching appointments:', error);
-//     throw error;
-//   }
-// };
+//get one bond function
+const getBond = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}${url}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching bond:', error);
+    throw error;
+  }
+};
 
-// // update appointment function
-// const updateAppointment = async (id, data) => {
-//   try {
-//     const response = await axios.patch(`${baseUrl}${url}/${id}`, data);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error al actualizar la cita:', error);
-//     throw error;
-//   }
-// };
+// update appointment function
+const updateBond = async (id, data) => {
+  try {
+    const response = await axios.patch(`${baseUrl}${url}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al borrar el grupo familiar:', error);
+    throw error;
+  }
+};
+const deleteBond = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}${url}/${id}`);
+    return console.log('user deleted', response.data);
+  } catch (error) {
+    console.log('Error delete profile', error);
+    throw error;
+  }
+};
 
-export { create, findAll };
+export { create, findAll, updateBond, deleteBond, getBond };
