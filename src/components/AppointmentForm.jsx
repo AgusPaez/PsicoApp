@@ -1,6 +1,22 @@
+//imports
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 //Import Hook
 import { useForm } from 'react-hook-form';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import {
+  isWeekend,
+  addDays,
+  setHours,
+  setMinutes,
+  startOfDay,
+  subDays,
+} from 'date-fns';
+import { es } from 'date-fns/locale';
+//import constant
+import { holidays } from '../constants/holidays';
 //images
 import imagenAppointmente from '../assets/images/imagenAppointment.png';
 //service
@@ -9,6 +25,7 @@ import { create } from '../services/appointmentService';
 import { LoadingSpinner } from './LoadingSpinner';
 //import Alert
 import { Alerts } from './Alerts';
+registerLocale('es', es);
 
 export const AppointmentForm = () => {
   //states
@@ -19,6 +36,10 @@ export const AppointmentForm = () => {
   const [object, setObject] = useState({});
   const [isMayor, setIsMayor] = useState(true);
   const [edadInformativa, setEdadInformativa] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [reservedAppointments, setReservedAppointments] = useState([]);
+  const [reservedDates, setReservedDates] = useState([]); // Fechas reservadas
+
   // validations
   const {
     register,
@@ -37,11 +58,70 @@ export const AppointmentForm = () => {
     }
   }, [edad]);
 
+  // Get reserved dates
+  useEffect(() => {
+    const fetchReservedAppointments = async () => {
+      try {
+        const response = await axios.get(
+          'https://backend-api-psicoapp.onrender.com/appointment/reserved-dates-times'
+        );
+        setReservedAppointments(
+          response.data.map((datetime) => new Date(datetime))
+        );
+      } catch (error) {
+        console.error('Error al cargar citas reservadas:', error);
+      }
+    };
+
+    fetchReservedAppointments();
+  }, []);
+
+  useEffect(() => {
+    if (reservedAppointments.length > 0) {
+      const findNextAvailableDateTime = () => {
+        let currentDate = addDays(new Date(), 1);
+        currentDate = startOfDay(currentDate);
+
+        while (true) {
+          if (filterDates(currentDate)) {
+            for (let hour = 17; hour <= 20; hour++) {
+              const potentialDateTime = setHours(
+                setMinutes(currentDate, 0),
+                hour
+              );
+
+              if (filterTimes(potentialDateTime)) {
+                return potentialDateTime;
+              }
+            }
+          }
+          currentDate = addDays(currentDate, 1);
+        }
+      };
+
+      const nextAvailable = findNextAvailableDateTime();
+      if (selectedDate != null) {
+        setSelectedDate(nextAvailable);
+      }
+    }
+  }, [reservedAppointments]);
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       setTimeout(async () => {
-        const response = await create(data);
+        //set GMT+0300
+        const timezoneOffset = -3 * 60;
+        const adjustedDate = new Date(
+          selectedDate.getTime() + timezoneOffset * 60 * 1000
+        );
+
+        const payload = {
+          ...data,
+          fecha_consulta: adjustedDate.toISOString(),
+        };
+
+        const response = await create(payload);
         setObject(response);
         setLoading(false);
         setShowAlert(true);
@@ -52,10 +132,42 @@ export const AppointmentForm = () => {
       setNegAlert(true);
     }
   };
+
   const handleAlertClose = () => {
     setShowAlert(false);
   };
 
+  // Filter days function
+  const filterDates = (date) => {
+    const today = startOfDay(new Date(), 1);
+    const isHoliday = holidays.includes(date.toISOString().split('T')[0]);
+
+    // Verify days hours
+    const dateString = date.toISOString().split('T')[0];
+    const reservationsForDay = reservedAppointments.filter(
+      (appointment) => appointment.toISOString().split('T')[0] === dateString
+    );
+
+    const allSlotsFull = reservationsForDay.length === 4;
+
+    return date >= today && !isWeekend(date) && !isHoliday && !allSlotsFull;
+  };
+
+  // Filter hours function
+  const filterTimes = (time) => {
+    if (!selectedDate) return true;
+
+    const selectedDay = selectedDate.toISOString().split('T')[0];
+
+    const reservedTimes = reservedAppointments
+      .filter(
+        (appointment) => appointment.toISOString().split('T')[0] === selectedDay
+      )
+      .map((appointment) => appointment.getHours());
+
+    const hour = time.getHours();
+    return hour >= 17 && hour <= 20 && !reservedTimes.includes(hour);
+  };
   const back = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700" opacity="0.59"><defs><linearGradient gradientTransform="rotate(147, 0.5, 0.5)" x1="50%" y1="0%" x2="50%" y2="100%" id="ffflux-gradient"><stop stop-color="hsl(315, 100%, 72%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(0, 0%, 80%)" stop-opacity="1" offset="100%"></stop></linearGradient><filter id="ffflux-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
   <feTurbulence type="fractalNoise" baseFrequency="0.001 0.004" numOctaves="2" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
   <feGaussianBlur stdDeviation="43 51" x="0%" y="0%" width="100%" height="100%" in="turbulence" edgeMode="duplicate" result="blur"></feGaussianBlur>
@@ -171,15 +283,20 @@ export const AppointmentForm = () => {
               </div>
             </div>
             <div className="flex w-full gap-4 my-4">
-              <div className="flex md:w-5/12">
-                <input
-                  type={inputType}
-                  // onFocus={}
-                  placeholder="Fecha de consulta"
-                  onClick={() => setInputType('datetime-local')}
-                  className="w-full text-[#7a7a7a] p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0] cursor-pointer"
-                  id="fecha_consulta"
-                  {...register('fecha_consulta', { required: true })}
+              <div className="flex md:w-5/12 ">
+                <DatePicker
+                  minDate={subDays(new Date(), -1)}
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  filterDate={filterDates}
+                  timeIntervals={60}
+                  showTimeSelect
+                  filterTime={filterTimes}
+                  dateFormat="Pp"
+                  placeholderText="Seleccione fecha y hora"
+                  className="w-full md:w-[118%] p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0] cursor-pointer"
+                  calendarClassName="bg-slate-300 rounded-sm"
+                  locale={es}
                 />
                 {errors.fecha_consulta &&
                   errors.fecha_consulta.type === 'required' && (
@@ -187,6 +304,18 @@ export const AppointmentForm = () => {
                       La fecha de consulta es obligatoria
                     </span>
                   )}
+                {selectedDate && selectedDate < new Date(new Date()) && (
+                  <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
+                    La fecha debe ser como mínimo mañana.
+                  </span>
+                )}
+
+                {selectedDate && !filterTimes(selectedDate) && (
+                  <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
+                    La hora seleccionada no está disponible. Elija una hora
+                    entre las 17:00 y las 20:00.
+                  </span>
+                )}
               </div>
 
               <div className="flex md:w-7/12">

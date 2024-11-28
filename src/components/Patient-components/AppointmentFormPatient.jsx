@@ -4,15 +4,33 @@ import React, { useEffect, useState } from 'react';
 import { ListAppointment } from './ListAppointment';
 //import hooks rhf
 import { set, useForm } from 'react-hook-form';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import {
+  isWeekend,
+  addDays,
+  setHours,
+  setMinutes,
+  startOfDay,
+  subDays,
+} from 'date-fns';
+import { es } from 'date-fns/locale';
 //import services
 import { create } from '../../services/appointmentService';
 //import context
 import { useAuth } from '../../context/AuthProvider';
 // import Spinner
 import { LoadingSpinner } from '../LoadingSpinner';
+//import holidays
+import { holidays } from '../../constants/holidays';
+import axios from 'axios';
+
 export const AppointmentFormPatient = () => {
   //states
   const [loading, setLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [reservedAppointments, setReservedAppointments] = useState([]);
   //context
   const { dataLogin } = useAuth();
   //rhf
@@ -33,6 +51,87 @@ export const AppointmentFormPatient = () => {
     }
     return edad;
   };
+
+  // Get reserved dates
+  useEffect(() => {
+    const fetchReservedAppointments = async () => {
+      try {
+        const response = await axios.get(
+          'https://backend-api-psicoapp.onrender.com/appointment/reserved-dates-times'
+        );
+        setReservedAppointments(
+          response.data.map((datetime) => new Date(datetime))
+        );
+      } catch (error) {
+        console.error('Error al cargar citas reservadas:', error);
+      }
+    };
+
+    fetchReservedAppointments();
+  }, []);
+
+  useEffect(() => {
+    if (reservedAppointments.length > 0) {
+      const findNextAvailableDateTime = () => {
+        let currentDate = addDays(new Date(), 1);
+        currentDate = startOfDay(currentDate);
+
+        while (true) {
+          if (filterDates(currentDate)) {
+            for (let hour = 17; hour <= 20; hour++) {
+              const potentialDateTime = setHours(
+                setMinutes(currentDate, 0),
+                hour
+              );
+
+              if (filterTimes(potentialDateTime)) {
+                return potentialDateTime;
+              }
+            }
+          }
+          currentDate = addDays(currentDate, 1);
+        }
+      };
+
+      const nextAvailable = findNextAvailableDateTime();
+      if (selectedDate != null) {
+        setSelectedDate(nextAvailable);
+      }
+    }
+  }, [reservedAppointments]);
+
+  // Función para filtrar días
+  const filterDates = (date) => {
+    const today = startOfDay(new Date(), 1);
+    const isHoliday = holidays.includes(date.toISOString().split('T')[0]);
+
+    // Verificar si todos los horarios del día están reservados
+    const dateString = date.toISOString().split('T')[0];
+    const reservationsForDay = reservedAppointments.filter(
+      (appointment) => appointment.toISOString().split('T')[0] === dateString
+    );
+
+    const allSlotsFull = reservationsForDay.length === 4;
+
+    // Retorna falso si la fecha es anterior a hoy, un día festivo o está llena.
+    return date >= today && !isWeekend(date) && !isHoliday && !allSlotsFull;
+  };
+
+  // Función para filtrar horarios
+  const filterTimes = (time) => {
+    if (!selectedDate) return true; // Permitir todos los horarios si no hay una fecha seleccionada.
+
+    const selectedDay = selectedDate.toISOString().split('T')[0];
+
+    const reservedTimes = reservedAppointments
+      .filter(
+        (appointment) => appointment.toISOString().split('T')[0] === selectedDay
+      )
+      .map((appointment) => appointment.getHours());
+
+    const hour = time.getHours();
+    return hour >= 17 && hour <= 20 && !reservedTimes.includes(hour);
+  };
   const edad = calculateAge(dataLogin.fecha_nacimiento);
   useEffect(() => {
     if (dataLogin) {
@@ -51,11 +150,21 @@ export const AppointmentFormPatient = () => {
     try {
       setLoading(true);
       setTimeout(async () => {
-        //call service
-        const response = await create(data);
-        console.log('cita creada correctamente');
+        // Ajustar la fecha a GMT+0300
+        const timezoneOffset = -3 * 60; // GMT+0300 en minutos
+        const adjustedDate = new Date(
+          selectedDate.getTime() + timezoneOffset * 60 * 1000
+        );
+
+        const payload = {
+          ...data,
+          fecha_consulta: adjustedDate.toISOString(),
+        };
+
+        console.log(payload); // Verifica que la fecha ajustada es correcta
+        const response = await create(payload);
         setLoading(false);
-        window.location.reload();
+        //window.location.reload();
       }, 4000);
     } catch (error) {
       console.error('Error al intentar crear una cita', error);
@@ -178,19 +287,39 @@ export const AppointmentFormPatient = () => {
                   <label htmlFor="fecha_consulta">
                     Fecha y hora de consulta:
                   </label>
-                  <input
-                    type="datetime-local"
-                    placeholder="fecha de consulta"
-                    className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-black"
-                    id="fecha_consulta"
-                    {...register('fecha_consulta', { required: true })}
+                  <DatePicker
+                    minDate={subDays(new Date(), -1)}
+                    // minTime={setHours(setMinutes(new Date(), 0), 17)}
+                    // maxTime={setHours(setMinutes(new Date(), 0), 20)}
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    filterDate={filterDates}
+                    timeIntervals={60}
+                    showTimeSelect
+                    filterTime={filterTimes}
+                    dateFormat="Pp"
+                    className="w-full h-9 rounded-xl opacity-60 focus:opacity-80 p-1.5 bg-[#f7f5ef] text-black cursor-pointer"
+                    calendarClassName="bg-slate-300 rounded-sm"
+                    locale={es}
                   />
+
                   {errors.fecha_consulta &&
                     errors.fecha_consulta.type === 'required' && (
                       <span className="text-red-500 text-xs m-2 mt-0.5">
                         La fecha de la consulta es obligatoria
                       </span>
                     )}
+                  {selectedDate && selectedDate < new Date(new Date()) && (
+                    <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
+                      La fecha debe ser como mínimo mañana.
+                    </span>
+                  )}
+                  {selectedDate && !filterTimes(selectedDate) && (
+                    <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
+                      La hora seleccionada no está disponible. Elija una hora
+                      entre las 17:00 y las 20:00.
+                    </span>
+                  )}
                 </div>
                 <div className="p-1 m-2 md:p-4 md:w-1/2 ">
                   <label> Derivacion : </label>

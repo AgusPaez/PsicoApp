@@ -4,14 +4,31 @@ import React, { useEffect, useState } from 'react';
 import { findPatients } from '../../services/users';
 // import hooks rhf
 import { useForm } from 'react-hook-form';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import {
+  isWeekend,
+  addDays,
+  setHours,
+  setMinutes,
+  startOfDay,
+  subDays,
+} from 'date-fns';
+import { es } from 'date-fns/locale';
 //import spinner
 import { LoadingSpinner } from '../LoadingSpinner';
+//import holidays
+import { holidays } from '../../constants/holidays';
+import axios from 'axios';
 
 export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
   //states
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [reservedAppointments, setReservedAppointments] = useState([]);
   //rhf
   const {
     register,
@@ -71,11 +88,99 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
     const diff = Date.now() - new Date(birthDate).getTime();
     return Math.abs(new Date(diff).getUTCFullYear() - 1970);
   };
+  // Get reserved dates
+  useEffect(() => {
+    const fetchReservedAppointments = async () => {
+      try {
+        const response = await axios.get(
+          'https://backend-api-psicoapp.onrender.com/appointment/reserved-dates-times'
+        );
+        setReservedAppointments(
+          response.data.map((datetime) => new Date(datetime))
+        );
+      } catch (error) {
+        console.error('Error al cargar citas reservadas:', error);
+      }
+    };
 
+    fetchReservedAppointments();
+  }, []);
+
+  useEffect(() => {
+    if (reservedAppointments.length > 0) {
+      const findNextAvailableDateTime = () => {
+        let currentDate = addDays(new Date(), 1);
+        currentDate = startOfDay(currentDate);
+
+        while (true) {
+          if (filterDates(currentDate)) {
+            for (let hour = 17; hour <= 20; hour++) {
+              const potentialDateTime = setHours(
+                setMinutes(currentDate, 0),
+                hour
+              );
+
+              if (filterTimes(potentialDateTime)) {
+                return potentialDateTime;
+              }
+            }
+          }
+          currentDate = addDays(currentDate, 1);
+        }
+      };
+
+      const nextAvailable = findNextAvailableDateTime();
+      if (selectedDate != null) {
+        setSelectedDate(nextAvailable);
+      }
+    }
+  }, [reservedAppointments]);
+
+  // Filer days function
+  const filterDates = (date) => {
+    const today = startOfDay(new Date(), 1);
+    const isHoliday = holidays.includes(date.toISOString().split('T')[0]);
+
+    // Verify reserved hours
+    const dateString = date.toISOString().split('T')[0];
+    const reservationsForDay = reservedAppointments.filter(
+      (appointment) => appointment.toISOString().split('T')[0] === dateString
+    );
+
+    const allSlotsFull = reservationsForDay.length === 4;
+
+    return date >= today && !isWeekend(date) && !isHoliday && !allSlotsFull;
+  };
+
+  // Filter hours function
+  const filterTimes = (time) => {
+    if (!selectedDate) return true;
+
+    const selectedDay = selectedDate.toISOString().split('T')[0];
+
+    const reservedTimes = reservedAppointments
+      .filter(
+        (appointment) => appointment.toISOString().split('T')[0] === selectedDay
+      )
+      .map((appointment) => appointment.getHours());
+
+    const hour = time.getHours();
+    return hour >= 17 && hour <= 20 && !reservedTimes.includes(hour);
+  };
   const onSubmit = (data) => {
     setLoading(true);
     setTimeout(async () => {
-      await onSave(data);
+      const timezoneOffset = -3 * 60; // GMT+0300
+      const adjustedDate = new Date(
+        selectedDate.getTime() + timezoneOffset * 60 * 1000
+      );
+
+      const payload = {
+        ...data,
+        fecha_consulta: adjustedDate.toISOString(),
+      };
+
+      await onSave(payload);
       setLoading(false);
       onClose();
       window.location.reload();
@@ -248,16 +353,35 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
             <div className="md:flex gap-7">
               <div className="md:w-[8rem] mb-4">
                 <label className="block text-gray-700">Fecha de Consulta</label>
-                <input
-                  type="datetime-local"
-                  {...register('fecha_consulta', {
-                    required: 'La fecha de consulta es obligatoria',
-                  })}
+                <DatePicker
+                  minDate={subDays(new Date(), -1)}
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  filterDate={filterDates}
+                  timeIntervals={60}
+                  showTimeSelect
+                  filterTime={filterTimes}
+                  dateFormat="Pp"
                   className="w-full h-10 px-3 py-2 border rounded-lg shadow-sm shadow-[#846bcaf3] hover:shadow-md hover:shadow-[#846bcacc] transition-all duration-300"
+                  calendarClassName="bg-slate-300 rounded-sm"
+                  locale={es}
                 />
-                {errors.fecha_consulta && (
+
+                {errors.fecha_consulta &&
+                  errors.fecha_consulta.type === 'required' && (
+                    <p className="ext-xs text-red-500t">
+                      La fecha de la consulta es obligatoria
+                    </p>
+                  )}
+                {selectedDate && selectedDate < new Date(new Date()) && (
                   <p className="text-xs text-red-500">
-                    {errors.fecha_consulta.message}
+                    La fecha debe ser como mínimo mañana.
+                  </p>
+                )}
+                {selectedDate && !filterTimes(selectedDate) && (
+                  <p className="text-xs text-red-500 ">
+                    La hora seleccionada no está disponible. Elija una hora
+                    entre las 17:00 y las 20:00.
                   </p>
                 )}
               </div>
