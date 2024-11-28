@@ -103,8 +103,14 @@ export const Alerts = ({
               <p className="mt-2">
                 <span className="font-semibold">Consulta:</span>
                 <br />
-                <span className="font-semibold">Fecha:</span>{' '}
-                {object.fecha_consulta.split('T')[0]}
+                <span className="font-semibold">Fecha y Hora:</span>{' '}
+                {new Date(
+                  new Date(object.fecha_consulta).getTime() + 3 * 60 * 60 * 1000
+                ).toLocaleString('es-ES', {
+                  dateStyle: 'short',
+                  timeStyle: 'short',
+                })}{' '}
+                hs
                 <br />
                 <span className="font-semibold">Derivación:</span>{' '}
                 {object.derivacion}

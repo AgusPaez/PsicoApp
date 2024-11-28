@@ -100,12 +100,12 @@ export const AppointmentFormPatient = () => {
     }
   }, [reservedAppointments]);
 
-  // Función para filtrar días
+  // Filter days function
   const filterDates = (date) => {
     const today = startOfDay(new Date(), 1);
     const isHoliday = holidays.includes(date.toISOString().split('T')[0]);
 
-    // Verificar si todos los horarios del día están reservados
+    // Verify reserved hours
     const dateString = date.toISOString().split('T')[0];
     const reservationsForDay = reservedAppointments.filter(
       (appointment) => appointment.toISOString().split('T')[0] === dateString
@@ -113,13 +113,12 @@ export const AppointmentFormPatient = () => {
 
     const allSlotsFull = reservationsForDay.length === 4;
 
-    // Retorna falso si la fecha es anterior a hoy, un día festivo o está llena.
     return date >= today && !isWeekend(date) && !isHoliday && !allSlotsFull;
   };
 
-  // Función para filtrar horarios
+  // Filter hours function
   const filterTimes = (time) => {
-    if (!selectedDate) return true; // Permitir todos los horarios si no hay una fecha seleccionada.
+    if (!selectedDate) return true;
 
     const selectedDay = selectedDate.toISOString().split('T')[0];
 
@@ -150,8 +149,8 @@ export const AppointmentFormPatient = () => {
     try {
       setLoading(true);
       setTimeout(async () => {
-        // Ajustar la fecha a GMT+0300
-        const timezoneOffset = -3 * 60; // GMT+0300 en minutos
+        // GMT+0300
+        const timezoneOffset = -3 * 60;
         const adjustedDate = new Date(
           selectedDate.getTime() + timezoneOffset * 60 * 1000
         );
@@ -160,11 +159,9 @@ export const AppointmentFormPatient = () => {
           ...data,
           fecha_consulta: adjustedDate.toISOString(),
         };
-
-        console.log(payload); // Verifica que la fecha ajustada es correcta
         const response = await create(payload);
         setLoading(false);
-        //window.location.reload();
+        window.location.reload();
       }, 4000);
     } catch (error) {
       console.error('Error al intentar crear una cita', error);
@@ -289,8 +286,6 @@ export const AppointmentFormPatient = () => {
                   </label>
                   <DatePicker
                     minDate={subDays(new Date(), -1)}
-                    // minTime={setHours(setMinutes(new Date(), 0), 17)}
-                    // maxTime={setHours(setMinutes(new Date(), 0), 20)}
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
                     filterDate={filterDates}

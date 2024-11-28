@@ -261,22 +261,14 @@ const ListAppointment = () => {
                       {appointment.email}
                     </td>
                     <td className="px-4 py-2 text-sm border-b border-gray-700">
-                      {new Date(appointment.fecha_consulta).toLocaleDateString(
-                        'es-ES',
-                        {
-                          year: 'numeric',
-                          month: 'numeric',
-                          day: 'numeric',
-                        }
-                      )}{' '}
-                      ||{' '}
-                      {new Date(appointment.fecha_consulta).toLocaleTimeString(
-                        'es-ES',
-                        {
-                          hour: 'numeric',
-                          minute: 'numeric',
-                        }
-                      )}
+                      {new Date(
+                        new Date(appointment.fecha_consulta).getTime() +
+                          3 * 60 * 60 * 1000
+                      ).toLocaleString('es-ES', {
+                        dateStyle: 'medium',
+                        timeStyle: 'short',
+                      })}{' '}
+                      hs
                     </td>
                     <td
                       className={`px-4 py-2 text-sm border-b border-gray-700 ${

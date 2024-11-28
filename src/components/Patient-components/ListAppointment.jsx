@@ -56,22 +56,13 @@ export const ListAppointment = () => {
                 hover:bg-gradient-to-r hover:from-[#4a4040] hover:via-[#383636] hover:to-[#4a4040]"
                   >
                     <td className="px-2 py-2 text-sm border-b border-gray-700">
-                      {new Date(appointment.fecha_consulta).toLocaleDateString(
-                        'es-ES',
-                        {
-                          year: 'numeric',
-                          month: 'numeric',
-                          day: 'numeric',
-                        }
-                      )}{' '}
-                      ||{' '}
-                      {new Date(appointment.fecha_consulta).toLocaleTimeString(
-                        'es-ES',
-                        {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        }
-                      )}{' '}
+                      {new Date(
+                        new Date(appointment.fecha_consulta).getTime() +
+                          3 * 60 * 60 * 1000
+                      ).toLocaleString('es-ES', {
+                        dateStyle: 'medium',
+                        timeStyle: 'short',
+                      })}{' '}
                       hs
                     </td>
 

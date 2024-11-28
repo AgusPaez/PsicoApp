@@ -129,7 +129,7 @@ export const PatientsList = ({ patients }) => {
                     {patient.email}
                   </td>
                   <td className="px-4 py-2 text-sm border-b border-gray-700">
-                    {new Date(patient.fecha_nacimiento).toLocaleDateString()}
+                    {patient.fecha_nacimiento.split('T')[0]}
                   </td>
                   <td className="px-4 py-2 text-sm border-b border-gray-700">
                     {patient.obra_social}
