@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 //Import Hook
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -44,14 +44,15 @@ export const AppointmentForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     watch,
   } = useForm();
   const edad = watch('edad');
   useEffect(() => {
-    if (edad < 18 && edad !== undefined) {
+    if (edad < 18 && edad !== undefined && edad !== '') {
       setEdadInformativa(
-        'Si sos menor a 18 años debes asistir con tus padres a la primera sesión o con su consentimiento firmado'
+        'IMPORTANTE : Si sos menor de 18 años debes asistir con tus padres a la primera sesión o con su consentimiento firmado'
       );
     } else {
       setEdadInformativa('');
@@ -184,7 +185,7 @@ export const AppointmentForm = () => {
           )}")`,
         }}
       >
-        <div className="px-2 py-3 mx-1 md:p-10 ">
+        <div className="px-2 py-3 mx-1 mb-10 md:mb-0 md:p-10 ">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="p-1.5 m-1.5 md:p-6 md:m-6"
@@ -211,14 +212,31 @@ export const AppointmentForm = () => {
                 {window.innerWidth < 768 ? (
                   <div className="flex w-3/12 md:hidden ">
                     <input
+                      type="number"
                       placeholder="Edad"
                       className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                       id="edad"
-                      {...register('edad', { required: true })}
+                      // {...register('edad', { required: true })}
+                      {...register('edad', {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: 'Debe ser un número válido',
+                        },
+                        max: {
+                          value: 120,
+                          message: 'La edad debe ser menor o igual a 120',
+                        },
+                      })}
                     />
                     {errors.edad && errors.edad.type === 'required' && (
                       <span className="absolute -ml-4 mt-[54px] text-xs text-red-500 ">
                         La edad es obligatoria
+                      </span>
+                    )}
+                    {errors.edad && (
+                      <span className="absolute -ml-4 mt-[54px] text-xs text-red-500">
+                        {errors.edad.message}
                       </span>
                     )}
                   </div>
@@ -243,14 +261,31 @@ export const AppointmentForm = () => {
               {window.innerWidth >= 768 ? (
                 <div className="hidden w-1/5 md:flex ">
                   <input
+                    type="edad"
                     placeholder="Edad"
                     className="w-full p-4 m-2 h-9 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0]  placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                     id="edad"
-                    {...register('edad', { required: true })}
+                    // {...register('edad', { required: true })}
+                    {...register('edad', {
+                      required: true,
+                      pattern: {
+                        value: /^[0-9]+$/,
+                        message: 'Debe ser un número válido',
+                      },
+                      max: {
+                        value: 120,
+                        message: 'La edad debe ser menor o igual a 120',
+                      },
+                    })}
                   />
                   {errors.edad && errors.edad.type === 'required' && (
                     <span className=" text-red-500 text-xs m-2 mt-[54px] absolute">
                       La edad es obligatoria
+                    </span>
+                  )}
+                  {errors.edad && (
+                    <span className="absolute -ml-4 mt-[54px] text-xs text-red-500">
+                      {errors.edad.message}
                     </span>
                   )}
                 </div>
@@ -270,6 +305,7 @@ export const AppointmentForm = () => {
 
               <div className="flex md:w-1/2">
                 <input
+                  type="number"
                   placeholder="Número de telefono"
                   className="w-full p-4 m-2  md:my-4 transition-all duration-500 border-b  shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
                   id="numero"
@@ -283,27 +319,39 @@ export const AppointmentForm = () => {
               </div>
             </div>
             <div className="flex w-full gap-4 my-4">
-              <div className="flex md:w-5/12 ">
-                <DatePicker
-                  minDate={subDays(new Date(), -1)}
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  filterDate={filterDates}
-                  timeIntervals={60}
-                  showTimeSelect
-                  filterTime={filterTimes}
-                  dateFormat="Pp"
-                  placeholderText="Seleccione fecha y hora"
-                  className="w-full md:w-[118%] p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0] cursor-pointer"
-                  calendarClassName="bg-slate-300 rounded-sm"
-                  locale={es}
-                />
-                {errors.fecha_consulta &&
-                  errors.fecha_consulta.type === 'required' && (
-                    <span className=" text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
-                      La fecha de consulta es obligatoria
-                    </span>
+              <div className="flex w-1/2 md:w-5/12 ">
+                <Controller
+                  name="fecha_consulta"
+                  control={control}
+                  rules={{ required: 'La fecha de consulta es obligatoria' }}
+                  render={({ field }) => (
+                    <DatePicker
+                      {...field}
+                      selected={field.value}
+                      onChange={(date) => {
+                        field.onChange(date);
+                        setSelectedDate(date);
+                      }}
+                      minDate={subDays(new Date(), -1)}
+                      filterDate={filterDates}
+                      timeIntervals={60}
+                      showTimeSelect
+                      filterTime={filterTimes}
+                      dateFormat="Pp"
+                      placeholderText="Seleccione fecha y hora"
+                      className="w-full md:w-[118%] p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0] cursor-pointer"
+                      calendarClassName="bg-slate-300 rounded-sm "
+                      popperPlacement="bottom-end"
+                      time
+                      locale={es}
+                    />
                   )}
+                />
+                {errors.fecha_consulta && (
+                  <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
+                    {errors.fecha_consulta.message}
+                  </span>
+                )}
                 {selectedDate && selectedDate < new Date(new Date()) && (
                   <span className="text-red-500 text-xs m-2 mt-[54px] absolute ml-4">
                     La fecha debe ser como mínimo mañana.
@@ -318,7 +366,7 @@ export const AppointmentForm = () => {
                 )}
               </div>
 
-              <div className="flex md:w-7/12">
+              <div className="flex w-full md:w-7/12">
                 <input
                   placeholder="Derivación"
                   className="w-full p-4 m-2 transition-all duration-500 border-b shadow-[#6aabffe0] shadow-sm hover:shadow-lg  border-b-[#6aabffe0] h-9 placeholder-[#7a7a7a] bg-slate-200 hover:bg-slate-100 focus:bg-slate-100 rounded-xl opacity-60 focus:shadow-md focus:shadow-[#6aabffe0] focus:outline-[#6aabffe0]"
@@ -341,8 +389,8 @@ export const AppointmentForm = () => {
                   </span>
                 )}
             </div>
-            <div className="flex-row hidden w-full md:flex">
-              <div className="w-1/3">
+            <div className="relative flex-row hidden w-full md:flex">
+              <div className="w-[27.33%]">
                 {' '}
                 <button
                   className="w-32 h-12 m-2 text-md font-medium hover:font-bold tracking-wide hover:tracking-widest transition-all duration-700 text-slate-600 bg-[#6aabffb7] border border-transparent rounded-lg group hover:bg-[#5091e6c2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -352,7 +400,7 @@ export const AppointmentForm = () => {
                   {loading ? 'Cargando...' : 'Enviar'}
                 </button>
               </div>
-              <div className="w-1/3">
+              <div className="w-[38%]">
                 {loading && (
                   <div className="mx-6 mt-4">
                     <LoadingSpinner />
@@ -360,8 +408,19 @@ export const AppointmentForm = () => {
                 )}
               </div>
               {edadInformativa && (
-                <div className="w-1/3  bg-slate-600 rounded-md px-2 py-1 text-yellow-500 text-xs m-2 mt-[10px]  ">
-                  {edadInformativa && <span>{edadInformativa}</span>}
+                <div className="w-5/12 absolute flex bg-[#ffb83dc0] rounded-md px-2 py-1 text-slate-600 text-xs m-2 mt-[10px] right-0 animate-pulse ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="5em"
+                    height="4em"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M10 3a2 2 0 0 0-2 2c0 2.065.746 4.915 1.184 6.403a.84.84 0 0 0 .817.597a.84.84 0 0 0 .816-.595C11.255 9.925 12 7.09 12 5a2 2 0 0 0-2-2M7 5a3 3 0 0 1 6 0c0 2.25-.788 5.214-1.224 6.69A1.84 1.84 0 0 1 10 13c-.811 0-1.542-.52-1.776-1.315C7.789 10.204 7 7.227 7 5m3 10a1 1 0 1 0 0 2a1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                    />
+                  </svg>
+                  <p>{edadInformativa}</p>
                 </div>
               )}
             </div>
@@ -377,9 +436,9 @@ export const AppointmentForm = () => {
                   {loading ? 'Cargando...' : 'Enviar'}
                 </button>
               </div>
-              <div className="w-1/3">
+              <div className="w-full">
                 {loading && (
-                  <div className="mx-6 mt-4">
+                  <div className="mx-6 mt-4 ml-10">
                     <LoadingSpinner />
                   </div>
                 )}
@@ -387,7 +446,18 @@ export const AppointmentForm = () => {
             </div>
             <div className="w-full md:hidden">
               {edadInformativa && (
-                <div className="w-full bg-slate-600 rounded-md px-2 py-1 text-yellow-500 text-xs m-2 mt-[10px]  ">
+                <div className="w-full flex bg-[#ffb83dc0] rounded-md px-2 py-1 text-slate-600 animate-pulse text-xs m-2 mt-[10px] ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="5em"
+                    height="4em"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M10 3a2 2 0 0 0-2 2c0 2.065.746 4.915 1.184 6.403a.84.84 0 0 0 .817.597a.84.84 0 0 0 .816-.595C11.255 9.925 12 7.09 12 5a2 2 0 0 0-2-2M7 5a3 3 0 0 1 6 0c0 2.25-.788 5.214-1.224 6.69A1.84 1.84 0 0 1 10 13c-.811 0-1.542-.52-1.776-1.315C7.789 10.204 7 7.227 7 5m3 10a1 1 0 1 0 0 2a1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0a2 2 0 0 1-4 0"
+                    />
+                  </svg>
                   {edadInformativa && (
                     <span className="p-2">{edadInformativa}</span>
                   )}
