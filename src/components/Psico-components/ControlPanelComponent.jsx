@@ -32,7 +32,7 @@ export const ControlPanelComponent = () => {
   };
   return (
     <>
-      <section className="flex w-full h-[92vh]">
+      <section className="md:flex w-full h-auto md:h-[92vh] mb-2.5 pb-2.5">
         <AsideControlPanel changeSection={changeSection} section={section} />
         {renderSection()}
       </section>

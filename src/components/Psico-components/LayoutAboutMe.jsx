@@ -51,7 +51,7 @@ export const LayoutAboutMe = () => {
 
   return (
     <>
-      <section className="flex flex-col w-5/6 p-5 m-5 ml-10 text-white border border-blue-500 rounded-xl">
+      <section className="flex flex-col w-11/12 min-h-[80vh] p-3 mx-auto mt-5 border border-blue-500 md:h-auto md:w-5/6 md:p-5 md:m-5 md:ml-10 rounded-xl">
         <div className="flex items-center justify-center gap-4 p-2 m-4 ">
           <AboutMeICON h={40} w={40} color={'#edf0ea'} />
           <h2 className="font-semibold text-black">
