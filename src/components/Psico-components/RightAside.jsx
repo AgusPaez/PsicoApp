@@ -32,6 +32,11 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
   //set data
   useEffect(() => {
     if (appointment) {
+      const formattedDate = appointment.fecha_consulta
+        ? new Date(new Date(appointment.fecha_consulta).getTime())
+            .toISOString()
+            .slice(0, 16)
+        : '';
       setFormData({
         nombre: appointment.nombre || '',
         apellido: appointment.apellido || '',
@@ -41,13 +46,14 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
         derivacion: appointment.derivacion || '',
         numero: appointment.numero || '',
         email: appointment.email || '',
-        fecha_consulta: appointment.fecha_consulta || '',
+        fecha_consulta: formattedDate || '',
         detalle_consulta: appointment.detalle_consulta || '',
         estado_consulta: appointment.estado_consulta || '',
       });
       setInEmail(appointment.email || '');
     }
   }, [appointment]);
+  console.log('formdata', formData);
   // fetch user by email if it matches
   useEffect(() => {
     if (inEmail) {
