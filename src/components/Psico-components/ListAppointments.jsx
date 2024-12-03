@@ -135,7 +135,7 @@ const ListAppointment = () => {
             Agregar Cita
           </button>
         </div>
-        <div className="flex w-full gap-4 pt-2 mt-2 md:hidden">
+        <div className="flex w-full gap-4 pt-6 pb-4 mt-2 md:hidden">
           <div className="absolute">
             <span className="m-4 text-lg right-2">SOLO CITAS DE HOY</span>
             <label className="relative inline-flex items-center cursor-pointer">

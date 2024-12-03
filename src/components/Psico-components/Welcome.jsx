@@ -7,6 +7,7 @@ import { useAuth } from '../../context/AuthProvider';
 //import service
 import { findPatients } from '../../services/users';
 import { getAppointmentsByEmail } from '../../services/appointmentService';
+import { findAll } from '../../services/appointmentService';
 export const Welcome = () => {
   //context
   const { dataLogin, logout } = useAuth();
@@ -27,8 +28,12 @@ export const Welcome = () => {
         setActivePatientsCount(patientsForUserCount);
 
         //Appointment
-        const appo = await getAppointmentsByEmail(dataLogin.email);
-        const appoLength = appo.length;
+        const appo = await findAll();
+        console.log(appo);
+        const appoLength = appo.filter(
+          (cita) => cita.estado_consulta === 'confirmada'
+        ).length;
+        console.log(appoLength);
         setAppointmentCount(appoLength);
 
         //Appointment last month
@@ -49,7 +54,8 @@ export const Welcome = () => {
           const fechaConsulta = new Date(appo.fecha_consulta);
           return (
             fechaConsulta >= firstDayOfCurrentMonth &&
-            fechaConsulta <= lastDayOfCurrentMonth
+            fechaConsulta <= lastDayOfCurrentMonth &&
+            appo.estado_consulta === 'finalizada'
           );
         });
         setAppointmentCountLastMonth(appoCurrentMonth.length);

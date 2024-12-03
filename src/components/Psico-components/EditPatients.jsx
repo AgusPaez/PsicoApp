@@ -84,7 +84,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-5/6 p-8 bg-white shadow-lg rounded-xl md:w-1/2 lg:w-1/3">
+      <div className="relative w-full h-[88%] overflow-auto md:h-auto py-12  p-8 bg-white shadow-lg rounded-xl md:w-1/2 lg:w-1/3">
         <h1 className="mb-6 text-xl font-semibold text-center">
           EDITAR PACIENTE
         </h1>
@@ -107,9 +107,9 @@ export const EditPatients = ({ close, deleted, selected }) => {
             />
           </div>
 
-          <div className="flex space-x-4">
+          <div className="md:space-x-4 md:flex">
             {/* Nombre */}
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col md:w-1/2">
               <label className="text-gray-700">Nombre:</label>
               <input
                 type="text"
@@ -122,7 +122,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
             </div>
 
             {/* Apellido */}
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col md:w-1/2">
               <label className="text-gray-700">Apellido:</label>
               <input
                 type="text"
@@ -137,9 +137,9 @@ export const EditPatients = ({ close, deleted, selected }) => {
             </div>
           </div>
 
-          <div className="flex space-x-4">
+          <div className="md:flex md:space-x-4">
             {/* Email */}
-            <div className="w-1/2 mb-4">
+            <div className="mb-4 md:w-1/2">
               <label className="block text-gray-700">Email</label>
               <input
                 {...register('email', {
@@ -158,7 +158,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
             </div>
 
             {/* Número */}
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col md:w-1/2">
               <label className="text-gray-700">Número:</label>
               <input
                 type="number"
@@ -171,7 +171,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
             </div>
           </div>
 
-          <div className="flex w-auto mb-3 space-x-6">
+          <div className="w-auto mb-3 md:flex md:space-x-6">
             {/* Fecha de Nacimiento */}
             <div className="flex flex-col ">
               <label className="text-gray-700">Fecha nacimiento:</label>
@@ -228,7 +228,7 @@ export const EditPatients = ({ close, deleted, selected }) => {
           </div>
 
           {/* Botones */}
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-5">
             <button
               type="button"
               onClick={close}

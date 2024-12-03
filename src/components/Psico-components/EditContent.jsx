@@ -107,7 +107,7 @@ export const EditContent = ({ select, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 bg-black bg-opacity-50">
-      <div className="w-7/12 h-auto p-6 transition-all duration-300 transform scale-100 bg-white rounded-lg shadow-lg ">
+      <div className="p-6 overflow-auto transition-all duration-300 transform scale-100 bg-white rounded-lg shadow-lg w-full md:h-auto h-[85%] md:w-7/12">
         <h2 className="mb-4 text-lg font-bold">Editar Contenido</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -161,7 +161,7 @@ export const EditContent = ({ select, onClose }) => {
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
-          <div className="flex justify-between">
+          <div className="justify-between md:flex">
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
               <input

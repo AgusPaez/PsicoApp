@@ -1,5 +1,6 @@
 //imports
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import service
 import { findPatients } from '../../services/users';
 // import hooks rhf
@@ -29,6 +30,8 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [reservedAppointments, setReservedAppointments] = useState([]);
+  // Navigate
+  const navigate = useNavigate();
   //rhf
   const {
     register,
@@ -188,10 +191,12 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
   };
 
   if (!isOpen) return null;
-
+  const RedirectAddPatient = () => {
+    navigate('/Patients');
+  };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center py-8 bg-black bg-opacity-50">
-      <div className="w-full md:h-auto h-auto overflow-auto  max-w-lg max-h-screen m-4  p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
+      <div className="w-full h-[100%] md:h-auto overflow-auto py-12 max-w-lg max-h-screen   p-6 mt-16 mb-16 bg-white rounded-lg shadow-lg bg-gradient-to-b from-[#e7e7e7fb] to-[#fdfdfdfd]">
         <div className="">
           <h2 className="mb-4 text-xl font-semibold text-center">
             Agregar Nueva Cita
@@ -216,7 +221,10 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
                   </option>
                 ))}
               </select>
-              <button className="w-full md:w-auto px-4 py-2 mb-4 mt-4 md:mt-0 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:tracking-wide">
+              <button
+                onClick={RedirectAddPatient}
+                className="w-full md:w-auto px-4 py-2 mb-4 mt-4 md:mt-0 md:ml-8 text-black transition-all duration-300 bg-[#846bca] rounded hover:bg-[#735cac] hover:font-semibold hover:tracking-wide"
+              >
                 Agregar Paciente
               </button>
             </div>
