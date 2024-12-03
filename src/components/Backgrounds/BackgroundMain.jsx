@@ -1,5 +1,6 @@
 import React from 'react';
-import svgBackground from '../../assets/images/fondops.svg';
+// import svgBackground from '../../assets/images/fondops.svg';
+import svgBackground from '../../assets/images/BGDEF.png';
 
 export const BackgroundMain = ({ children }) => {
   return (
