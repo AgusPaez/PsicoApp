@@ -124,12 +124,12 @@ export const LogIn = () => {
             </div>
 
             <div className="flex items-end text-xs md:text-sm">
-              <a
+              {/* <a
                 href="#"
                 className="font-medium m-1 p-1 mt-2.5 text-[#7a7a7a] hover:text-[#5f5f5f] md:hover:tracking-wide md:hover:underline pr-0 transition-all duration-700 "
               >
                 ¿Olvidaste tu contraseña?
-              </a>
+              </a> */}
             </div>
           </div>
 

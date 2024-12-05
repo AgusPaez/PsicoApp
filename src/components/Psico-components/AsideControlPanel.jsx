@@ -89,12 +89,12 @@ export const AsideControlPanel = ({ changeSection, section }) => {
               </div>
               <span className="text-lg md:block">Pacientes</span>
             </button>
-            <button className={buttonClass(4)} onClick={() => changeSection(4)}>
+            {/* <button className={buttonClass(4)} onClick={() => changeSection(4)}>
               <div className="absolute w-full text-white left-6 md:left-12">
                 <AppointmentICON h={30} w={30} color={'#edf0ea'} />
               </div>
               <span className="text-lg md:block">Citas</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </aside>
@@ -128,12 +128,12 @@ export const AsideControlPanel = ({ changeSection, section }) => {
             </div>
             <span className="text-xs lg:text-base md:block">Pacientes</span>
           </button>
-          <button className={buttonClass(4)} onClick={() => changeSection(4)}>
+          {/* <button className={buttonClass(4)} onClick={() => changeSection(4)}>
             <div className="absolute w-full text-white left-6 md:left-12">
               <AppointmentICON h={30} w={30} color={'#edf0ea'} />
             </div>
             <span className="text-xs lg:text-base md:block">Citas</span>
-          </button>
+          </button> */}
         </div>
       </aside>
     </div>

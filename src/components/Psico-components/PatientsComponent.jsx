@@ -25,7 +25,10 @@ export const PatientsComponent = () => {
     const fetchPatients = async () => {
       try {
         const data = await findPatients();
-        setPatients(data);
+        const patientsWithRole = data.filter(
+          (patient) => patient.rol === 'paciente'
+        );
+        setPatients(patientsWithRole);
       } catch (error) {
         console.log('Error fetch patients', error);
       }

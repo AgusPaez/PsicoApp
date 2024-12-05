@@ -11,6 +11,7 @@ export const StudiesComponent = () => {
   //state use for studies
   const [studies, setStudies] = useState([]);
   const [profesionalRegistration, setProfesionalRegistration] = useState();
+  const [name, setName] = useState('');
   //fetch studies
   useEffect(() => {
     const fetchStudies = async () => {
@@ -28,6 +29,12 @@ export const StudiesComponent = () => {
         //call service
         const ProfesionalRegistration = await getMyProfile(
           '67291ac4daf65b986d34e3c4'
+        );
+        //update name
+        setName(
+          ProfesionalRegistration.data.nombre +
+            ' ' +
+            ProfesionalRegistration.data.apellido
         );
         // update Profesional registration
         setProfesionalRegistration(
@@ -74,7 +81,7 @@ export const StudiesComponent = () => {
           </div>
           <div>
             <h2 className="flex items-center justify-center p-0 mt-4 text-3xl md:text-4xl">
-              Lic. Antonella Rabiti
+              Lic. {name}
             </h2>
           </div>
           <div>

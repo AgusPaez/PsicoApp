@@ -51,24 +51,25 @@ export const HomePatientComponent = () => {
           >
             Editar perfil
           </Link>
-          <Link
+          {/* <Link
             to="/*"
             className="block bg-[#a1968d] hover:bg-[#8d7e73] text-[#f5f0e1] text-center font-semibold hover:font-extrabold py-4 px-6 rounded-lg shadow-md hover:tracking-widest transition-all duration-300"
           >
             Recursos y guías
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             to="/*"
             className="block bg-[#a1968d] hover:bg-[#8d7e73] text-[#f5f0e1] text-center font-semibold hover:font-extrabold py-4 px-6 rounded-lg shadow-md hover:tracking-widest transition-all duration-300"
           >
             Soporte técnico
-          </Link>
+          </Link> */}
           <Link
             to="/AboutMePatient"
             className="block bg-[#a1968d] hover:bg-[#8d7e73] text-[#f5f0e1] text-center font-semibold hover:font-extrabold py-4 px-6 rounded-lg shadow-md hover:tracking-widest transition-all duration-300"
           >
             Configuración de la cuenta
           </Link>
+          <div></div>
           <Link
             onClick={logout}
             className="block bg-[#4a4a4a] hover:bg-[#2f2f2f] text-[#f5f0e1] text-center font-semibold hover:font-extrabold py-4 px-6 rounded-lg shadow-md hover:tracking-widest transition-all duration-300"

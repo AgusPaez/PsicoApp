@@ -27,7 +27,8 @@ export const LayoutPatients = () => {
     const fetchPatients = async () => {
       try {
         // Llamadas a los servicios
-        const response = await findPatients();
+        const data = await findPatients();
+        const response = data.filter((patient) => patient.rol === 'paciente');
         const response2 = await findAll();
 
         // Procesar datos

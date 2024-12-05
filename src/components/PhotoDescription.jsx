@@ -38,7 +38,7 @@ export const PhotoDescription = ({
           {photo ? (
             <img
               className="object-cover mx-auto  md:mb-6 border-2 border-[#9cbcfc] rounded-full w-44 h-44 md:w-72 md:h-72"
-              src="https://www.shutterstock.com/image-photo/happy-professional-middle-eastern-female-260nw-2101132801.jpg"
+              src={info.imagenUrl}
               alt="imagen del profesional"
             />
           ) : (
