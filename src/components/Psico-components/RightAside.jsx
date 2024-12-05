@@ -202,7 +202,7 @@ export const RightAside = ({ isOpen, onClose, appointment }) => {
                   )}
                 </div>
 
-                <div className="grid md:w-1/3">
+                <div className=" md:w-1/3">
                   <label className="block text-gray-700">Nombre:</label>
                   <input
                     type="text"

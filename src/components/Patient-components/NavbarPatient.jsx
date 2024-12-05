@@ -174,7 +174,7 @@ export const NavbarPatient = () => {
 
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-400"
+                      className="z-50 block px-4 py-2 text-sm text-gray-700  hover:bg-slate-400"
                       role="menuitem"
                       id="user-menu-item-2"
                       onClick={logout}
