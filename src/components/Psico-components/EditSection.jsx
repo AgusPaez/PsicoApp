@@ -35,12 +35,14 @@ const EditSection = ({ select, onClose }) => {
       try {
         const updatedStudy = await updateStudy(id, data);
         console.log('Study updated successfully:', updatedStudy);
+        window.location.reload();
       } catch (error) {
         console.error('Failed to update study:', error);
       }
+    } else {
+      removeStudy();
     }
     // == false -> call removeStudy function
-    removeStudy();
   };
 
   //modify RemoveItem State

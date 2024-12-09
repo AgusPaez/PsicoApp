@@ -77,11 +77,12 @@ export const Group = ({ onClose }) => {
               <select
                 {...register('tipo', { required: true })}
                 className="w-full p-2 border rounded"
+                placeholder="Nombre del vínculo"
               >
-                <option value="">Seleccionar tipo</option>
-                <option value="no tiene">No tiene</option>
-                <option value="pareja">Pareja</option>
+                {/* <option value="">Seleccionar tipo</option> */}
+                {/* <option value="no tiene">No tiene</option> */}
                 <option value="familia">Familia</option>
+                <option value="pareja">Pareja</option>
               </select>
               {errors.tipo && (
                 <span className="text-xs text-red-500">
@@ -98,11 +99,13 @@ export const Group = ({ onClose }) => {
                 className="w-full p-2 border rounded"
               >
                 <option value="">Seleccionar pareja</option>
-                {patients.map((patient) => (
-                  <option key={patient._id} value={patient._id}>
-                    {patient.nombre} {patient.apellido}
-                  </option>
-                ))}
+                {patients
+                  .filter((patient) => patient.rol === 'paciente')
+                  .map((patient) => (
+                    <option key={patient._id} value={patient._id}>
+                      {patient.nombre} {patient.apellido}
+                    </option>
+                  ))}
               </select>
               {errors.titular && (
                 <span className="text-xs text-red-500">
@@ -117,11 +120,13 @@ export const Group = ({ onClose }) => {
                 className="w-full p-2 border rounded"
               >
                 <option value="">Seleccionar pareja</option>
-                {patients.map((patient) => (
-                  <option key={patient._id} value={patient._id}>
-                    {patient.nombre} {patient.apellido}
-                  </option>
-                ))}
+                {patients
+                  .filter((patient) => patient.rol === 'paciente')
+                  .map((patient) => (
+                    <option key={patient._id} value={patient._id}>
+                      {patient.nombre} {patient.apellido}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -133,11 +138,13 @@ export const Group = ({ onClose }) => {
                 className="w-full p-2 border rounded"
               >
                 <option value="">Seleccionar hijo</option>
-                {patients.map((patient) => (
-                  <option key={patient._id} value={patient._id}>
-                    {patient.nombre} {patient.apellido}
-                  </option>
-                ))}
+                {patients
+                  .filter((patient) => patient.rol === 'paciente')
+                  .map((patient) => (
+                    <option key={patient._id} value={patient._id}>
+                      {patient.nombre} {patient.apellido}
+                    </option>
+                  ))}
               </select>
             </div>
           ))}

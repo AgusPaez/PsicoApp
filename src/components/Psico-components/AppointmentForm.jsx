@@ -215,11 +215,13 @@ export const AppointmentForm = ({ isOpen, onClose, onSave }) => {
                 }}
               >
                 <option value="">Seleccionar Paciente</option>
-                {patients.map((patient) => (
-                  <option key={patient._id} value={patient._id}>
-                    {patient.nombre} {patient.apellido}
-                  </option>
-                ))}
+                {patients
+                  .filter((patient) => patient.rol === 'paciente')
+                  .map((patient) => (
+                    <option key={patient._id} value={patient._id}>
+                      {patient.nombre} {patient.apellido}
+                    </option>
+                  ))}
               </select>
               <button
                 onClick={RedirectAddPatient}
