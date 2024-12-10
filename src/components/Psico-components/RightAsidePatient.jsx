@@ -404,13 +404,13 @@ export const RightAsidePatient = ({ isOpen, user, onClose }) => {
                       <LoadingSpinner />
                     </div>
                   )}
-                  <button
+                  {/* <button
                     type="button"
                     className="px-4 py-2 text-white transition-all duration-300 bg-orange-600 rounded hover:tracking-wider hover:bg-orange-700"
                     onClick={() => console.log('Crear perfil')}
                   >
                     Crear perfil
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </form>
