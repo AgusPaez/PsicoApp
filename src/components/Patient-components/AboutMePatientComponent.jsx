@@ -165,7 +165,15 @@ export const AboutMePatientComponent = () => {
                 <strong className="text-sm md:text-base">
                   Fecha de Consulta:
                 </strong>{' '}
-                {new Date(lastAppointment.createdAt).toLocaleString()}
+                {/* {lastAppointment.fecha_consulta.toLocaleString()} */}
+                {new Date(
+                  new Date(lastAppointment.fecha_consulta).getTime() +
+                    3 * 60 * 60 * 1000
+                ).toLocaleString('es-ES', {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                })}{' '}
+                hs
               </p>
               <div className="justify-between mt-6 md:flex gap-9">
                 <button
